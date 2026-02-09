@@ -1,0 +1,40 @@
+footer.footer {
+  display: flex;
+  justify-content: space-between;
+}
+.footerLinks {
+  display: flex;
+}
+
+/* Hover Events, Desktop Only */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Phones */
+@media screen and (min-width: 320px) {
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  footer.footer {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+  }
+  .copyright {
+    grid-column: 1 / 8;
+  }
+  .footerLinks {
+    grid-column: 21 / 25;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+}
+
+/* Large Format Screens */
+@media screen and (min-width: 2560px) {
+}

@@ -14,8 +14,9 @@ import Interview from "@/components/Text/Interview/Interview";
 import styles from "./FilmPage.module.css";
 import Carousel from "@/components/Carousel/Carousel";
 import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
+import Footer from "@/components/Footer/Footer";
 
-const FilmPage = ({ films, film }) => {
+const FilmPage = ({ site, films, film }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const CoverMedia = () => {
@@ -184,6 +185,8 @@ const FilmPage = ({ films, film }) => {
         </Section>
 
         <LoadNextFilm />
+
+        <Footer site={site} />
       </ContentWrapper>
     </div>
   );

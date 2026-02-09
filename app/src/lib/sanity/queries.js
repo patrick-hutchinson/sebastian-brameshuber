@@ -1,5 +1,17 @@
 import { mediaAssetFragment } from "./fragments";
 
+export const siteQuery = `*[_type=="site"][0]{
+  title,
+  description,
+  address,
+  email,
+  phone,
+  socials[]{
+    platform,
+    link
+  },
+}`;
+
 export const screeningsQuery = `*[_type == "screening"]{
   _id,
   _type,

@@ -1,5 +1,5 @@
 import { production, preview } from "./client";
-import { filmsQuery, screeningsQuery } from "./queries";
+import { filmsQuery, screeningsQuery, siteQuery } from "./queries";
 
 const isProduction = process.env.VERCEL_ENV === "production";
 const isPreview = process.env.VERCEL_ENV === "preview";
@@ -15,6 +15,10 @@ export const getSanityClient = () => {
 const client = getSanityClient();
 
 console.log("client:", client.config());
+
+export async function getSite() {
+  return client.fetch(siteQuery);
+}
 
 export async function getScreenings() {
   return client.fetch(screeningsQuery);

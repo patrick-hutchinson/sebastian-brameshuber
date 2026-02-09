@@ -21,7 +21,7 @@
 
 .interviewee {
   grid-column: 1 / 12;
-  text-indent: calc(100% / 13);
+  text-indent: calc(100% / 12);
 }
 
 .row {
@@ -34,7 +34,6 @@
   position: absolute;
   left: 0;
   top: 0.3em;
-  font-size: 6px;
 }
 
 .interviewerInitials {

@@ -42,14 +42,18 @@ const Screening = ({ screening }) => {
           <ScreeningLocation />
         </div>
         <div className={styles.screeningBody} typo="h2">
-          <ScreeningDate date={firstScreening?.screeningDate} />, <span>{firstScreening?.cinema}</span>
+          <ScreeningDate date={firstScreening?.screeningDate} />
+          {firstScreening?.cinema || firstScreening?.festival
+            ? `, ${firstScreening.cinema ?? firstScreening.festival}`
+            : null}
         </div>
       </div>
       {extraScreenings?.map((showtime) => {
         return (
           <div key={showtime._id} className={styles.screening}>
             <div className={styles.screeningBody} typo="h2">
-              <ScreeningDate date={showtime.screeningDate} />, <div>{showtime.cinema ?? showtime.festival}</div>
+              <ScreeningDate date={showtime.screeningDate} />
+              {showtime.cinema || showtime.festival ? `, ${showtime.cinema ?? showtime.festival}` : null}
             </div>
           </div>
         );
