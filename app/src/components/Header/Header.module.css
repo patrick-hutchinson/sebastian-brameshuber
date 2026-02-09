@@ -5,6 +5,9 @@ header.header {
   height: var(--font-size-4);
   position: fixed;
   height: var(--header-height);
+  left: 0;
+  top: 0;
+  padding: 0 var(--margin-page);
 }
 header.header a:first-child {
   grid-column: 1 / 2;

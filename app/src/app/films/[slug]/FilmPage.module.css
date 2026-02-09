@@ -6,6 +6,7 @@
   height: 100%;
   position: relative;
   left: calc(-1 * var(--margin-page));
+  bottom: calc(-1 * var(--margin-page));
   margin-top: 100vh;
   z-index: 2;
 
@@ -23,7 +24,7 @@
   height: var(--content-height);
   width: 100vw;
   position: relative;
-  left: calc(-1 * var(--margin-page));
+  left: 0;
   position: fixed;
   top: var(--header-height);
   z-index: 1;
