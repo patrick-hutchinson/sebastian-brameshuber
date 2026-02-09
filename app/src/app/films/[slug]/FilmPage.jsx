@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { loadNextFilm } from "./utils/loadNextFilm";
 
 import Media from "@/components/Media/Media";
@@ -14,6 +16,7 @@ import Carousel from "@/components/Carousel/Carousel";
 import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
 
 const FilmPage = ({ films, film }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   console.log(film, "film");
 
   const CoverMedia = () => {
@@ -149,14 +152,16 @@ const FilmPage = ({ films, film }) => {
         <Section>
           <FilmComments />
         </Section>
-
         <Section>
           <FilmSupportingMedia />
         </Section>
       </div>
 
       <Section>
-        <Carousel array={film.gallery} />
+        <Carousel array={film.gallery} onIndexChange={setCurrentIndex} />
+        <div typo="display">
+          {currentIndex + 1}/{film.gallery.length}
+        </div>
       </Section>
 
       <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>

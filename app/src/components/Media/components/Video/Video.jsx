@@ -7,13 +7,12 @@ const Video = ({ medium, playerState, playerControls }) => {
     <MuxPlayer
       ref={playerControls.playerRef}
       playbackId={medium.playbackId}
-      // autoPlay
-      // playsInline
+      autoPlay
+      playsInline
       controls={false}
       loop
       muted={playerControls.muted ?? true}
-      // paused={playerControls.paused ? playerControls.paused : false}
-      paused={true}
+      paused={playerControls.paused ? playerControls.paused : false}
       fill
       style={{
         position: "relative",
