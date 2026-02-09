@@ -51,7 +51,7 @@ body {
 
   font-weight: 375;
   padding: var(--margin-page);
-  padding-top: 0;
+  padding-top: var(--font-size-4);
 }
 
 a,
