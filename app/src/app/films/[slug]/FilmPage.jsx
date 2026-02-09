@@ -17,7 +17,6 @@ import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
 
 const FilmPage = ({ films, film }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log(film, "film");
 
   const CoverMedia = () => {
     if (!film.coverMedia) return undefined;
@@ -136,49 +135,56 @@ const FilmPage = ({ films, film }) => {
     );
   };
 
+  const ContentWrapper = ({ children }) => {
+    return <div className={styles.contentWrapper}>{children}</div>;
+  };
+
   return (
     <div>
-      <Section>
-        <CoverMedia />
-        <Text className={styles.filmTitle} typo="display" text={film.fullTitle ?? film.title} />
-        <Text className={styles.filmDescription} typo="display" text={film.description} />
-      </Section>
+      <CoverMedia />
 
-      <Section>
-        <FilmCredits />
-      </Section>
-
-      <div className={`${styles.sectionWrapper} ${styles.commentsAndMedia}`}>
+      <ContentWrapper>
         <Section>
-          <FilmComments />
+          <Text className={styles.filmTitle} typo="display" text={film.fullTitle ?? film.title} />
+          <Text className={styles.filmDescription} typo="display" text={film.description} />
         </Section>
-        <Section>
-          <FilmSupportingMedia />
-        </Section>
-      </div>
 
-      <Section>
-        <Carousel array={film.gallery} onIndexChange={setCurrentIndex} />
-        <div typo="display">
-          {currentIndex + 1}/{film.gallery.length}
+        <Section>
+          <FilmCredits />
+        </Section>
+
+        <div className={`${styles.sectionWrapper} ${styles.commentsAndMedia}`}>
+          <Section>
+            <FilmComments />
+          </Section>
+          <Section>
+            <FilmSupportingMedia />
+          </Section>
         </div>
-      </Section>
-
-      <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>
-        <Section>
-          <FilmInterview />
-        </Section>
 
         <Section>
-          <FilmReviews />
+          <Carousel array={film.gallery} onIndexChange={setCurrentIndex} />
+          <div typo="display">
+            {currentIndex + 1}/{film.gallery.length}
+          </div>
         </Section>
-      </div>
 
-      <Section>
-        <FilmScreenings />
-      </Section>
+        <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>
+          <Section>
+            <FilmInterview />
+          </Section>
 
-      <LoadNextFilm />
+          <Section>
+            <FilmReviews />
+          </Section>
+        </div>
+
+        <Section>
+          <FilmScreenings />
+        </Section>
+
+        <LoadNextFilm />
+      </ContentWrapper>
     </div>
   );
 };

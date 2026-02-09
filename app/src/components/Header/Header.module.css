@@ -3,6 +3,8 @@ header.header {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   height: var(--font-size-4);
+  position: fixed;
+  height: var(--header-height);
 }
 header.header a:first-child {
   grid-column: 1 / 2;
