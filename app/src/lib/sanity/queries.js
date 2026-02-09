@@ -14,12 +14,21 @@ export const siteQuery = `*[_type=="site"][0]{
 
 export const aboutQuery = `*[_type=="about"][0]{
   aboutText,
+  featuredScreenings[]->{
+    film->{
+      title,
+      fullTitle,
+    },
+    festival,
+    "cinema": showtimes[0].cinema
+  },
   awards[]->{
     award,
     year,
     film->{
+      title,
       fullTitle,
-      slug,
+      slug
     },
     link
   }

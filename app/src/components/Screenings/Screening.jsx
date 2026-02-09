@@ -21,8 +21,8 @@ const Screening = ({ screening }) => {
 
     return (
       <span className={styles.location}>
-        , {screening.location?.city && <span>{screening.location.city}, </span>}
-        {screening.location?.country && <span>{screening.location.country}</span>}
+        , {screening.location.city && <span>{screening.location.city}, </span>}
+        {screening.location.country && <span>{screening.location.country}</span>}
       </span>
     );
   };
@@ -37,7 +37,7 @@ const Screening = ({ screening }) => {
     <motion.div layout>
       <div className={styles.screening} typo="h4">
         <div className={styles.screeningHeader}>
-          {screening.film.title}
+          {screening.film?.title}
           <ScreeningFestival />
           <ScreeningAnnotation />
           <ScreeningLocation />

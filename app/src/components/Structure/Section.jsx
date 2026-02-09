@@ -1,5 +1,7 @@
-const Section = ({ children }) => {
-  return <section style={{ marginBottom: "var(--margin-1)" }}>{children}</section>;
+import styles from "./Section.module.css";
+
+const Section = ({ children, className }) => {
+  return <section className={`${styles.section} ${className}`}>{children}</section>;
 };
 
 export default Section;

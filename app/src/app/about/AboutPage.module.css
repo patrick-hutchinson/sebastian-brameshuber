@@ -1,0 +1,73 @@
+.aboutText {
+  grid-column: 1 / 13;
+}
+
+section.featuredScreenings {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.featuredScreenings > ul {
+  grid-column: 3 / 13;
+}
+
+.featuredScreenings .filmTitle {
+  color: var(--accent);
+}
+.awards .filmTitle {
+  color: var(--accent);
+}
+
+.awardYearContainer {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.awardYear {
+  grid-column: 1 / 2;
+  padding-right: var(--margin-page);
+}
+.awardFilmContainer {
+  grid-column: 3 / 13;
+}
+.sectionWrapper {
+  display: contents;
+}
+
+/* Hover Events, Desktop Only */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Phones */
+@media screen and (min-width: 320px) {
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  main.aboutPage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  section.aboutText {
+    display: contents;
+  }
+  .sectionWrapper {
+    display: block;
+  }
+  .awardFilmContainer {
+    grid-column: 2 / 13;
+  }
+  section.featuredScreenings > ul {
+    grid-column: 2 / 13;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+}
+
+/* Large Format Screens */
+@media screen and (min-width: 2560px) {
+}

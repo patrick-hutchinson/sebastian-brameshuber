@@ -8,6 +8,7 @@ const Header = ({}) => {
     <header className={styles.header} typo="fineprint">
       <AnimationLink path="/films">Films</AnimationLink>
       <AnimationLink path="/screenings">Screenings</AnimationLink>
+      <AnimationLink path="/about">About</AnimationLink>
     </header>
   );
 };

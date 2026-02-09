@@ -14,6 +14,7 @@ export const about = defineType({
       of: [{type: 'reference', to: [{type: 'screening'}]}],
       description:
         'Hier kannst du Screenings auswählen, die du auf der About Seite hervorheben möchtest.',
+      validation: (Rule) => Rule.unique().error('Each screening can only be selected once.'),
     }),
     defineField({
       name: 'awards',
