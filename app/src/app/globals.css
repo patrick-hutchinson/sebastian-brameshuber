@@ -1,0 +1,128 @@
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --accent: #8d8a8a;
+
+  --margin-page: 8px;
+  --margin-3: 16px;
+  --margin-2: 60px;
+  --margin-1: 120px;
+
+  --gap-vertical: 2px;
+  --gap-horizontal: 2px;
+  --border: 1.5px;
+
+  --header-height: var(--font-size-4);
+  --content-height: calc(100vh - var(--header-height));
+
+  --transition: 0.4s ease;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::-webkit-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html {
+  font-size: 10px;
+  line-height: 1;
+  overscroll-behavior: none;
+  overflow-anchor: none;
+}
+
+body {
+  margin: 0;
+
+  color: var(--foreground);
+  background: var(--background);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-size: var(--font-size-3);
+  line-height: var(--line-height-3);
+
+  font-weight: 375;
+  padding: var(--margin-page);
+  padding-top: 0;
+}
+
+a,
+a:visited {
+  color: #fff;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover {
+  color: var(--accent);
+}
+
+mux-player {
+  --play-button: none;
+  --live-button: none;
+  --seek-backward-button: none;
+  --seek-forward-button: none;
+  --mute-button: none;
+  --captions-button: none;
+  --airplay-button: none;
+  --pip-button: none;
+  --fullscreen-button: none;
+  --cast-button: none;
+  --playback-rate-button: none;
+  --volume-range: none;
+  --time-range: none;
+  --time-display: none;
+  --duration-display: none;
+  --rendition-menu-button: none;
+  --gradient-shadow: none;
+  --media-loading-indicator-display: none;
+  --media-background-color: var(--background);
+  --media-background-color: transparent;
+  pointer-events: none !important;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+mux-player::part(control-bar) {
+  opacity: 1 !important;
+  --gradient-steps: none !important;
+}
+
+mux-player .mux-spinner {
+  display: none !important;
+}
+
+/* Hover Events, Desktop Only */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Phones */
+@media screen and (min-width: 320px) {
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  :root {
+    --margin-3: 14px;
+    --margin-2: 85px;
+    --margin-1: 175px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+}
+
+/* Large Format Screens */
+@media screen and (min-width: 2560px) {
+}

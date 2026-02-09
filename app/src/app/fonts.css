@@ -1,0 +1,84 @@
+@font-face {
+  font-family: "BertholdImago";
+  src: url("/fonts/BertholdImagoMedium.ttf") format("truetype");
+  font-weight: medium;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MagdaClean";
+  src: url("/fonts/MagdaClean.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* largest */
+  /* --font-size-1: 94px;
+  --line-height-1: 1;
+  --letter-spacing-1: -0.5rem;
+  --paragraph-spacing-1: 0; */
+
+  --font-size-2: 3.4rem;
+  --line-height-2: 3.4rem; /* leave this — it's unitless */
+  --letter-spacing-2: -0.02rem;
+  --paragraph-spacing-2: 0rem;
+
+  --font-size-3: 1.4rem;
+  --line-height-3: 1.6rem; /* leave this — it's unitless */
+  --letter-spacing-3: 0.03rem;
+  --paragraph-spacing-3: 0rem;
+
+  --font-size-4: 1.2rem;
+  --line-height-4: 1.2rem;
+  --letter-spacing-4: 0.01rem;
+  --paragraph-spacing-4: 0rem;
+
+  /* smallest */
+}
+
+h2,
+[typo="h2"] {
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-2);
+  letter-spacing: var(--letter-spacing-2);
+}
+h2 p,
+[typo="h2"] p {
+  margin-bottom: var(--paragraph-spacing-2);
+}
+
+h4,
+[typo="h4"] {
+  font-size: var(--font-size-4);
+  line-height: var(--line-height-4);
+  letter-spacing: var(--letter-spacing-4);
+}
+h4 p,
+[typo="h4"] p {
+  margin-bottom: var(--paragraph-spacing-4);
+}
+
+[typo="display"],
+[typo="display"] p {
+  font-family: "BertholdImago";
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-2);
+  letter-spacing: var(--letter-spacing-2);
+}
+[typo="longcopy"],
+[typo="longcopy"] p {
+  font-family: "BertholdImago";
+  font-size: var(--font-size-3);
+  line-height: var(--line-height-3);
+  letter-spacing: var(--letter-spacing-3);
+}
+[typo="fineprint"],
+[typo="fineprint"] p {
+  font-family: "MagdaClean";
+  font-size: var(--font-size-4);
+  line-height: var(--line-height-4);
+  letter-spacing: var(--letter-spacing-4);
+}

@@ -1,0 +1,153 @@
+.sectionWrapper {
+  display: contents;
+}
+
+.movieDescription {
+  color: var(--accent);
+}
+
+.coverMedia {
+  height: var(--content-height);
+  width: 100vw;
+  position: relative;
+  left: calc(-1 * var(--margin-page));
+  /* top: calc(-1 * var(--margin-page)); */
+}
+
+.filmDescription {
+  color: var(--accent);
+}
+
+.filmCredits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.filmCredit {
+  margin-bottom: var(--margin-3);
+}
+.filmCredits .role {
+  color: var(--accent);
+}
+
+.filmComment:not(:last-child) {
+  margin-bottom: var(--margin-2);
+}
+
+.filmComment .text {
+  color: var(--accent);
+}
+.commentInformation {
+  display: grid;
+
+  /* grid-template-columns: (1fr, repeat(12)); */
+  padding-top: var(--margin-3);
+}
+.filmComment .readMore {
+  grid-column: 10 / 12;
+}
+
+.interviewHeading {
+  margin-bottom: var(--margin-2);
+}
+
+.interviewSubtitle {
+  color: var(--accent);
+}
+
+.filmReviews {
+  column-count: 2;
+}
+.filmReview {
+  break-inside: avoid;
+
+  flex-direction: column;
+  margin-bottom: var(--margin-3);
+}
+.filmReview_credit {
+  color: var(--accent);
+}
+
+.loadNext {
+  width: 100%;
+  margin: var(--margin-2) auto;
+  text-align: center;
+}
+
+.filmSupportingMedia {
+  padding: var(--margin-page);
+  background: #fff;
+}
+
+/* Hover Events, Desktop Only */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Phones */
+@media screen and (min-width: 320px) {
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  .filmCredits {
+    display: flex;
+    flex-direction: column; /* stack items vertically first */
+    flex-wrap: wrap; /* allow items to wrap to new column */
+    height: 250px; /* fixed height to control 6 items per column */
+
+    align-content: flex-start;
+  }
+
+  .filmCredit {
+    flex: 0 0 auto; /* don't shrink or grow, keep natural height */
+    width: calc(100% / (24 / 3)); /* 3/24 of container width per column */
+  }
+
+  .sectionWrapper {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+  }
+
+  /* Comments + SupportingMedia */
+  .sectionWrapper.commentsAndMedia section:first-child {
+    grid-column: 1 / 12;
+  }
+
+  .sectionWrapper.commentsAndMedia section:nth-child(2) {
+    grid-column: 13 / 25;
+  }
+
+  /* // Interview + Reviews */
+  .sectionWrapper.interviewAndReviews section:first-child {
+    /* Separate Header from Text */
+    display: contents;
+  }
+  .filmInterview {
+    display: contents;
+  }
+  .interviewHeading {
+    grid-column: 1 / 25;
+  }
+  .interviewText {
+    grid-column: 1 / 16;
+  }
+  .sectionWrapper.interviewAndReviews section:nth-child(2) {
+    grid-column: 18 / 25;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .interviewText {
+    grid-column: 1 / 12;
+  }
+  .sectionWrapper.interviewAndReviews section:nth-child(2) {
+    grid-column: 21 / 25;
+  }
+}
+
+/* Large Format Screens */
+@media screen and (min-width: 2560px) {
+}

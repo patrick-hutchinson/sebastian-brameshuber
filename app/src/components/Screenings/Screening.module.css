@@ -1,0 +1,45 @@
+.screeningContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.screening {
+  background: #8d8a8a;
+  display: flex;
+  flex-direction: column;
+  /* gap: var(--gap-horitontal); */
+  margin-bottom: var(--gap-vertical);
+
+  /* Compensation for Descenders */
+  padding: 1px;
+  padding-bottom: 4px;
+
+  height: fit-content;
+}
+
+.screeningHeader {
+  font-family: "MagdaClean";
+  color: #000;
+}
+
+.screeningBody {
+  font-family: "BertholdImago";
+  color: #fff;
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  .screeningContainer {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--gap-vertical);
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .screeningContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: var(--gap-vertical);
+  }
+}
