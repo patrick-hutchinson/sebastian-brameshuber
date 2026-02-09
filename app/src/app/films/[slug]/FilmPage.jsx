@@ -75,7 +75,7 @@ const FilmPage = ({ films, film }) => {
     return (
       <div className={styles.filmSupportingMedia}>
         {film.supportingMedia.map((item) => (
-          <Media medium={item.medium} />
+          <Media key={item._id} medium={item.medium} />
         ))}
       </div>
     );
@@ -117,7 +117,7 @@ const FilmPage = ({ films, film }) => {
     return (
       <ScreeningContainer>
         {film.screenings.map((screening) => (
-          <Screening screening={screening} />
+          <Screening key={screening._id} screening={screening} />
         ))}
       </ScreeningContainer>
     );
