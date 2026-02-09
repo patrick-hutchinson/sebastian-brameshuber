@@ -4,6 +4,7 @@ import {site} from './site'
 
 // Pages
 import {index} from './pages/index'
+import {about} from './pages/about'
 
 // Types
 import {link} from './types/link'
@@ -21,6 +22,7 @@ import {interview} from './interview'
 import {review} from './reviews'
 import {mediaAsset} from './types/mediaAsset'
 import {gallery} from './types/gallery'
+import {award} from './award'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
@@ -40,5 +42,7 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     review,
     mediaAsset,
     gallery,
+    award,
+    about,
   ],
 }

@@ -6,6 +6,7 @@ import styles from "./Screening.module.css";
 import { motion } from "framer-motion";
 
 const Screening = ({ screening }) => {
+  console.log(screening, "screening");
   const firstScreening = screening.showtimes[0];
   const extraScreenings = screening.showtimes.slice(1);
 

@@ -12,15 +12,30 @@ export const siteQuery = `*[_type=="site"][0]{
   },
 }`;
 
+export const aboutQuery = `*[_type=="about"][0]{
+  aboutText,
+  awards[]->{
+    award,
+    year,
+    film->{
+      fullTitle,
+      slug,
+    },
+    link
+  }
+}`;
+
 export const screeningsQuery = `*[_type == "screening"]{
   _id,
   _type,
   film->{
     title,
+    slug,
   },
   location,
   screeningDate,
   annotation,
+  festival,
   showtimes,
 }`;
 
@@ -65,6 +80,7 @@ export const filmsQuery = `*[_type == "film"]{
     _type,
     film->{
       title,
+      slug,
     },
     location,
     screeningDate,

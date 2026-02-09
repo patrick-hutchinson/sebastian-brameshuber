@@ -40,7 +40,7 @@
   grid-template-columns: 1fr 1fr;
 }
 .filmCredit {
-  margin-bottom: var(--margin-3);
+  margin-bottom: var(--margin-4);
 }
 .filmCredits .role {
   color: var(--accent);
@@ -57,7 +57,7 @@
   display: grid;
 
   /* grid-template-columns: (1fr, repeat(12)); */
-  padding-top: var(--margin-3);
+  padding-top: var(--margin-4);
 }
 .filmComment .readMore {
   grid-column: 10 / 12;
@@ -78,7 +78,7 @@
   break-inside: avoid;
 
   flex-direction: column;
-  margin-bottom: var(--margin-3);
+  margin-bottom: var(--margin-4);
 }
 .filmReview_credit {
   color: var(--accent);

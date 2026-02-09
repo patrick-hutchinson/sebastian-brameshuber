@@ -21,6 +21,7 @@
 .screeningHeader {
   font-family: "MagdaClean";
   color: #000;
+  margin-bottom: var(--margin-3);
 }
 
 .screeningBody {
