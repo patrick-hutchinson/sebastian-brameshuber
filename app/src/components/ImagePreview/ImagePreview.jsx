@@ -59,7 +59,7 @@ const ImagePreview = ({ medium, isHovering }) => {
     };
   }, [isHovering]);
 
-  if (isTouch || !isMounted) return;
+  if (isTouch || !isMounted || !medium) return;
 
   return createPortal(
     <AnimatePresence>

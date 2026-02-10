@@ -41,7 +41,7 @@ const NewsItem = ({ newsItem }) => {
         </span>
       </div>
 
-      <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />
+      {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
     </div>
   );
 };
