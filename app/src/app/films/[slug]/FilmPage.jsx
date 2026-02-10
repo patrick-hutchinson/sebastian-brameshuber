@@ -1,148 +1,30 @@
 "use client";
 
-import { useState } from "react";
-
-import { loadNextFilm } from "./utils/loadNextFilm";
-
-import Media from "@/components/Media/Media";
 import Text from "@/components/Text/Text";
 import Section from "@/components/Structure/Section";
-import AnimationLink from "@/components/Animation/AnimationLink";
-import Screening from "@/components/Screenings/Screening";
-import Interview from "@/components/Text/Interview/Interview";
+import Footer from "@/components/Footer/Footer";
+
+import CoverMedia from "@/components/CoverMedia/CoverMedia";
 
 import FilmGallery from "./components/FilmGallery";
+import FilmComments from "./components/FilmComments";
+import FilmScreenings from "./components/FilmScreenings";
+import FilmInterview from "./components/FilmInterview";
+import FilmCredits from "./components/FilmCredits";
+import FilmSupportingMedia from "./components/FilmSupportingMedia";
+import FilmReviews from "./components/FilmReviews";
+import LoadNextFilm from "./components/LoadNextFilm";
 
 import styles from "./FilmPage.module.css";
 
-import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
-import Footer from "@/components/Footer/Footer";
-
 const FilmPage = ({ site, films, film }) => {
-  const CoverMedia = () => {
-    if (!film.coverMedia) return undefined;
-
-    return (
-      <div className={styles.coverMedia}>
-        <Media medium={film.coverMedia.medium} />
-      </div>
-    );
-  };
-
-  const FilmCredits = () => {
-    if (!film.credits) return undefined;
-
-    return (
-      <div className={styles.filmCredits} typo="fineprint">
-        {film.credits.map((credit) => (
-          <div key={credit._id} className={styles.filmCredit}>
-            <div className={styles.role}>{credit.role}</div>
-            <div className={styles.people}>
-              {credit.people.map((person) => (
-                <div key={person._id}>{person}</div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const FilmComments = () => {
-    if (!film.comments) return undefined;
-
-    return (
-      <div className={styles.filmComments} typo="longcopy">
-        {film.comments?.map((comment) => (
-          <div key={comment._id} className={styles.filmComment}>
-            <Text text={comment.title} />
-            <Text text={comment.text} className={styles.text} />
-            <div className={styles.commentInformation} typo="fineprint">
-              <div className={styles.CommentSource}>
-                <div>{comment.source}</div>
-                <div>{comment.author}</div>
-              </div>
-              <div className={styles.readMore}>
-                <AnimationLink link={comment.link}>Read More</AnimationLink>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const FilmSupportingMedia = () => {
-    if (!film.supportingMedia) return undefined;
-
-    return (
-      <div className={styles.filmSupportingMedia}>
-        {film.supportingMedia.map((item) => (
-          <Media key={item._id} medium={item.medium} />
-        ))}
-      </div>
-    );
-  };
-
-  const FilmInterview = () => {
-    if (!film.interview) return undefined;
-
-    const interview = film.interview;
-    return (
-      <div className={styles.filmInterview}>
-        <div typo="display" className={styles.interviewHeading}>
-          <div className={styles.interviewTitle}>{interview.title}</div>
-          <div className={styles.interviewSubtitle}>{interview.subtitle}</div>
-        </div>
-        <Interview className={styles.interviewText} text={film.interview.interviewText} />
-      </div>
-    );
-  };
-
-  const FilmReviews = () => {
-    if (!film.reviews) return undefined;
-
-    return (
-      <div className={styles.filmReviews} typo="fineprint">
-        {film.reviews.map((review) => (
-          <div key={review._id} className={styles.filmReview}>
-            <Text text={review.text} />
-            <div className={styles.filmReview_credit}>{`${review.author}, ${review.publication}`}</div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const FilmScreenings = () => {
-    if (!film.screenings) return undefined;
-
-    return (
-      <ScreeningContainer>
-        {film.screenings.map((screening) => (
-          <Screening key={screening._id} screening={screening} />
-        ))}
-      </ScreeningContainer>
-    );
-  };
-
-  const LoadNextFilm = () => {
-    return (
-      <AnimationLink path={loadNextFilm(films, film)}>
-        <div className={styles.loadNext} typo="display">
-          Load Next
-        </div>
-      </AnimationLink>
-    );
-  };
-
   const ContentWrapper = ({ children }) => {
     return <div className={styles.contentWrapper}>{children}</div>;
   };
 
   return (
     <div>
-      <CoverMedia />
+      <CoverMedia medium={film.coverMedia.medium} />
 
       <ContentWrapper>
         <Section>
@@ -151,15 +33,15 @@ const FilmPage = ({ site, films, film }) => {
         </Section>
 
         <Section>
-          <FilmCredits />
+          <FilmCredits film={film} />
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.commentsAndMedia}`}>
           <Section>
-            <FilmComments />
+            <FilmComments film={film} />
           </Section>
           <Section>
-            <FilmSupportingMedia />
+            <FilmSupportingMedia film={film} />
           </Section>
         </div>
 
@@ -169,16 +51,16 @@ const FilmPage = ({ site, films, film }) => {
 
         <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>
           <Section>
-            <FilmInterview />
+            <FilmInterview film={film} />
           </Section>
 
           <Section>
-            <FilmReviews />
+            <FilmReviews film={film} />
           </Section>
         </div>
 
         <Section>
-          <FilmScreenings />
+          <FilmScreenings film={film} />
         </Section>
 
         <LoadNextFilm />

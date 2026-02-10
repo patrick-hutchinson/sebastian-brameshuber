@@ -16,11 +16,11 @@ export const portableText = defineType({
       marks: {
         decorators: [{title: 'Emphasis', value: 'em'}],
         annotations: [
-          // {
-          //   name: 'link',
-          //   title: 'Link',
-          //   type: 'link',
-          // },
+          {
+            name: 'link',
+            title: 'Link',
+            type: 'link',
+          },
         ],
       },
     }),

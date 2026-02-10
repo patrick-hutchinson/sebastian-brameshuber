@@ -1,0 +1,9 @@
+.coverMedia {
+  height: var(--content-height);
+  width: 100vw;
+  position: relative;
+  left: 0;
+  position: fixed;
+  top: var(--header-height);
+  z-index: 1;
+}
