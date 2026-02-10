@@ -8,35 +8,28 @@ const AboutPage = ({ about }) => {
   const FeaturedScreenings = ({ featuredScreenings }) => {
     if (!featuredScreenings || featuredScreenings.length === 0) return null;
 
-    const groupByFilm = (screenings) => {
-      return screenings.reduce((acc, screening) => {
-        const filmTitle = screening.film?.fullTitle ?? screening.film?.title;
-        if (!acc[filmTitle]) acc[filmTitle] = [];
-        acc[filmTitle].push({
-          festival: screening.festival,
-          cinema: screening.cinema,
-        });
-        return acc;
-      }, {});
-    };
+    // const groupByFilm = (screenings) => {
+    //   return screenings.reduce((acc, screening) => {
+    //     const filmTitle = screening.film?.fullTitle ?? screening.film?.title;
+    //     if (!acc[filmTitle]) acc[filmTitle] = [];
+    //     acc[filmTitle].push({
+    //       festival: screening.festival,
+    //       cinema: screening.cinema,
+    //     });
+    //     return acc;
+    //   }, {});
+    // };
 
-    const screeningsByFilm = groupByFilm(featuredScreenings);
+    // const screeningsByFilm = groupByFilm(featuredScreenings);
 
     return (
       <ul typo="longcopy">
-        {Object.entries(screeningsByFilm)
-          .sort(([a], [b]) => a.localeCompare(b)) // optional: sort film titles
-          .map(([filmTitle, screenings]) => (
-            <li key={filmTitle}>
-              <div className={styles.filmTitle}>{filmTitle}</div>
-              <div>
-                Festivals (selection):
-                {screenings.map((s, idx) => (
-                  <span key={idx}>{s.festival && s.cinema}</span>
-                ))}
-              </div>
-            </li>
-          ))}
+        {about.featuredScreenings.map((screening) => (
+          <li key={screening._id}>
+            <div className={styles.filmTitle}>{screening.film.title}</div>
+            <Text text={screening.festivals} />
+          </li>
+        ))}
       </ul>
     );
   };
