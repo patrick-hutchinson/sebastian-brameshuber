@@ -11,14 +11,14 @@ import AnimationLink from "@/components/Animation/AnimationLink";
 import Screening from "@/components/Screenings/Screening";
 import Interview from "@/components/Text/Interview/Interview";
 
+import FilmGallery from "./components/FilmGallery";
+
 import styles from "./FilmPage.module.css";
-import Carousel from "@/components/Carousel/Carousel";
+
 import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
 import Footer from "@/components/Footer/Footer";
 
 const FilmPage = ({ site, films, film }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const CoverMedia = () => {
     if (!film.coverMedia) return undefined;
 
@@ -81,18 +81,6 @@ const FilmPage = ({ site, films, film }) => {
           <Media key={item._id} medium={item.medium} />
         ))}
       </div>
-    );
-  };
-
-  const FilmGallery = () => {
-    if (!film.gallery || film.gallery.length === 0) return undefined;
-    return (
-      <>
-        <Carousel array={film.gallery} onIndexChange={setCurrentIndex} />
-        <div typo="display">
-          {currentIndex + 1}/{film.gallery.length}
-        </div>
-      </>
     );
   };
 
@@ -176,7 +164,7 @@ const FilmPage = ({ site, films, film }) => {
         </div>
 
         <Section>
-          <FilmGallery />
+          <FilmGallery film={film} />
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>

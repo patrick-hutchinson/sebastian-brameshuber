@@ -15,7 +15,7 @@
 /* iPads and other Tablets */
 @media screen and (min-width: 769px) {
   .publicationsContainer {
-    width: 100%;
+    width: calc(100% - var(--gap-vertical));
     display: grid;
     grid-template-columns: 50% 50%;
     column-gap: var(--gap-vertical);

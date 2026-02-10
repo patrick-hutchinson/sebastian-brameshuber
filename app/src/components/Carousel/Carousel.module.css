@@ -21,6 +21,7 @@
 }
 .slide {
   height: 100vh;
+  margin-right: var(--margin-page);
 }
 
 @media screen and (min-width: 320px) {
