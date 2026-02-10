@@ -25,12 +25,14 @@ import {gallery} from './types/gallery'
 import {award} from './award'
 import {news} from './news'
 import {publication} from './publication'
+import {newsCategory} from './newsCategory'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
     link,
     screening,
     // location,
+    newsCategory,
     page,
     film,
     site,

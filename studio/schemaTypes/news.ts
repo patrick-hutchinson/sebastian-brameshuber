@@ -10,16 +10,10 @@ export const news = defineType({
     defineField({name: 'author', title: 'Author', type: 'string'}),
     defineField({name: 'publication', title: 'Publication', type: 'string'}),
     defineField({
-      name: 'category',
+      name: 'newsCategory',
       title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Interview', value: 'interview'},
-          {title: 'Statement', value: 'statement'},
-          {title: 'Press', value: 'press'},
-        ],
-      },
+      type: 'reference',
+      to: {type: 'newsCategory'},
     }),
     defineField({
       name: 'film',

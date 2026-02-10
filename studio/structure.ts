@@ -12,6 +12,7 @@ const hiddenTypes = [
   'award',
   'comment',
   'interview',
+  'newsCategory',
   'review',
   'page',
 ]
