@@ -2,6 +2,7 @@ import PublicationDisplay from "./components/PublicationDisplay";
 import Section from "@/components/Structure/Section";
 
 import styles from "./PublicationsPage.module.css";
+import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 
 const PublicationsPage = ({ publications }) => {
   return (
@@ -13,6 +14,7 @@ const PublicationsPage = ({ publications }) => {
           })}
         </div>
       </Section>
+      <ScrollToTop />
     </main>
   );
 };

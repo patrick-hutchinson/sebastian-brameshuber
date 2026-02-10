@@ -5,7 +5,6 @@ import AnimationLink from "../Animation/AnimationLink";
 import styles from "./Footer.module.css";
 
 const Footer = ({ site }) => {
-  console.log(site, "site");
   const currentYear = new Date().getFullYear();
 
   return (

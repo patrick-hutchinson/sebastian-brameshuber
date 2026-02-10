@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 import NewsItem from "./components/NewsItem/NewsItem";
 
 import styles from "./NewsPage.module.css";
@@ -8,6 +9,7 @@ const NewsPage = ({ news }) => {
       {news.map((newsItem) => {
         return <NewsItem key={newsItem._key} newsItem={newsItem} />;
       })}
+      <ScrollToTop />
     </main>
   );
 };

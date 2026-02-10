@@ -1,7 +1,6 @@
 import styles from "./ContactPage.module.css";
 
 const ContactPage = ({ site }) => {
-  console.log(site, "site");
   return (
     <main>
       <div typo="display">

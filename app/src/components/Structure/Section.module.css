@@ -3,7 +3,7 @@
   height: fit-content;
 }
 
-.section:last-child {
+/* .section:last-child {
   padding-bottom: 200px;
-  margin-bottom: 0; /* optional */
-}
+  margin-bottom: 0;
+} */

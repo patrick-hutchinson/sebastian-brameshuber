@@ -76,7 +76,7 @@ const ImagePreview = ({ medium, isHovering }) => {
             y,
             top: "var(--margin-page)",
             left: "var(--margin-page)",
-            width: "10vw",
+            width: "clamp(200px, 10vw, 500px)",
             height: "auto",
             pointerEvents: "none",
             zIndex: 10,

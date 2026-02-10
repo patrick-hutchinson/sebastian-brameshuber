@@ -2,6 +2,7 @@ import Text from "@/components/Text/Text";
 import Section from "@/components/Structure/Section";
 
 import styles from "./AboutPage.module.css";
+import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 
 const AboutPage = ({ about }) => {
   const FeaturedScreenings = ({ featuredScreenings }) => {
@@ -106,6 +107,7 @@ const AboutPage = ({ about }) => {
           <Awards awards={about.awards} />
         </Section>
       </div>
+      <ScrollToTop />
     </main>
   );
 };

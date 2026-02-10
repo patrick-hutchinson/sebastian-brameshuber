@@ -35,7 +35,6 @@ export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }) {
   const site = await getSite();
-  console.log(site, "site in layout");
 
   return (
     <ViewTransitions>

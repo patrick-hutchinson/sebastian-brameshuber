@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 import Screening from "../../components/Screenings/Screening";
 import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
 
@@ -9,11 +10,14 @@ const ScreeningsPage = ({ screenings }) => {
   });
 
   return (
-    <ScreeningContainer>
-      {sortedScreenings.map((screening) => {
-        return <Screening key={screening._id} screening={screening} />;
-      })}
-    </ScreeningContainer>
+    <main>
+      <ScreeningContainer>
+        {sortedScreenings.map((screening) => {
+          return <Screening key={screening._id} screening={screening} />;
+        })}
+      </ScreeningContainer>
+      <ScrollToTop />
+    </main>
   );
 };
 

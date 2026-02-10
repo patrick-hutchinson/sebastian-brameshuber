@@ -1,12 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+
 import ScreeningDate from "@/components/Screenings/ScreeningDate";
+
 import styles from "./Screening.module.css";
 
-import { motion } from "framer-motion";
-
 const Screening = ({ screening }) => {
-  console.log(screening, "screening");
   const firstScreening = screening.showtimes[0];
   const extraScreenings = screening.showtimes.slice(1);
 
@@ -34,7 +35,7 @@ const Screening = ({ screening }) => {
   };
 
   return (
-    <motion.div layout>
+    <motion.div>
       <div className={styles.screening} typo="h4">
         <div className={styles.screeningHeader}>
           {screening.film?.title}
