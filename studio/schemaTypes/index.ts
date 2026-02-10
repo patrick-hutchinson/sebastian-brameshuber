@@ -11,7 +11,7 @@ import {link} from './types/link'
 import {page} from './types/page'
 
 import {screening} from './screening'
-import {location} from './location'
+// import {location} from './location'
 import {film} from './film'
 import {portableText} from './types/portableText'
 import {comment} from './comment'
@@ -30,7 +30,7 @@ export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
     link,
     screening,
-    location,
+    // location,
     page,
     film,
     site,

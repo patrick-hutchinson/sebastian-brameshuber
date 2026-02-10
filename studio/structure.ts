@@ -6,7 +6,15 @@ import {DashboardIcon} from '@sanity/icons'
 const singletons = ['site', 'index', 'about']
 
 // Add other types you want to hide from Desk here
-const hiddenTypes = [...singletons, 'mux.videoAsset']
+const hiddenTypes = [
+  ...singletons,
+  'mux.videoAsset',
+  'award',
+  'comment',
+  'interview',
+  'review',
+  'page',
+]
 
 export const structure: StructureResolver = (S, context) =>
   S.list()
