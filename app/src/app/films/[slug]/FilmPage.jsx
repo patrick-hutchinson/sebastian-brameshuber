@@ -84,6 +84,18 @@ const FilmPage = ({ site, films, film }) => {
     );
   };
 
+  const FilmGallery = () => {
+    if (!film.gallery || film.gallery.length === 0) return undefined;
+    return (
+      <>
+        <Carousel array={film.gallery} onIndexChange={setCurrentIndex} />
+        <div typo="display">
+          {currentIndex + 1}/{film.gallery.length}
+        </div>
+      </>
+    );
+  };
+
   const FilmInterview = () => {
     if (!film.interview) return undefined;
 
@@ -164,10 +176,7 @@ const FilmPage = ({ site, films, film }) => {
         </div>
 
         <Section>
-          <Carousel array={film.gallery} onIndexChange={setCurrentIndex} />
-          <div typo="display">
-            {currentIndex + 1}/{film.gallery.length}
-          </div>
+          <FilmGallery />
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>

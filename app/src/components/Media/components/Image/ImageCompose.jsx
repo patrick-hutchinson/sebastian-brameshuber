@@ -4,11 +4,11 @@ import Image from "./Image";
 import styles from "../../Media.module.css";
 import Placeholder from "../Placeholder";
 
-const ImageCompose = ({ medium }) => {
+const ImageCompose = ({ medium, className }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className={styles.mediaContainer}>
+    <div className={`${styles.mediaContainer} ${className}`}>
       <Placeholder medium={medium} isLoaded={isLoaded} />
       <Image medium={medium} setIsLoaded={setIsLoaded} />
     </div>

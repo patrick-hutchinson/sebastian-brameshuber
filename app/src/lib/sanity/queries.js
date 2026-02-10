@@ -2,6 +2,8 @@ import { mediaAssetFragment } from "./fragments";
 
 export const siteQuery = `*[_type=="site"][0]{
   title,
+  owner,
+  site,
   description,
   address,
   email,
@@ -101,4 +103,30 @@ export const filmsQuery = `*[_type == "film"]{
     text,
   },
   slug
+}`;
+
+export const newsQuery = `*[_type == "news"]{
+  _id,
+  _type,
+  text,
+  date,
+  category,
+  author,
+  publication,
+  showtimes,
+  film->{
+    title,
+    slug,
+  },
+  link,
+  previewMedia[0] ${mediaAssetFragment}
+}`;
+
+export const publicationsQuery = `*[_type == "publication"]{
+  _id,
+  _type,
+  title,
+  text,
+  media[0] ${mediaAssetFragment},
+  link,
 }`;

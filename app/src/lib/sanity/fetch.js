@@ -1,5 +1,5 @@
 import { production, preview } from "./client";
-import { aboutQuery, filmsQuery, screeningsQuery, siteQuery } from "./queries";
+import { aboutQuery, filmsQuery, newsQuery, publicationsQuery, screeningsQuery, siteQuery } from "./queries";
 
 const isProduction = process.env.VERCEL_ENV === "production";
 const isPreview = process.env.VERCEL_ENV === "preview";
@@ -30,4 +30,12 @@ export async function getScreenings() {
 
 export async function getFilms() {
   return client.fetch(filmsQuery);
+}
+
+export async function getNews() {
+  return client.fetch(newsQuery);
+}
+
+export async function getPublications() {
+  return client.fetch(publicationsQuery);
 }

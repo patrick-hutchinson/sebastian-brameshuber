@@ -23,6 +23,8 @@ import {review} from './reviews'
 import {mediaAsset} from './types/mediaAsset'
 import {gallery} from './types/gallery'
 import {award} from './award'
+import {news} from './news'
+import {publication} from './publication'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
@@ -44,5 +46,7 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     gallery,
     award,
     about,
+    news,
+    publication,
   ],
 }

@@ -45,6 +45,7 @@ export default async function RootLayout({ children }) {
             <LenisProvider>
               <Header />
               {children}
+              <div id="portal"></div>
               <FooterWrapper site={site} />
             </LenisProvider>
           </body>

@@ -31,7 +31,6 @@ const Image = ({ medium, setIsLoaded }) => {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          willChange: "transform",
           objectPosition: "center",
         }}
         onLoad={() => setIsLoaded(true)}

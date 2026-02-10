@@ -1,0 +1,6 @@
+.socialAccount a {
+  color: var(--accent);
+}
+.socialAccount a:hover {
+  color: #fff;
+}

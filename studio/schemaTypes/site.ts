@@ -13,6 +13,11 @@ export const site = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'owner',
+      title: 'Website Owner',
+      type: 'string',
+    }),
+    defineField({
       name: 'description',
       title: 'Website Description',
       description: 'As seen on Google Search Results',
@@ -23,8 +28,33 @@ export const site = defineType({
     defineField({
       name: 'address',
       title: 'Address',
-      type: 'array',
-      of: [{type: 'block'}],
+      type: 'object',
+      options: {
+        columns: 3,
+      },
+      fields: [
+        {
+          name: 'street',
+          title: 'Street',
+          type: 'string',
+          options: {columns: 3}, // full width
+        },
+        {
+          name: 'postcode',
+          title: 'Post code',
+          type: 'string',
+        },
+        {
+          name: 'city',
+          title: 'City',
+          type: 'string',
+        },
+        {
+          name: 'country',
+          title: 'Country',
+          type: 'string',
+        },
+      ],
     }),
     defineField({
       name: 'email',
