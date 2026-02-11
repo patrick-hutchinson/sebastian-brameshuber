@@ -9,6 +9,7 @@ header.header {
   top: 0;
   padding: 0 var(--margin-page);
   z-index: 10;
+  background: #000;
 }
 header.header a:first-child {
   grid-column: 1 / 2;

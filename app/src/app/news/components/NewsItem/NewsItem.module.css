@@ -29,7 +29,6 @@
   display: -webkit-box;
   -webkit-line-clamp: 3; /* or 3 */
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .newsHeadline:not(:has(+ .previewMedia)) {

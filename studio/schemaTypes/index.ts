@@ -3,15 +3,13 @@ import {type SchemaTypeDefinition} from 'sanity'
 import {site} from './site'
 
 // Pages
-import {index} from './pages/index'
 import {about} from './pages/about'
 
 // Types
 import {link} from './types/link'
-import {page} from './types/page'
+import {page} from './page'
 
-import {screening} from './screening'
-// import {location} from './location'
+import {screening} from './pages/screening'
 import {film} from './film'
 import {portableText} from './types/portableText'
 import {comment} from './comment'
@@ -23,7 +21,7 @@ import {review} from './reviews'
 import {mediaAsset} from './types/mediaAsset'
 import {gallery} from './types/gallery'
 import {award} from './award'
-import {news} from './news'
+import {news} from './pages/news'
 import {publication} from './publication'
 import {newsCategory} from './newsCategory'
 
@@ -31,12 +29,10 @@ export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
     link,
     screening,
-    // location,
     newsCategory,
     page,
     film,
     site,
-    index,
     portableText,
     comment,
     imageAsset,
