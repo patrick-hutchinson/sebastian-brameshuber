@@ -7,7 +7,7 @@ import Footer from "@/components/Footer/Footer";
 import CoverMedia from "@/components/CoverMedia/CoverMedia";
 
 import FilmGallery from "./components/FilmGallery";
-import FilmComments from "./components/FilmComments";
+import FilmComments from "./components/FilmComments/FilmComments";
 import FilmScreenings from "./components/FilmScreenings";
 import FilmInterview from "./components/FilmInterview";
 import FilmCredits from "./components/FilmCredits";
@@ -37,10 +37,10 @@ const FilmPage = ({ site, films, film }) => {
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.commentsAndMedia}`}>
-          <Section>
+          <Section className={styles.filmComments_Section}>
             <FilmComments film={film} />
           </Section>
-          <Section>
+          <Section className={styles.filmSupportingMedia_Section}>
             <FilmSupportingMedia film={film} />
           </Section>
         </div>
@@ -50,11 +50,11 @@ const FilmPage = ({ site, films, film }) => {
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>
-          <Section>
+          <Section className={styles.filmInterview_Section}>
             <FilmInterview film={film} />
           </Section>
 
-          <Section>
+          <Section className={styles.filmReview_Section}>
             <FilmReviews film={film} />
           </Section>
         </div>

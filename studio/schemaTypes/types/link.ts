@@ -5,9 +5,7 @@ export const link = defineType({
   name: 'link',
   title: 'Link',
   type: 'object',
-  options: {
-    columns: 2, // display children in two columns
-  },
+  options: {columns: 2},
   fields: [
     {
       name: 'type',
@@ -20,7 +18,7 @@ export const link = defineType({
       },
     },
     {
-      name: 'internal',
+      name: 'internalLink',
       type: 'reference',
       to: [{type: 'page'}, {type: 'film'}],
       hidden: ({parent}) => parent?.type !== 'internal',

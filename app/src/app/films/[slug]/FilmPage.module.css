@@ -40,6 +40,7 @@
 .filmComment .text {
   color: var(--accent);
 }
+
 .commentInformation {
   display: grid;
 
@@ -63,10 +64,13 @@
 }
 .filmReview {
   break-inside: avoid;
-
   flex-direction: column;
   margin-bottom: var(--margin-4);
 }
+.filmReview:last-child {
+  margin-bottom: 0;
+}
+
 .filmReview_credit {
   color: var(--accent);
 }
@@ -114,31 +118,55 @@
     grid-template-columns: repeat(24, 1fr);
   }
 
+  .sectionWrapper section {
+    display: contents;
+    margin-bottom: 0;
+  }
+
   /* Comments + SupportingMedia */
-  .sectionWrapper.commentsAndMedia section:first-child {
+  .sectionWrapper.commentsAndMedia .filmComments {
     grid-column: 1 / 12;
   }
 
-  .sectionWrapper.commentsAndMedia section:nth-child(2) {
+  .sectionWrapper.commentsAndMedia .filmSupportingMedia {
     grid-column: 13 / 25;
   }
 
+  .sectionWrapper.commentsAndMedia {
+    margin-bottom: var(--margin-1);
+  }
+
+  .filmSupportingMedia {
+    position: sticky;
+    margin-bottom: 0;
+    height: fit-content;
+    grid-column: 14 / 25;
+  }
+
   /* // Interview + Reviews */
-  .sectionWrapper.interviewAndReviews section:first-child {
-    /* Separate Header from Text */
+
+  .filmInterview_Section .filmInterview {
     display: contents;
   }
-  .filmInterview {
-    display: contents;
+  .filmInterview_Section .interviewHeading {
+    grid-column: 1 / 20;
   }
-  .interviewHeading {
-    grid-column: 1 / 25;
+  .filmInterview_Section .interviewText {
+    grid-column: 1 / 12;
   }
-  .interviewText {
-    grid-column: 1 / 16;
+
+  .sectionWrapper.interviewAndReviews .filmReviews {
+    grid-column: 21 / 25;
+    position: sticky;
+    top: 50%;
+    height: fit-content;
   }
-  .sectionWrapper.interviewAndReviews section:nth-child(2) {
-    grid-column: 18 / 25;
+
+  .filmReviews {
+    column-count: 1;
+  }
+  .sectionWrapper.interviewAndReviews {
+    margin-bottom: var(--margin-1);
   }
 }
 
@@ -146,9 +174,6 @@
 @media screen and (min-width: 1280px) {
   .interviewText {
     grid-column: 1 / 12;
-  }
-  .sectionWrapper.interviewAndReviews section:nth-child(2) {
-    grid-column: 21 / 25;
   }
 }
 

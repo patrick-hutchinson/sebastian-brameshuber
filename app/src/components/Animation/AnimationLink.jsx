@@ -3,6 +3,8 @@ import { useTransitionRouter } from "next-view-transitions";
 const AnimationLink = ({ path, link, children, className }) => {
   const router = useTransitionRouter();
 
+  console.log(link, "link");
+
   if (!path && link && !link.url && !link.email && !link.internalLink) return <>{children}</>;
 
   let isInternal;

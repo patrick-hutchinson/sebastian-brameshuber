@@ -78,7 +78,19 @@ export const filmsQuery = `*[_type == "film"]{
       // speech blocks
       speaker,
       initials,
-      text[],
+      text[]{
+        ...,
+        markDefs[]{
+          ...,
+          _type == "link" => {
+            type,
+            url,
+            internalLink->{
+              slug
+            }
+          }
+        }
+      },
 
       // heading blocks
       style,
@@ -107,7 +119,19 @@ export const filmsQuery = `*[_type == "film"]{
 export const newsQuery = `*[_type == "news"]{
   _id,
   _type,
-  text,
+   text[]{
+        ...,
+        markDefs[]{
+          ...,
+          _type == "link" => {
+            type,
+            url,
+            internalLink->{
+              slug
+            }
+          }
+        }
+      },
   date,
   category,
   author,
