@@ -8,7 +8,7 @@ const LoadNextFilm = ({ films, film }) => {
   return (
     <AnimationLink path={loadNextFilm(films, film)}>
       <div className={styles.loadNext} typo="display">
-        Load Next
+        <button>Load Next</button>
       </div>
     </AnimationLink>
   );

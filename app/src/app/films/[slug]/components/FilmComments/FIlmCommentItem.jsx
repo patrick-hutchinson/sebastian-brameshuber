@@ -33,9 +33,9 @@ const FilmCommentItem = ({ comment }) => {
           <div>{comment.source}</div>
           <div>{comment.author}</div>
         </div>
-        <div className={styles.readMore} onClick={() => setExpanded((prev) => !prev)}>
+        <button className={styles.readMore} onClick={() => setExpanded((prev) => !prev)}>
           {expanded ? "Read Less" : "Read More"}
-        </div>
+        </button>
       </div>
     </div>
   );

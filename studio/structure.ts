@@ -9,7 +9,7 @@ const singletons = ['site', 'about']
 const hiddenTypes = [
   ...singletons,
   'mux.videoAsset',
-  'award',
+  // 'award',
   'comment',
   'interview',
   'newsCategory',

@@ -99,23 +99,10 @@
 
 /* iPads and other Tablets */
 @media screen and (min-width: 769px) {
-  .filmCredits {
-    display: flex;
-    flex-direction: column; /* stack items vertically first */
-    flex-wrap: wrap; /* allow items to wrap to new column */
-    height: 250px; /* fixed height to control 6 items per column */
-
-    align-content: flex-start;
-  }
-
-  .filmCredit {
-    flex: 0 0 auto; /* don't shrink or grow, keep natural height */
-    width: calc(100% / (24 / 3)); /* 3/24 of container width per column */
-  }
-
   .sectionWrapper {
     display: grid;
     grid-template-columns: repeat(24, 1fr);
+    margin-bottom: var(--margin-1);
   }
 
   .sectionWrapper section {
@@ -132,18 +119,12 @@
     grid-column: 13 / 25;
   }
 
-  .sectionWrapper.commentsAndMedia {
-    margin-bottom: var(--margin-1);
-  }
-
   .filmSupportingMedia {
     position: sticky;
-    margin-bottom: 0;
     height: fit-content;
-    grid-column: 14 / 25;
   }
 
-  /* // Interview + Reviews */
+  /* Interview + Reviews */
 
   .filmInterview_Section .filmInterview {
     display: contents;
@@ -165,8 +146,20 @@
   .filmReviews {
     column-count: 1;
   }
-  .sectionWrapper.interviewAndReviews {
-    margin-bottom: var(--margin-1);
+
+  /* Credits */
+
+  .filmCredits {
+    display: flex;
+    flex-direction: column; /* stack items vertically first */
+    flex-wrap: wrap; /* allow items to wrap to new column */
+    height: 250px; /* fixed height to control 6 items per column */
+    align-content: flex-start;
+  }
+
+  .filmCredit {
+    flex: 0 0 auto; /* don't shrink or grow, keep natural height */
+    width: calc(100% / (24 / 3)); /* 3/24 of container width per column */
   }
 }
 

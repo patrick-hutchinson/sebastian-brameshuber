@@ -9,7 +9,7 @@ import Text from "@/components/Text/Text";
 
 import styles from "./NewsItem.module.css";
 import ImagePreview from "@/components/ImagePreview/ImagePreview";
-import ScreeningDate from "@/components/Screenings/ScreeningDate";
+import AnimationLink from "@/components/Animation/AnimationLink";
 import FormatDate from "@/components/FormatDate/FormatDate";
 
 const NewsItem = ({ newsItem }) => {
@@ -26,8 +26,18 @@ const NewsItem = ({ newsItem }) => {
     setIsHovering(false);
   };
 
+  const commonProps = {
+    className: styles.newsItem,
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+  };
+
+  const hasLink = newsItem.link;
+  const Wrapper = hasLink ? AnimationLink : "div";
+  const wrapperProps = hasLink ? { link: newsItem.link, ...commonProps } : { ...commonProps };
+
   return (
-    <div className={styles.newsItem} onMouseEnter={() => handleMouseEnter()} onMouseLeave={() => handleMouseLeave()}>
+    <Wrapper {...wrapperProps}>
       <div className={styles.newsHeadline} typo="display">
         <FormatDate date={newsItem.date} />
         <Text text={newsItem.text} className={styles.clamp} />
@@ -42,7 +52,7 @@ const NewsItem = ({ newsItem }) => {
       </div>
 
       {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
-    </div>
+    </Wrapper>
   );
 };
 

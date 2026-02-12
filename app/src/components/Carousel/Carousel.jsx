@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 const Carousel = ({ array, onIndexChange }) => {
   if (!array) return;
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, dragFree: true, dragResistance: 1 }, []);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, dragResistance: 1 }, []);
 
   // Triple the date in case it is not long enough to fill the width of the screen
   const carouselMedia = [...array, ...array, ...array];
@@ -31,6 +31,28 @@ const Carousel = ({ array, onIndexChange }) => {
       emblaApi.off("scroll", updateIndex);
     };
   }, [emblaApi, array.length, onIndexChange]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        emblaApi.scrollNext();
+      }
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        emblaApi.scrollPrev();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [emblaApi]);
 
   return (
     <motion.div className={`${styles.carousel_outer} embla`} ref={emblaRef}>

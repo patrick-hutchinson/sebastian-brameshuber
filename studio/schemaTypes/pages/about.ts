@@ -27,6 +27,21 @@ export const about = defineType({
               type: 'portableText',
             }),
           ],
+
+          preview: {
+            select: {
+              title: 'film.title',
+              festivals: 'festivals',
+            },
+            prepare({title, festivals}) {
+              const firstFestival = festivals?.[0]?.children?.[0]?.text
+
+              return {
+                title: title || 'Untitled film',
+                subtitle: firstFestival ? `Festival: ${firstFestival}` : 'No festivals listed',
+              }
+            },
+          },
         }),
       ],
     }),

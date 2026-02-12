@@ -7,7 +7,7 @@ const FilmScreenings = ({ film }) => {
   const sortedScreenings = film.screenings
     .slice() // copy so we don't mutate
     .sort((a, b) => new Date(a.showtimes[0]?.screeningDate) - new Date(b.showtimes[0]?.screeningDate))
-    .slice(0, 10); // limit to first 10
+    .slice(0, 6); // limit to first 10
 
   return (
     <ScreeningContainer>

@@ -6,6 +6,18 @@
   padding: 1px;
 }
 
+.newsHeadline {
+  transition: color var(--transition);
+}
+
+a.newsItem:hover .newsHeadline {
+  color: #fff !important;
+}
+
+.newsFooter {
+  color: #fff !important;
+}
+
 .newsFooter {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
