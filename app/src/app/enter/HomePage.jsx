@@ -1,9 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useMotionValue } from "framer-motion";
-
-import { useLenisContext } from "@/context/LenisContext";
+import { useEffect, useRef } from "react";
 
 import FilmSlide from "./components/FilmSlide";
 
@@ -18,27 +15,15 @@ const HomePage = ({ films }) => {
     { background: "#0ff" },
     { background: "#fff" },
     { background: "#00f" },
+    { background: "#f00" },
   ];
 
-  const ITEM_HEIGHT = 50; // vh or px
-  const TOTAL = array.length * ITEM_HEIGHT;
-
-  const lenis = useLenisContext();
-  const scroll = useMotionValue(0);
-
-  useEffect(() => {
-    if (!lenis) return;
-
-    const onScroll = (e) => scroll.set(e.animatedScroll);
-
-    lenis.on("scroll", onScroll);
-    return () => lenis.off("scroll", onScroll);
-  }, [lenis, scroll]);
+  const duplicatedArray = [...array, ...array];
 
   return (
-    <div className={styles.gallery}>
+    <div>
       {array.map((film, index) => (
-        <FilmSlide key={index} film={film} index={index} scroll={scroll} total={TOTAL} itemHeight={ITEM_HEIGHT} />
+        <FilmSlide key={film._id} film={film} index={index} />
       ))}
     </div>
   );

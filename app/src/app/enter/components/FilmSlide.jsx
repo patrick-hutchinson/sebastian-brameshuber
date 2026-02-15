@@ -3,8 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 import styles from "../HomePage.module.css";
 
-const FilmSlide = ({ film, index, scroll, itemHeight, total }) => {
-  console.log(itemHeight, total);
+const FilmSlide = ({ film, index }) => {
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -21,18 +20,10 @@ const FilmSlide = ({ film, index, scroll, itemHeight, total }) => {
 
   // const scale = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [2, 1.2, 1, 0.75, 0.5]);
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1.5, 0.75]);
-
-  const y = useTransform(scroll, (scroll) => {
-    return (((index * itemHeight - scroll) % total) + total) % total;
-  });
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
 
   return (
-    <motion.div
-      ref={ref}
-      className={styles.filmSlide}
-      style={{ scale, background: film.background, y, height: `${itemHeight}vh` }}
-    >
+    <motion.div ref={ref} className={styles.filmSlide} style={{ scale, background: film.background }}>
       <div>{index + 1}</div>
     </motion.div>
   );
