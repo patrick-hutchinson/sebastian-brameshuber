@@ -1,7 +1,7 @@
 import styles from "../FilmPage.module.css";
 
 const FilmCredits = ({ film }) => {
-  if (!film.credits) return undefined;
+  if (!film.credits || film.credits.length === 0) return undefined;
 
   return (
     <div className={styles.filmCredits} typo="fineprint">

@@ -6,23 +6,12 @@ import FilmSlide from "./components/FilmSlide";
 
 import styles from "./HomePage.module.css";
 import { useLenisContext } from "@/context/LenisContext";
-import { useMotionValue } from "framer-motion";
+import { useMotionValue, motion, useTransform } from "framer-motion";
 
 const HomePage = ({ films }) => {
   const lenis = useLenisContext();
   const scroll = useMotionValue(0); // virtual scroll
-  const [lastScroll, setLastScroll] = useState(0);
-
-  const [slideHeight, setSlideHeight] = useState(0);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const style = getComputedStyle(root);
-
-    const parse = (v) => parseFloat(v);
-
-    setSlideHeight(parse(style.getPropertyValue("--content-height")));
-  }, [films]);
+  const prevScrollRef = useRef(0);
 
   const array = [
     { background: "#f00" },
@@ -32,32 +21,45 @@ const HomePage = ({ films }) => {
     { background: "#0ff" },
     { background: "#fff" },
     { background: "#00f" },
-    { background: "#f00" },
   ];
+
+  const duplicatedArray = [...array, ...array];
+
+  const slideHeight = 879;
+  const totalHeight = slideHeight * duplicatedArray.length;
 
   useEffect(() => {
     if (!lenis) return;
 
-    let prevScroll = 0;
-
     const onScroll = (e) => {
-      const delta = e.animatedScroll - prevScroll; // difference since last frame
-      prevScroll = e.animatedScroll;
-
-      scroll.set(scroll.get() + delta); // accumulate continuously
+      const delta = e.animatedScroll - prevScrollRef.current;
+      prevScrollRef.current = e.animatedScroll;
+      scroll.set(scroll.get() + delta);
     };
 
     lenis.on("scroll", onScroll);
     return () => lenis.off("scroll", onScroll);
   }, [lenis, scroll]);
 
-  const duplicatedArray = [...array, ...array];
+  const wrappedScroll = useTransform(scroll, (v) => {
+    console.log(v, "v");
+    return -(v % totalHeight);
+  });
 
   return (
     <div className={styles.container}>
-      {array.map((film, index) => (
-        <FilmSlide key={film._id} film={film} index={index} />
-      ))}
+      <motion.div style={{ y: wrappedScroll }}>
+        {duplicatedArray.map((film, index) => (
+          <FilmSlide
+            key={index}
+            film={film}
+            index={index}
+            slideHeight={slideHeight}
+            totalHeight={totalHeight}
+            scroll={scroll}
+          />
+        ))}
+      </motion.div>
     </div>
   );
 };

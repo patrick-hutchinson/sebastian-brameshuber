@@ -22,6 +22,8 @@ const FilmPage = ({ site, films, film }) => {
     return <div className={styles.contentWrapper}>{children}</div>;
   };
 
+  if (!film) return;
+
   return (
     <div>
       <CoverMedia medium={film.coverMedia?.medium} />

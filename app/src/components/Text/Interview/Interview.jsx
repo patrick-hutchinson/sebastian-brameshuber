@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react";
 import styles from "./Interview.module.css";
 
 const Interview = ({ text, className }) => {
+  if (!text || text.length === 0) return;
   return (
     <div className={`${styles.interview} ${className}`} typo="longcopy">
       {text.map((block) => {
