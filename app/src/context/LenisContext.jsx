@@ -13,10 +13,11 @@ export default function LenisProvider({ children }) {
   const lenis = useLenis(); // hook provided by ReactLenis
   const pathname = usePathname();
 
-  const isHome = pathname === "/";
+  const infiniteRoutes = ["/", "/enter"];
+  const scrollInfinite = infiniteRoutes.includes(pathname);
 
   return (
-    <ReactLenis root options={{ infinite: isHome, syncTouch: true }}>
+    <ReactLenis root options={{ infinite: scrollInfinite, syncTouch: true }}>
       <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>
     </ReactLenis>
   );

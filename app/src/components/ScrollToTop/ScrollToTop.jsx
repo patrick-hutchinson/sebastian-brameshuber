@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 
 const ScrollToTop = () => {
   const lenis = useLenisContext();
-  const { isMobile, isTouch } = useContext(DeviceContext);
+  const { isMobile, isTouch, isDesktop } = useContext(DeviceContext);
   const [scrollHeight, setScrollHeight] = useState(null);
   const [pageIsOverflowing, setPageIsOverflowing] = useState(false);
 
@@ -33,7 +33,7 @@ const ScrollToTop = () => {
   };
 
   // if (!isMobile) return;
-  if (!pageIsOverflowing) return;
+  if (!pageIsOverflowing || isDesktop) return;
 
   return (
     <div

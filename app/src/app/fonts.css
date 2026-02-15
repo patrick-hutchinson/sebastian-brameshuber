@@ -74,7 +74,13 @@ h4 p,
   font-size: var(--font-size-3);
   line-height: var(--line-height-3);
   letter-spacing: var(--letter-spacing-3);
+  text-indent: calc(100% / 12);
 }
+[typo="longcopy"]:first-child,
+[typo="longcopy"] p:first-child {
+  text-indent: 0;
+}
+
 [typo="fineprint"],
 [typo="fineprint"] p {
   font-family: "MagdaClean";

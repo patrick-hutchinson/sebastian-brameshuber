@@ -1,6 +1,6 @@
 import { useStickyPositioning } from "@/components/Media/hooks/useStickyPositioning";
 
-import FilmCommentItem from "./FIlmCommentItem";
+import FilmCommentItem from "./FilmCommentItem";
 
 import styles from "../../FilmPage.module.css";
 

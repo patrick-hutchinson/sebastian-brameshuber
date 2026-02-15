@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 
+import { convertToPlainText } from "@/utils/convertToPlainText";
+
 import Text from "@/components/Text/Text";
 
 import styles from "../../FilmPage.module.css";
@@ -17,6 +19,7 @@ const FilmCommentItem = ({ comment }) => {
   return (
     <div key={comment._id} className={styles.filmComment}>
       <Text text={comment.title} />
+
       <div
         ref={contentRef}
         className={styles.textWrapper}
@@ -29,13 +32,15 @@ const FilmCommentItem = ({ comment }) => {
         <Text text={comment.text} className={styles.text} />
       </div>
       <div className={styles.commentInformation} typo="fineprint">
-        <div className={styles.CommentSource}>
-          <div>{comment.source}</div>
-          <div>{comment.author}</div>
+        <div className={styles.commentSource} style={{ gridColumn: "1 / 9" }}>
+          <Text text={comment.source} />
+          <Text text={comment.author} />
         </div>
-        <button className={styles.readMore} onClick={() => setExpanded((prev) => !prev)}>
-          {expanded ? "Read Less" : "Read More"}
-        </button>
+        {height > 305 && (
+          <button className={styles.readMore} onClick={() => setExpanded((prev) => !prev)}>
+            {expanded ? "Read Less" : "Read More"}
+          </button>
+        )}
       </div>
     </div>
   );

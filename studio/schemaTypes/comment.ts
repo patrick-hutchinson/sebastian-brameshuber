@@ -5,10 +5,10 @@ export const comment = defineType({
   title: 'Comment',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Title', type: 'string'}),
+    defineField({name: 'title', title: 'Title', type: 'portableText'}),
     defineField({name: 'text', title: 'Text', type: 'portableText'}),
-    defineField({name: 'source', title: 'Source', type: 'string'}),
-    defineField({name: 'author', title: 'Author', type: 'string'}),
+    defineField({name: 'source', title: 'Source', type: 'portableText'}),
+    defineField({name: 'author', title: 'Author', type: 'portableText'}),
     defineField({name: 'link', title: 'Link', type: 'link'}),
   ],
 })

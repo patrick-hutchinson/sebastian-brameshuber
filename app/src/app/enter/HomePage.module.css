@@ -7,3 +7,9 @@
 .filmSlide:last-of-type {
   margin-bottom: 0;
 }
+
+.gallery {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}

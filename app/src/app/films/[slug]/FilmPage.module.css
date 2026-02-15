@@ -7,10 +7,11 @@
   position: relative;
   left: calc(-1 * var(--margin-page));
   bottom: calc(-1 * var(--margin-page));
-  margin-top: 100vh;
+  /* margin-top: 100vh; */
+  top: 100vh;
   z-index: 2;
 
-  background: rgba(0, 0, 0, 0.9); /* REQUIRED */
+  background: rgba(0, 0, 0, 0.85);
   padding: var(--margin-page);
 }
 
@@ -44,8 +45,11 @@
 .commentInformation {
   display: grid;
 
-  /* grid-template-columns: (1fr, repeat(12)); */
+  grid-template-columns: repeat(12, 1fr);
   padding-top: var(--margin-4);
+}
+.filmComment .commentSource {
+  grid-column: 1 / 9;
 }
 .filmComment .readMore {
   grid-column: 10 / 12;
@@ -137,7 +141,7 @@
   }
 
   .sectionWrapper.interviewAndReviews .filmReviews {
-    grid-column: 21 / 25;
+    grid-column: 22 / 25;
     position: sticky;
     top: 50%;
     height: fit-content;
