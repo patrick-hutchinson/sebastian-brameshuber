@@ -11,9 +11,16 @@ const FilmSupportingMedia = ({ film }) => {
 
   return (
     <div className={styles.filmSupportingMedia} ref={containerRef} style={{ top }}>
-      {film.supportingMedia.map((item) => (
-        <Media key={item._id} medium={item.medium} />
-      ))}
+      <div className={styles.filmSupportingMedia_inner}>
+        {film.supportingMedia.map((item) => (
+          <Media key={item._id} medium={item.medium} />
+        ))}
+      </div>
+      <div typo="fineprint" style={{ marginTop: "var(--margin-page)" }}>
+        <a href={film.purchaseLink} target="_blank">
+          Buy on {film.platform}
+        </a>
+      </div>
     </div>
   );
 };

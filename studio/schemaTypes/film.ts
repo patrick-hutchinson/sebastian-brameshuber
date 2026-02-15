@@ -63,6 +63,13 @@ export const film = defineType({
       description:
         'Diese Bilder/Videos kleben in der Desktop Version neben den Comments. Hier wären zum Beispiel Trailer vorgesehen.',
     }),
+    defineField({name: 'purchaseLink', title: 'Vimeo/Streaming Link', type: 'string'}),
+    defineField({
+      name: 'platform',
+      title: 'Platform',
+      type: 'string',
+      description: 'Trage ein, auf welcher Platform man den Film sehen kann',
+    }),
     defineField({
       name: 'gallery',
       title: 'Gallerie',

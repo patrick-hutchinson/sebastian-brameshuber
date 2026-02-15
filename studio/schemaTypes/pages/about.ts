@@ -50,6 +50,7 @@ export const about = defineType({
       title: 'Awards',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'award'}]}],
+      validation: (Rule) => Rule.unique().error('You cannot select the same award multiple times.'),
     }),
   ],
   preview: {

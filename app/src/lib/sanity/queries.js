@@ -65,6 +65,8 @@ export const filmsQuery = `*[_type == "film"]{
     link,
   },
   supportingMedia[] ${mediaAssetFragment},
+  purchaseLink,
+  platform,
   gallery[] ${mediaAssetFragment},
   interview->{
     title,

@@ -26,7 +26,7 @@ const AboutPage = ({ about }) => {
       <ul typo="longcopy">
         {about.featuredScreenings.map((screening) => (
           <li key={screening._id}>
-            <div className={styles.filmTitle}>{screening.film.title}</div>
+            <div className={styles.filmTitle}>{screening.film?.fullTitle ?? screening.film?.title}</div>
             <Text text={screening.festivals} />
           </li>
         ))}
@@ -41,7 +41,7 @@ const AboutPage = ({ about }) => {
       // Returns an object grouped by year -> film -> array of awards
       return awards.reduce((acc, award) => {
         const year = award.year ?? "Unknown Year";
-        const filmTitle = award.film?.fullTitle ?? award.film?.title;
+        const filmTitle = award.film?.title;
 
         if (!acc[year]) acc[year] = {};
         if (!acc[year][filmTitle]) acc[year][filmTitle] = [];

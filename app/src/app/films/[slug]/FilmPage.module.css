@@ -85,7 +85,7 @@
   text-align: center;
 }
 
-.filmSupportingMedia {
+.filmSupportingMedia_inner {
   padding: var(--margin-page);
   background: #fff;
 }

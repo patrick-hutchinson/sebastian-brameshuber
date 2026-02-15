@@ -51,7 +51,10 @@ section.featuredScreenings {
     grid-template-columns: 1fr 1fr;
   }
   section.aboutText {
-    display: contents;
+    /* display: contents; */
+    position: sticky;
+    top: calc(var(--margin-page) + var(--header-height));
+    grid-column: unset;
   }
   .sectionWrapper {
     display: block;
@@ -61,10 +64,6 @@ section.featuredScreenings {
   }
   section.featuredScreenings > ul {
     grid-column: 2 / 13;
-  }
-
-  .sectionWrapper section:last-child {
-    margin-bottom: 0;
   }
 }
 
