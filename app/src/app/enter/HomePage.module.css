@@ -2,6 +2,11 @@
   height: 600px;
   width: 80vw;
   position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* optional: keeps image contained */
 }
 
 .viewport {

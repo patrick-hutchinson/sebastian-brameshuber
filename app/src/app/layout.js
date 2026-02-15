@@ -10,7 +10,8 @@ import "./globals.css";
 import "./fonts.css";
 
 import { getSite } from "@/lib/sanity/fetch";
-import { AnimatePresence } from "framer-motion";
+
+import ScrollRestorationController from "@/controllers/ScrollRestorationController";
 
 export async function generateMetadata() {
   const site = await getSite();
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }) {
     <ViewTransitions>
       <html lang="en">
         <DeviceProvider>
+          <ScrollRestorationController />
           <body>
             <LenisProvider>
               <Header />

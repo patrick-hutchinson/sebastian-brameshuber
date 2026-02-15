@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLenisContext } from "@/context/LenisContext";
+import { animate } from "framer-motion";
 
 import FilmSlide from "./components/FilmSlide";
 
@@ -9,34 +10,51 @@ import styles from "./HomePage.module.css";
 import { useMotionValue, motion, wrap } from "framer-motion";
 
 const HomePage = ({ films }) => {
-  const array = [
-    { background: "#f00" },
-    { background: "#ff0" },
-    { background: "#0f0" },
-    { background: "#f0f" },
-    { background: "#0ff" },
-    { background: "#fff" },
-    { background: "#00f" },
-  ];
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const virtualScroll = useMotionValue(0);
-  const duplicatedArray = [...array, ...array];
-  const SLIDE_HEIGHT = 600;
-  const LOOP_HEIGHT = SLIDE_HEIGHT * array.length + 745;
+  const duplicatedArray = [...films, ...films];
+  const SLIDE_HEIGHT = 600; // ⚠️ Update slide height!
+
+  const LOOP_HEIGHT = SLIDE_HEIGHT * films.length + 745; // ⚠️ Update manual offset!
 
   const lenis = useLenisContext();
   useEffect(() => {
     if (!lenis) return;
 
     const onScroll = ({ scroll }) => {
+      if (isAnimating) return; // ignore scroll events while animating
       const y = wrap(-LOOP_HEIGHT, 0, -scroll);
-      console.log(y, "y");
+
       virtualScroll.set(y);
     };
 
     lenis.on("scroll", onScroll);
     return () => lenis.off("scroll", onScroll);
   }, [lenis]);
+
+  useEffect(() => {}, [activeIndex]);
+
+  // HomePage
+  const scrollToSlide = (index) => {
+    setIsAnimating(true);
+    const targetScroll = index * SLIDE_HEIGHT - window.innerHeight / 2 + SLIDE_HEIGHT / 2;
+
+    // stop Lenis while animating
+    lenis?.stop();
+    virtualScroll.stop();
+
+    animate(virtualScroll, -targetScroll, {
+      type: "spring",
+      stiffness: 150,
+      damping: 25,
+      onComplete: () => {
+        setActiveIndex(index);
+      },
+    });
+  };
 
   return (
     <>
@@ -49,7 +67,8 @@ const HomePage = ({ films }) => {
               index={index}
               virtualScroll={virtualScroll}
               slideHeight={SLIDE_HEIGHT}
-              loopHeight={LOOP_HEIGHT}
+              activeIndex={activeIndex}
+              scrollToSlide={scrollToSlide}
             />
           ))}
         </motion.div>
