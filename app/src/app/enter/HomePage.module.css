@@ -1,3 +1,10 @@
+.container {
+  height: 100vh;
+  overflow-y: hidden;
+  position: fixed;
+  width: 100%;
+}
+
 .filmSlide {
   height: var(--content-height);
 

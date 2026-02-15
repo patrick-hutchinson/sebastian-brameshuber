@@ -24,7 +24,7 @@ const FilmPage = ({ site, films, film }) => {
 
   return (
     <div>
-      <CoverMedia medium={film.coverMedia.medium} />
+      <CoverMedia medium={film.coverMedia?.medium} />
 
       <ContentWrapper>
         <Section>
