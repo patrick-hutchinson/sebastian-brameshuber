@@ -14,8 +14,6 @@ export const getSanityClient = () => {
 
 const client = getSanityClient();
 
-console.log("client:", client.config());
-
 export async function getSite() {
   return client.fetch(siteQuery);
 }
