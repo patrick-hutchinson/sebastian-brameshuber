@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
+import SplitMask from "../Animation/SplitMask";
+
 import ScreeningDate from "@/components/Screenings/ScreeningDate";
 
 import styles from "./Screening.module.css";
@@ -35,32 +37,34 @@ const Screening = ({ screening }) => {
   };
 
   return (
-    <motion.div>
-      <div className={styles.screening} typo="h4">
-        <div className={styles.screeningHeader}>
-          {screening.film?.title}
-          <ScreeningFestival />
-          <ScreeningAnnotation />
-          <ScreeningLocation />
-        </div>
-        <div className={styles.screeningBody} typo="h2">
-          <ScreeningDate date={firstScreening?.screeningDate} />
-          {firstScreening?.cinema || firstScreening?.festival
-            ? `, ${firstScreening.cinema ?? firstScreening.festival}`
-            : null}
-        </div>
-      </div>
-      {extraScreenings?.map((showtime) => {
-        return (
-          <div key={showtime._id} className={styles.screening}>
-            <div className={styles.screeningBody} typo="h2">
-              <ScreeningDate date={showtime.screeningDate} />
-              {showtime.cinema || showtime.festival ? `, ${showtime.cinema ?? showtime.festival}` : null}
-            </div>
+    <SplitMask>
+      <motion.div>
+        <div className={styles.screening} typo="h4">
+          <div className={styles.screeningHeader}>
+            {screening.film?.title}
+            <ScreeningFestival />
+            <ScreeningAnnotation />
+            <ScreeningLocation />
           </div>
-        );
-      })}
-    </motion.div>
+          <div className={styles.screeningBody} typo="h2">
+            <ScreeningDate date={firstScreening?.screeningDate} />
+            {firstScreening?.cinema || firstScreening?.festival
+              ? `, ${firstScreening.cinema ?? firstScreening.festival}`
+              : null}
+          </div>
+        </div>
+        {extraScreenings?.map((showtime) => {
+          return (
+            <div key={showtime._id} className={styles.screening}>
+              <div className={styles.screeningBody} typo="h2">
+                <ScreeningDate date={showtime.screeningDate} />
+                {showtime.cinema || showtime.festival ? `, ${showtime.cinema ?? showtime.festival}` : null}
+              </div>
+            </div>
+          );
+        })}
+      </motion.div>
+    </SplitMask>
   );
 };
 

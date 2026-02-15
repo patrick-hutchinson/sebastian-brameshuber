@@ -10,6 +10,7 @@ import "./globals.css";
 import "./fonts.css";
 
 import { getSite } from "@/lib/sanity/fetch";
+import { AnimatePresence } from "framer-motion";
 
 export async function generateMetadata() {
   const site = await getSite();

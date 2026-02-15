@@ -20,8 +20,8 @@ const HomePage = ({ films }) => {
     { background: "#00f" },
   ];
 
-  const ITEM_HEIGHT = 872; // vh or px
-  const TOTAL = films.length * ITEM_HEIGHT;
+  const ITEM_HEIGHT = 50; // vh or px
+  const TOTAL = array.length * ITEM_HEIGHT;
 
   const lenis = useLenisContext();
   const scroll = useMotionValue(0);

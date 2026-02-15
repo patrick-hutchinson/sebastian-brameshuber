@@ -165,6 +165,11 @@
     flex: 0 0 auto; /* don't shrink or grow, keep natural height */
     width: calc(100% / (24 / 3)); /* 3/24 of container width per column */
   }
+
+  /* Interview */
+  .interviewHeading {
+    margin-bottom: var(--margin-1);
+  }
 }
 
 /* Desktop */

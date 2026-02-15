@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "../HomePage.module.css";
 
 const FilmSlide = ({ film, index, scroll, itemHeight, total }) => {
+  console.log(itemHeight, total);
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
