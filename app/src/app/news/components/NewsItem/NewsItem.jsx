@@ -11,6 +11,7 @@ import styles from "./NewsItem.module.css";
 import ImagePreview from "@/components/ImagePreview/ImagePreview";
 import AnimationLink from "@/components/Animation/AnimationLink";
 import FormatDate from "@/components/FormatDate/FormatDate";
+import SplitMask from "../../../../components/Animation/SplitMask";
 
 const NewsItem = ({ newsItem }) => {
   const { isTouch } = useContext(DeviceContext);
@@ -38,22 +39,24 @@ const NewsItem = ({ newsItem }) => {
   const wrapperProps = hasLink ? { link: newsItem.link, ...commonProps } : { ...commonProps };
 
   return (
-    <Wrapper {...wrapperProps}>
-      <div className={styles.newsHeadline} typo="display">
-        <FormatDate date={newsItem.date} />
-        <Text text={newsItem.text} className={styles.clamp} />
-      </div>
-      {isTouch && <Media medium={newsItem.previewMedia.medium} className={styles.previewMedia} />}
-      <div typo="fineprint" className={styles.newsFooter}>
-        <div className={styles.category}>{newsItem.category}</div>
+    <SplitMask>
+      <Wrapper {...wrapperProps}>
+        <div className={styles.newsHeadline} typo="display">
+          <FormatDate date={newsItem.date} />
+          <Text text={newsItem.text} className={styles.clamp} />
+        </div>
+        {isTouch && <Media medium={newsItem.previewMedia.medium} className={styles.previewMedia} />}
+        <div typo="fineprint" className={styles.newsFooter}>
+          <div className={styles.category}>{newsItem.category}</div>
 
-        <span className={styles.source}>
-          {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
-        </span>
-      </div>
+          <span className={styles.source}>
+            {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
+          </span>
+        </div>
 
-      {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
-    </Wrapper>
+        {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
+      </Wrapper>
+    </SplitMask>
   );
 };
 

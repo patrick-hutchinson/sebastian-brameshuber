@@ -9,7 +9,6 @@ export const DeviceProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [deviceDimensions, setDeviceDimensions] = useState({ width: 0, height: 0 });
   const [isSafari, setIsSafari] = useState(false);
   const [isTouch, setIsTouch] = useState(null); // ← NEW
 
@@ -17,7 +16,6 @@ export const DeviceProvider = ({ children }) => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      const height = window.innerHeight;
 
       setIsMobile(width < 769);
       setIsTablet(width >= 769 && width < 1280);

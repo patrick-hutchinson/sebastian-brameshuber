@@ -4,15 +4,15 @@ const nextConfig = {
   images: {
     domains: ["cdn.sanity.io", "image.mux.com"],
   },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/films",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "/films",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;

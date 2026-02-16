@@ -1,9 +1,9 @@
-import { useImageResolution } from "../../hooks/useImageResolution";
-
+import { useImageResolution } from "@/components/Media/hooks/useImageResolution";
+import { markImageLoaded } from "@/utils/imageCache";
 import NextImage from "next/image";
 
 const Image = ({ medium, setIsLoaded }) => {
-  const imageSource = useImageResolution(medium);
+  const imageSource = medium.url;
 
   const resolutionWidth = medium.width;
   const resolutionHeight = medium.height;
@@ -35,7 +35,10 @@ const Image = ({ medium, setIsLoaded }) => {
           objectFit: "cover",
           objectPosition: "center",
         }}
-        onLoad={() => setIsLoaded(true)}
+        onLoad={() => {
+          markImageLoaded(imageSource);
+          setIsLoaded?.(true);
+        }}
       />
     </div>
   );

@@ -7,6 +7,8 @@
   justify-content: center;
   align-items: center;
   overflow: hidden; /* optional: keeps image contained */
+
+  cursor: pointer;
 }
 
 .viewport {

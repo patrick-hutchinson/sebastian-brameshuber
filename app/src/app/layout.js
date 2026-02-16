@@ -12,6 +12,7 @@ import "./fonts.css";
 import { getSite } from "@/lib/sanity/fetch";
 
 import ScrollRestorationController from "@/controllers/ScrollRestorationController";
+import { ViewportProvider } from "../context/ViewportContext";
 
 export async function generateMetadata() {
   const site = await getSite();
@@ -42,15 +43,17 @@ export default async function RootLayout({ children }) {
     <ViewTransitions>
       <html lang="en">
         <DeviceProvider>
-          <ScrollRestorationController />
-          <body>
-            <LenisProvider>
-              <Header />
-              {children}
-              <div id="portal"></div>
-              <FooterWrapper site={site} />
-            </LenisProvider>
-          </body>
+          <ViewportProvider>
+            <ScrollRestorationController />
+            <body>
+              <LenisProvider>
+                <Header />
+                {children}
+                <div id="portal"></div>
+                <FooterWrapper site={site} />
+              </LenisProvider>
+            </body>
+          </ViewportProvider>
         </DeviceProvider>
       </html>
     </ViewTransitions>

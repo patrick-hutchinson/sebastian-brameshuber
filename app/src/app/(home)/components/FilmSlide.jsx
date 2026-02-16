@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { motion, useTransform, animate, useMotionValue } from "framer-motion";
 import styles from "../HomePage.module.css";
 
 import Media from "@/components/Media/Media";
 import { useFilmSlideScale } from "../hooks/useFilmSlideScale";
+import { useViewport } from "../../../context/ViewportContext";
 
 const FilmSlide = ({ film, index, virtualScroll, slideHeight, activeIndex, scrollToSlide }) => {
+  const { viewportHeight } = useViewport();
   const noneSelected = activeIndex === null;
   const isActive = index === activeIndex;
 
@@ -17,7 +19,7 @@ const FilmSlide = ({ film, index, virtualScroll, slideHeight, activeIndex, scrol
     const relative = slideTop - y; // position of this slide relative to viewport
 
     const start = -slideHeight;
-    const end = window.innerHeight;
+    const end = viewportHeight;
 
     return Math.min(1, Math.max(0, (relative - start) / (end - start))); // normalize into [0..1] window
   });

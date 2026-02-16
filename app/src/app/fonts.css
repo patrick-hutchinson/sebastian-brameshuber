@@ -71,6 +71,7 @@ h4 p,
   text-indent: calc(100% / 12);
 }
 [typo="longcopy"]:first-child,
+[typo="longcopy"] div:first-child,
 [typo="longcopy"] p:first-child {
   text-indent: 0;
 }

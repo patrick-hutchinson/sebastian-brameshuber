@@ -7,6 +7,7 @@ import Text from "@/components/Text/Text";
 
 import styles from "./PublicationDisplay.module.css";
 import AdaptiveMediaContainer from "@/components/AdaptiveMediaContainer/AdaptiveMediaContainer";
+import SplitMask from "../../../components/Animation/SplitMask";
 
 const PublicationDisplay = ({ publication }) => {
   const containerRef = useRef(null);
@@ -14,9 +15,11 @@ const PublicationDisplay = ({ publication }) => {
     <div className={styles.publicationDisplay} typo="longcopy">
       <div className={styles.publicationTitle}>{publication.title}</div>
       <div className={styles.publicationMediaContainer} ref={containerRef}>
-        <AdaptiveMediaContainer container={containerRef} medium={publication.media.medium}>
-          <Media medium={publication.media.medium} className={styles.publicationMedia} />
-        </AdaptiveMediaContainer>
+        <SplitMask>
+          <AdaptiveMediaContainer container={containerRef} medium={publication.media.medium}>
+            <Media medium={publication.media.medium} className={styles.publicationMedia} />
+          </AdaptiveMediaContainer>
+        </SplitMask>
       </div>
       <Text text={publication.text} />
     </div>

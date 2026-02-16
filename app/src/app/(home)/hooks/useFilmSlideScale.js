@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useTransform, useMotionValue, animate } from "framer-motion";
 import { useAnimatedNavigation } from "../../../components/Animation/hooks/useAnimatedNavigation";
 
+import { preloadImage } from "@/utils/imageCache";
+
 export function useFilmSlideScale({ progress, isActive, noneSelected, film }) {
   const navigate = useAnimatedNavigation();
   // scroll-driven scale
@@ -9,6 +11,14 @@ export function useFilmSlideScale({ progress, isActive, noneSelected, film }) {
 
   // click-driven scale
   const clickScale = useMotionValue(1);
+
+  const preloadImage = (src) =>
+    new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = src;
+    });
 
   useEffect(() => {
     if (noneSelected) {
@@ -18,11 +28,17 @@ export function useFilmSlideScale({ progress, isActive, noneSelected, film }) {
         damping: 24,
       });
     } else if (isActive) {
-      animate(clickScale, 4 / 3, {
+      animate(clickScale, 1.265, {
         type: "spring",
         stiffness: 120,
         damping: 24,
-        onComplete: () => navigate(`films/${film.slug.current}`),
+        onComplete: async () => {
+          const imageUrl = film.coverMedia.medium.url;
+
+          await preloadImage(imageUrl);
+
+          navigate(`films/${film.slug.current}`);
+        },
       });
     } else {
       animate(clickScale, 1, {

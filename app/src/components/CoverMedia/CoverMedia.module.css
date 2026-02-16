@@ -1,5 +1,5 @@
 .coverMedia {
-  height: var(--content-height);
+  height: 100vh;
   width: 100vw;
   position: relative;
   left: 0;

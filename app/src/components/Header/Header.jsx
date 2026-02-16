@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 const Header = ({}) => {
   return (
     <header className={styles.header} typo="fineprint">
-      <AnimationLink path="/films">Films</AnimationLink>
+      <AnimationLink path="/">Films</AnimationLink>
       <AnimationLink path="/news">News</AnimationLink>
       <AnimationLink path="/about">About</AnimationLink>
       <AnimationLink path="/screenings">Screenings</AnimationLink>

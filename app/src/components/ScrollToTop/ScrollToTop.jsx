@@ -3,8 +3,10 @@
 import { DeviceContext } from "@/context/DeviceContext";
 import { useLenisContext } from "@/context/LenisContext";
 import { useContext, useEffect, useState } from "react";
+import { useViewport } from "../../context/ViewportContext";
 
 const ScrollToTop = () => {
+  const { viewportHeight } = useViewport();
   const lenis = useLenisContext();
   const { isMobile, isTouch, isDesktop } = useContext(DeviceContext);
   const [scrollHeight, setScrollHeight] = useState(null);
@@ -12,7 +14,7 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     const updateOverflow = () => {
-      const height = window.innerHeight;
+      const height = viewportHeight;
       const scroll = document.querySelector("main")?.scrollHeight ?? 0;
       setScrollHeight(scroll);
       setPageIsOverflowing(scroll > height);

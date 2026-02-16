@@ -10,14 +10,15 @@ import styles from "./HomePage.module.css";
 import { useMotionValue, motion, wrap } from "framer-motion";
 import { getCssVariable } from "@/utils/getCSSVariable";
 import { remToPixels } from "@/utils/remToPixels";
+import { useViewport } from "../../context/ViewportContext";
 
 const HomePage = ({ films }) => {
+  const { viewportHeight } = useViewport();
   const lenis = useLenisContext();
 
   const loopedFilms = [...films, ...films];
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const [viewportHeight, setViewportHeight] = useState(0);
   const layoutOffsets = useRef({ headerHeight: 0, margin: 0 });
 
   const virtualScroll = useMotionValue(0);
@@ -25,16 +26,8 @@ const HomePage = ({ films }) => {
   const LOOP_HEIGHT = useMemo(() => SLIDE_HEIGHT * films.length + viewportHeight, [SLIDE_HEIGHT, viewportHeight]);
 
   useLayoutEffect(() => {
-    const update = () => setViewportHeight(window.innerHeight);
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  useLayoutEffect(() => {
     layoutOffsets.current = {
       headerHeight: remToPixels(getCssVariable("--header-height")),
-      margin: getCssVariable("--margin-page"),
     };
   }, []);
 
@@ -53,9 +46,9 @@ const HomePage = ({ films }) => {
   }, [lenis]);
 
   const scrollToSlide = (index) => {
-    const { headerHeight, margin } = layoutOffsets.current;
+    const { headerHeight } = layoutOffsets.current;
 
-    const targetScroll = index * SLIDE_HEIGHT - window.innerHeight / 2 + SLIDE_HEIGHT / 2 - headerHeight - margin;
+    const targetScroll = index * SLIDE_HEIGHT - viewportHeight / 2 + SLIDE_HEIGHT / 2 - headerHeight;
 
     // stop Lenis while animating
     lenis?.stop();
@@ -71,6 +64,8 @@ const HomePage = ({ films }) => {
       },
     });
   };
+
+  if (!viewportHeight) return;
 
   return (
     <>
