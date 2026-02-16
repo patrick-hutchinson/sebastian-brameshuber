@@ -4,7 +4,7 @@ import { useAnimatedNavigation } from "../../../components/Animation/hooks/useAn
 
 import { preloadImage } from "@/utils/imageCache";
 
-export function useFilmSlideScale({ progress, isActive, noneSelected, film }) {
+export function useScaleAnimation({ progress, isActive, nonePending, film }) {
   const navigate = useAnimatedNavigation();
   // scroll-driven scale
   const scrollScale = useTransform(progress, [1, 0], [1.3, 0.8]);
@@ -21,7 +21,7 @@ export function useFilmSlideScale({ progress, isActive, noneSelected, film }) {
     });
 
   useEffect(() => {
-    if (noneSelected) {
+    if (nonePending) {
       animate(clickScale, 1, {
         type: "spring",
         stiffness: 120,
@@ -47,7 +47,7 @@ export function useFilmSlideScale({ progress, isActive, noneSelected, film }) {
         damping: 24,
       });
     }
-  }, [isActive, noneSelected]);
+  }, [isActive, nonePending]);
 
   // combine
   const scale = useTransform([scrollScale, clickScale], ([scroll, click]) => scroll * click);

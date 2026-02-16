@@ -7,13 +7,7 @@ import AnimationLink from "../Animation/AnimationLink";
 import styles from "./Footer.module.css";
 
 const Footer = ({ site }) => {
-  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
-
-  // const hiddenRoutes = ["/enter"];
-  // const hideFooter = hiddenRoutes.includes(pathname);
-
-  // if (hideFooter) return;
 
   return (
     <footer className={styles.footer} typo="fineprint">

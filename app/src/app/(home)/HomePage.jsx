@@ -17,6 +17,7 @@ const HomePage = ({ films }) => {
   const lenis = useLenisContext();
 
   const loopedFilms = [...films, ...films];
+  const [pendingIndex, setPendingIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
 
   const layoutOffsets = useRef({ headerHeight: 0, margin: 0 });
@@ -54,12 +55,16 @@ const HomePage = ({ films }) => {
     lenis?.stop();
     virtualScroll.stop();
 
+    // 🔑 fade immediately
+    setPendingIndex(index);
+
     animate(virtualScroll, -targetScroll, {
       type: "spring",
       stiffness: 120,
       damping: 30,
       mass: 1.2,
       onComplete: () => {
+        // 🔑 commit selection for scale
         setActiveIndex(index);
       },
     });
@@ -71,17 +76,20 @@ const HomePage = ({ films }) => {
     <>
       <div className={styles.viewport}>
         <motion.div className={styles.track} style={{ y: virtualScroll }}>
-          {loopedFilms.map((film, index) => (
-            <FilmSlide
-              key={index}
-              film={film}
-              index={index}
-              virtualScroll={virtualScroll}
-              slideHeight={SLIDE_HEIGHT}
-              activeIndex={activeIndex}
-              scrollToSlide={scrollToSlide}
-            />
-          ))}
+          {loopedFilms.map((film, index) => {
+            return (
+              <FilmSlide
+                key={index}
+                film={film}
+                index={index}
+                virtualScroll={virtualScroll}
+                slideHeight={SLIDE_HEIGHT}
+                pendingIndex={pendingIndex}
+                activeIndex={activeIndex}
+                scrollToSlide={scrollToSlide}
+              />
+            );
+          })}
         </motion.div>
       </div>
 

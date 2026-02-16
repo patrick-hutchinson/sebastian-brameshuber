@@ -13,7 +13,7 @@ export default function LenisProvider({ children }) {
   const lenis = useLenis(); // hook provided by ReactLenis
   const pathname = usePathname();
 
-  const infiniteRoutes = ["/", "/enter"];
+  const infiniteRoutes = ["/"];
   const scrollInfinite = infiniteRoutes.includes(pathname);
 
   return (

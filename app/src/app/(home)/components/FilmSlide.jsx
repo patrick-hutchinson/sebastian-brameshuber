@@ -3,13 +3,15 @@ import { motion, useTransform, animate, useMotionValue } from "framer-motion";
 import styles from "../HomePage.module.css";
 
 import Media from "@/components/Media/Media";
-import { useFilmSlideScale } from "../hooks/useFilmSlideScale";
+import { useScaleAnimation } from "../hooks/useScaleAnimation";
 import { useViewport } from "../../../context/ViewportContext";
+import { useOpacityAnimation } from "../hooks/useOpacityAnimation";
 
-const FilmSlide = ({ film, index, virtualScroll, slideHeight, activeIndex, scrollToSlide }) => {
+const FilmSlide = ({ film, index, virtualScroll, slideHeight, activeIndex, scrollToSlide, pendingIndex }) => {
   const { viewportHeight } = useViewport();
-  const noneSelected = activeIndex === null;
-  const isActive = index === activeIndex;
+  const nonePending = pendingIndex === null;
+  const isPending = index === pendingIndex; // Maybe rename to "is moving, movementinitiated"
+  const isActive = index === activeIndex; // maybe rename to "has set, position completed"
 
   const slideTop = index * slideHeight;
 
@@ -24,31 +26,11 @@ const FilmSlide = ({ film, index, virtualScroll, slideHeight, activeIndex, scrol
     return Math.min(1, Math.max(0, (relative - start) / (end - start))); // normalize into [0..1] window
   });
 
-  const scale = useFilmSlideScale({ progress, isActive, noneSelected, film });
-  const opacity = useTransform(progress, [1, 0.35, 0], [1, 1, 0.2]);
+  const scale = useScaleAnimation({ progress, isActive, nonePending, film });
+  const opacity = useOpacityAnimation({ progress, isPending, nonePending });
 
   return (
-    <motion.div
-      className={styles.filmSlide}
-      style={{
-        transformOrigin: "center",
-
-        scale: scale,
-        left: "50%",
-        x: "-50%",
-
-        opacity: noneSelected
-          ? opacity // normal scroll-based
-          : isActive
-            ? 1 // clicked element
-            : 0, // fade out the others
-
-        background: "#fff",
-        color: "#000",
-        pointerEvents: noneSelected || isActive ? "all" : "none",
-      }}
-      onClick={() => scrollToSlide(index)}
-    >
+    <motion.div className={styles.filmSlide} style={{ scale, x: "-50%", opacity }} onClick={() => scrollToSlide(index)}>
       <Media medium={film.coverMedia?.medium} />
     </motion.div>
   );

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 export default function ScrollRestorationController() {
   const pathname = usePathname();
   useEffect(() => {
-    if (pathname !== "/enter") return; // Only reset scroll at home
+    if (pathname !== "/") return; // Only reset scroll at home
 
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";

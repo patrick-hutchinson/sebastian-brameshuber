@@ -9,6 +9,12 @@
   overflow: hidden; /* optional: keeps image contained */
 
   cursor: pointer;
+
+  transform-origin: center;
+  left: 50%;
+  pointer-events: all;
+  color: #000;
+  background: #fff;
 }
 
 .viewport {
