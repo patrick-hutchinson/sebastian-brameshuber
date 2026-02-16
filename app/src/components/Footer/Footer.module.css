@@ -1,9 +1,12 @@
 footer.footer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.copyright {
+  grid-column: 1 / 6;
 }
 .footerLinks {
-  display: flex;
+  grid-column: 7 / 13;
 }
 
 /* Hover Events, Desktop Only */

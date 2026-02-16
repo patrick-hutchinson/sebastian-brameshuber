@@ -20,7 +20,7 @@
   touch-action: pan-y pinch-zoom;
 }
 .slide {
-  height: 80vh;
+  height: 66vh;
   margin-right: var(--margin-page);
 }
 
@@ -33,6 +33,9 @@
 
 /* Desktop */
 @media screen and (min-width: 1280px) {
+  .slide {
+    height: 80vh;
+  }
 }
 
 /* Large Format Screens */

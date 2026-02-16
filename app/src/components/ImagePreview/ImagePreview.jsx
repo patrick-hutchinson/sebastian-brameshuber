@@ -11,13 +11,15 @@ const ImagePreview = ({ medium, isHovering }) => {
   const { isTouch } = useContext(DeviceContext);
 
   const [isScrolling, setIsScrolling] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [portal, setPortal] = useState(null);
 
   const imageRef = useRef(null);
   const scrollPosition = useRef(0);
   const scrollTimeout = useRef(null);
 
-  useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    setPortal(document.getElementById("portal"));
+  }, []);
 
   // Track the scroll
   useEffect(() => {
@@ -59,7 +61,15 @@ const ImagePreview = ({ medium, isHovering }) => {
     };
   }, [isHovering]);
 
-  if (isTouch || !isMounted || !medium) return;
+  useEffect(() => {
+    console.log(isTouch, medium, portal);
+  }, [isTouch, medium, portal]);
+
+  useEffect(() => {
+    console.log(isHovering, "is hovering");
+  }, [isHovering]);
+
+  if (isTouch || !medium || !portal) return;
 
   return createPortal(
     <AnimatePresence>
@@ -86,7 +96,7 @@ const ImagePreview = ({ medium, isHovering }) => {
         </motion.div>
       )}
     </AnimatePresence>,
-    document.getElementById("portal"),
+    portal,
   );
 };
 

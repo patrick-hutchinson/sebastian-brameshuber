@@ -19,6 +19,7 @@ const NewsItem = ({ newsItem }) => {
 
   const handleMouseEnter = () => {
     if (isTouch) return;
+    console.log("hovered");
     setIsHovering(true);
   };
   const handleMouseLeave = () => {

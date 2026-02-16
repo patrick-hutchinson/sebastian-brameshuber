@@ -21,7 +21,9 @@
 
 .interviewee {
   grid-column: 1 / 12;
-  text-indent: calc(100% / 12);
+}
+.interviewee p {
+  text-indent: calc(100% / 12) !important;
 }
 
 .row {

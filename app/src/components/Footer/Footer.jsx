@@ -10,9 +10,10 @@ const Footer = ({ site }) => {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
 
-  const isHome = pathname === "/";
+  // const hiddenRoutes = ["/enter"];
+  // const hideFooter = hiddenRoutes.includes(pathname);
 
-  if (isHome) return;
+  // if (hideFooter) return;
 
   return (
     <footer className={styles.footer} typo="fineprint">
@@ -22,7 +23,7 @@ const Footer = ({ site }) => {
         {site.socials.map((social, index) => (
           <span key={social.platform}>
             <AnimationLink path={social.link}>{social.platform}</AnimationLink>
-            {index !== site.socials.length - 1 && ", "}
+            {index !== site.socials.length - 1 && ",\u00A0"}
           </span>
         ))}
       </div>

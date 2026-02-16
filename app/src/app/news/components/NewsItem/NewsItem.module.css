@@ -41,7 +41,9 @@ a.newsItem:hover .newsHeadline {
 .clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3; /* or 3 */
+  overflow-x: hidden;
   -webkit-box-orient: vertical;
+  padding-bottom: 2.5px;
 }
 
 .newsHeadline:not(:has(+ .previewMedia)) {

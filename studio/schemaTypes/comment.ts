@@ -1,5 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
+import {portableTextToPreview} from '../utils/portableTextToPreview'
+
 export const comment = defineType({
   name: 'comment',
   title: 'Comment',
@@ -11,4 +13,16 @@ export const comment = defineType({
     defineField({name: 'author', title: 'Author', type: 'portableText'}),
     defineField({name: 'link', title: 'Link', type: 'link'}),
   ],
+  preview: {
+    select: {
+      text: 'text',
+      author: 'author',
+    },
+    prepare({text, author}) {
+      return {
+        title: portableTextToPreview(text, 75) || 'Untitled comment',
+        subtitle: author ? `by ${portableTextToPreview(author, 75)}` : '',
+      }
+    },
+  },
 })

@@ -1,20 +1,10 @@
-import { useTransitionRouter } from "next-view-transitions";
+import { useAnimatedNavigation } from "./hooks/useAnimatedNavigation";
 
-const AnimationLink = ({ path, link, children, className }) => {
-  const router = useTransitionRouter();
+const AnimationLink = ({ path, link, children, className, onMouseEnter, onMouseLeave }) => {
+  const navigate = useAnimatedNavigation();
 
-  console.log(link, "link");
-
-  if (!path && link && !link.url && !link.email && !link.internalLink) return <>{children}</>;
-
-  let isInternal;
-  let isExternal;
-  let href = path;
-
+  let href;
   if (link) {
-    isInternal = link.type === "internal";
-    isExternal = link.type === "external";
-
     href =
       link.type === "internal"
         ? `/${link.internalLink.slug.current}`
@@ -23,40 +13,26 @@ const AnimationLink = ({ path, link, children, className }) => {
           : link.type === "email"
             ? `mailto:${link.email}`
             : "#";
+  } else {
+    href = path;
   }
 
   if (!href) return <>{children}</>;
 
-  const pageAnimation = () => {
-    document.documentElement.animate([{ opacity: 1 }, { opacity: 0 }], {
-      duration: 500,
-      easing: "ease",
-      fill: "forwards",
-      pseudoElement: "::view-transition-old(root)",
-    });
-
-    document.documentElement.animate([{ opacity: 0 }, { opacity: 1 }], {
-      duration: 500,
-      easing: "ease",
-      fill: "forwards",
-      pseudoElement: "::view-transition-new(root)",
-    });
-  };
-
   const handleClick = (e) => {
-    // if (!isInternal) return;
-
     e.preventDefault();
-    router.push(href, {
-      onTransitionReady: pageAnimation,
-    });
+    navigate(href);
   };
+
+  const isExternal = link?.type === "external";
 
   return (
     <a
       href={href}
       className={className}
       onClick={handleClick}
+      onMouseEnter={onMouseEnter} // <--- add
+      onMouseLeave={onMouseLeave} // <--- add
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
     >

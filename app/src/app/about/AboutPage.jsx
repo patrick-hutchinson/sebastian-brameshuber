@@ -100,7 +100,6 @@ const AboutPage = ({ about }) => {
           <Awards awards={about.awards} />
         </Section>
       </div>
-      <ScrollToTop />
     </main>
   );
 };

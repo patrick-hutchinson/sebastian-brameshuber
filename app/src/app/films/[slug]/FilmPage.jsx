@@ -65,7 +65,7 @@ const FilmPage = ({ site, films, film }) => {
           <FilmScreenings film={film} />
         </Section>
 
-        <LoadNextFilm />
+        <LoadNextFilm films={films} film={film} />
 
         <Footer site={site} />
       </ContentWrapper>

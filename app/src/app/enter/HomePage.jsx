@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect, useMemo } from "react";
 import { useLenisContext } from "@/context/LenisContext";
 import { animate } from "framer-motion";
 
@@ -8,24 +8,41 @@ import FilmSlide from "./components/FilmSlide";
 
 import styles from "./HomePage.module.css";
 import { useMotionValue, motion, wrap } from "framer-motion";
+import { getCssVariable } from "@/utils/getCSSVariable";
+import { remToPixels } from "@/utils/remToPixels";
 
 const HomePage = ({ films }) => {
+  const lenis = useLenisContext();
+
+  const loopedFilms = [...films, ...films];
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const layoutOffsets = useRef({ headerHeight: 0, margin: 0 });
 
   const virtualScroll = useMotionValue(0);
-  const duplicatedArray = [...films, ...films];
-  const SLIDE_HEIGHT = 600; // ⚠️ Update slide height!
+  const SLIDE_HEIGHT = useMemo(() => viewportHeight * 0.75, [viewportHeight]);
+  const LOOP_HEIGHT = useMemo(() => SLIDE_HEIGHT * films.length + viewportHeight, [SLIDE_HEIGHT, viewportHeight]);
 
-  const LOOP_HEIGHT = SLIDE_HEIGHT * films.length + 745; // ⚠️ Update manual offset!
+  useLayoutEffect(() => {
+    const update = () => setViewportHeight(window.innerHeight);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
-  const lenis = useLenisContext();
+  useLayoutEffect(() => {
+    layoutOffsets.current = {
+      headerHeight: remToPixels(getCssVariable("--header-height")),
+      margin: getCssVariable("--margin-page"),
+    };
+  }, []);
+
+  // Update y based on lenis' scroll
   useEffect(() => {
     if (!lenis) return;
 
     const onScroll = ({ scroll }) => {
-      if (isAnimating) return; // ignore scroll events while animating
       const y = wrap(-LOOP_HEIGHT, 0, -scroll);
 
       virtualScroll.set(y);
@@ -35,12 +52,10 @@ const HomePage = ({ films }) => {
     return () => lenis.off("scroll", onScroll);
   }, [lenis]);
 
-  useEffect(() => {}, [activeIndex]);
-
-  // HomePage
   const scrollToSlide = (index) => {
-    setIsAnimating(true);
-    const targetScroll = index * SLIDE_HEIGHT - window.innerHeight / 2 + SLIDE_HEIGHT / 2;
+    const { headerHeight, margin } = layoutOffsets.current;
+
+    const targetScroll = index * SLIDE_HEIGHT - window.innerHeight / 2 + SLIDE_HEIGHT / 2 - headerHeight - margin;
 
     // stop Lenis while animating
     lenis?.stop();
@@ -48,8 +63,9 @@ const HomePage = ({ films }) => {
 
     animate(virtualScroll, -targetScroll, {
       type: "spring",
-      stiffness: 150,
-      damping: 25,
+      stiffness: 120,
+      damping: 30,
+      mass: 1.2,
       onComplete: () => {
         setActiveIndex(index);
       },
@@ -60,7 +76,7 @@ const HomePage = ({ films }) => {
     <>
       <div className={styles.viewport}>
         <motion.div className={styles.track} style={{ y: virtualScroll }}>
-          {duplicatedArray.map((film, index) => (
+          {loopedFilms.map((film, index) => (
             <FilmSlide
               key={index}
               film={film}

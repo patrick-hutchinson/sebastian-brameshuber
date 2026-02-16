@@ -14,7 +14,6 @@ const PublicationsPage = ({ publications }) => {
           })}
         </div>
       </Section>
-      <ScrollToTop />
     </main>
   );
 };

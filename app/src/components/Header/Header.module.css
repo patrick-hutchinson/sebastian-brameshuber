@@ -27,7 +27,9 @@ header.header a:nth-child(5) {
   grid-column: 9 / 10;
 }
 header.header a:nth-child(6) {
-  grid-column: 11 / 12;
+  grid-column: 11 / 13;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Hover Events, Desktop Only */
