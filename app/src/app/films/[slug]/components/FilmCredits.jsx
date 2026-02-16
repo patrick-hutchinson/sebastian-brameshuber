@@ -9,8 +9,8 @@ const FilmCredits = ({ film }) => {
         <div key={credit._id} className={styles.filmCredit}>
           <div className={styles.role}>{credit.role}</div>
           <div className={styles.people}>
-            {credit.people?.map((person) => (
-              <div key={person._id}>{person}</div>
+            {credit.people?.map((person, index) => (
+              <div key={index}>{person}</div>
             ))}
           </div>
         </div>

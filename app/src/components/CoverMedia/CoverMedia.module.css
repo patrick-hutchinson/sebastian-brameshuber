@@ -1,9 +1,16 @@
 .coverMedia {
   height: 100vh;
   width: 100vw;
-  position: relative;
+
   left: 0;
   position: fixed;
   top: var(--header-height);
   z-index: 1;
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  .coverMedia_inner {
+    display: contents;
+  }
 }

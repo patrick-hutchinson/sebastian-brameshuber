@@ -127,6 +127,7 @@ section:has(+ .loadNext) {
   /* Comments + SupportingMedia */
   .sectionWrapper.commentsAndMedia .filmComments {
     grid-column: 1 / 13;
+    padding-right: var(--margin-page);
   }
 
   .sectionWrapper.commentsAndMedia .filmSupportingMedia {
@@ -147,7 +148,8 @@ section:has(+ .loadNext) {
     grid-column: 1 / 24;
   }
   .filmInterview_Section .interviewText {
-    grid-column: 1 / 12;
+    grid-column: 1 / 13;
+    padding-right: var(--margin-page);
   }
 
   .sectionWrapper.interviewAndReviews .filmReviews {

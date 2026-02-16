@@ -20,7 +20,7 @@
   touch-action: pan-y pinch-zoom;
 }
 .slide {
-  height: 66vh;
+  height: calc(100vw - (4 * var(--margin-page)));
   margin-right: var(--margin-page);
 }
 

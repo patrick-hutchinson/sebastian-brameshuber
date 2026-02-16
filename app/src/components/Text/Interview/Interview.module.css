@@ -20,7 +20,7 @@
 }
 
 .interviewee {
-  grid-column: 1 / 12;
+  grid-column: 1 / 13;
 }
 .interviewee p {
   text-indent: calc(100% / 12) !important;
@@ -34,7 +34,7 @@
 
 .initials {
   position: absolute;
-  left: 0;
+  left: -1px;
   top: 0.3em;
 }
 

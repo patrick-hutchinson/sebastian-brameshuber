@@ -16,11 +16,13 @@ const FilmSupportingMedia = ({ film }) => {
           <Media key={item._id} medium={item.medium} />
         ))}
       </div>
-      <div typo="fineprint" style={{ marginTop: "var(--margin-page)" }}>
-        <a href={film.purchaseLink} target="_blank">
-          Buy on {film.platform}
-        </a>
-      </div>
+      {film.platform && film.purchaseLink && (
+        <div typo="fineprint" style={{ marginTop: "var(--margin-page)" }}>
+          <a href={film.purchaseLink} target="_blank">
+            Buy on {film.platform}
+          </a>
+        </div>
+      )}
     </div>
   );
 };
