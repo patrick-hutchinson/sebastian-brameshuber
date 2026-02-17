@@ -24,7 +24,7 @@ section.featuredScreenings {
 
 .awardYear {
   grid-column: 1 / 2;
-  padding-right: var(--margin-page);
+  /* padding-right: var(--margin-page); */
 }
 .awardFilmContainer {
   grid-column: 3 / 13;
