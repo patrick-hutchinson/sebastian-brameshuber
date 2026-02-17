@@ -95,6 +95,7 @@
   background: #fff;
 }
 
+section:has(+ a .loadNext),
 section:has(+ .loadNext) {
   /* styles for a section immediately before .loadNext */
   margin-bottom: 0;

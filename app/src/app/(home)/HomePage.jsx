@@ -23,7 +23,9 @@ const HomePage = ({ films }) => {
   const layoutOffsets = useRef({ headerHeight: 0, margin: 0 });
 
   const virtualScroll = useMotionValue(0);
-  const SLIDE_HEIGHT = useMemo(() => viewportHeight * 0.75, [viewportHeight]);
+  const GAP = 0;
+  const ITEM_HEIGHT = useMemo(() => viewportHeight * 0.75, [viewportHeight]);
+  const SLIDE_HEIGHT = useMemo(() => ITEM_HEIGHT + GAP, [ITEM_HEIGHT]);
   const LOOP_HEIGHT = useMemo(() => SLIDE_HEIGHT * films.length + viewportHeight, [SLIDE_HEIGHT, viewportHeight]);
 
   useLayoutEffect(() => {

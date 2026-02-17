@@ -28,9 +28,10 @@ const FilmSlide = ({ film, index, virtualScroll, slideHeight, activeIndex, scrol
 
   const scale = useScaleAnimation({ progress, isActive, nonePending, film });
   const opacity = useOpacityAnimation({ progress, isPending, nonePending });
+  const top = useTransform(progress, [1, 0.5, 0], [0, 0, 250]);
 
   return (
-    <motion.div className={styles.filmSlide} style={{ scale, x: "-50%", opacity }} onClick={() => scrollToSlide(index)}>
+    <motion.div className={styles.filmSlide} style={{ scale, x: "-50%", opacity, top }} onClick={() => scrollToSlide(index)}>
       <Media medium={film.coverMedia?.medium} />
     </motion.div>
   );

@@ -1,7 +1,7 @@
 .newsItem {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  border: 1px solid var(--accent);
+  border: 1px solid #454545;
   margin-bottom: var(--margin-3);
   padding: 1px;
 }
