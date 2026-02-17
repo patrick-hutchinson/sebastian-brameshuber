@@ -24,10 +24,9 @@
 }
 
 .filmCredits {
-  /* display: grid; */
   column-count: 2;
-  column-gap: var(--gap-vertical);
-  /* grid-template-columns: 1fr 1fr; */
+  /* column-gap: var(--gap-vertical); */
+  column-gap: var(--margin-page);
 }
 .filmCredit {
   margin-bottom: var(--margin-4);
@@ -69,7 +68,8 @@
 
 .filmReviews {
   column-count: 2;
-  column-gap: var(--gap-vertical);
+  /* column-gap: var(--gap-vertical); */
+  column-gap: var(--margin-page);
 }
 .filmReview {
   break-inside: avoid;

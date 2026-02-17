@@ -23,14 +23,14 @@ const CoverMedia = ({ medium }) => {
 
       container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2; // scroll to half the scrollable width
     }
-  }, [isMobile, viewportHeight, aspectRatio]);
+  }, [isMobile]);
 
   return (
     <div
       className={styles.coverMedia}
       style={{ overflowX: isMobile ? "scroll" : undefined }}
       ref={containerRef}
-      data-lenis-prevent
+      {...(isMobile ? { "data-lenis-prevent": true } : {})}
     >
       <div className={styles.coverMedia_inner} style={{ height: "100%", width: viewportHeight * aspectRatio }}>
         <Media medium={medium} />

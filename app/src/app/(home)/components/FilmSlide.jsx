@@ -1,33 +1,32 @@
-import { useState, useEffect, useContext } from "react";
-import { motion, useTransform, animate, useMotionValue } from "framer-motion";
+import { motion, useTransform } from "framer-motion";
 import styles from "../HomePage.module.css";
 
 import Media from "@/components/Media/Media";
 import { useScaleAnimation } from "../hooks/useScaleAnimation";
-import { useViewport } from "../../../context/ViewportContext";
+
 import { useOpacityAnimation } from "../hooks/useOpacityAnimation";
+import { useViewportHeight } from "../hooks/useViewportHeight";
 
-const FilmSlide = ({ film, index, virtualScroll, slideHeight, activeIndex, scrollToSlide, pendingIndex }) => {
-  const { viewportHeight } = useViewport();
-  const nonePending = pendingIndex === null;
-  const isPending = index === pendingIndex; // Maybe rename to "is moving, movementinitiated"
-  const isActive = index === activeIndex; // maybe rename to "has set, position completed"
+const FilmSlide = ({ film, index, virtualScroll, itemHeight, scrollToSlide, animationPhase, slidePosition }) => {
+  const viewportHeight = useViewportHeight();
 
-  const slideTop = index * slideHeight;
+  const isTransitioning = animationPhase.phase === "transitioning" && animationPhase.index === index;
+  const isFocused = animationPhase.phase === "focused" && animationPhase.index === index;
+  const isIdle = animationPhase.phase === "idle";
 
   const progress = useTransform(virtualScroll, (scrollValue) => {
     const y = -scrollValue; // v is NEGATIVE (you set -looped)
 
-    const relative = slideTop - y; // position of this slide relative to viewport
+    const relative = slidePosition - y; // position of this slide relative to viewport
 
-    const start = -slideHeight;
+    const start = -itemHeight;
     const end = viewportHeight;
 
     return Math.min(1, Math.max(0, (relative - start) / (end - start))); // normalize into [0..1] window
   });
 
-  const scale = useScaleAnimation({ progress, isActive, nonePending, film });
-  const opacity = useOpacityAnimation({ progress, isPending, nonePending });
+  const scale = useScaleAnimation({ progress, isFocused, isIdle, film });
+  const opacity = useOpacityAnimation({ progress, isTransitioning, isIdle });
   const top = useTransform(progress, [1, 0.5, 0], [0, 0, 250]);
 
   return (

@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useTransform, useMotionValue, animate } from "framer-motion";
 
-export function useOpacityAnimation({ progress, isPending, nonePending }) {
+export function useOpacityAnimation({ progress, isTransitioning, isIdle }) {
   const scrollOpacity = useTransform(progress, [1, 0.45, 0], [1, 1, 0.2]);
   const clickOpacity = useMotionValue(1);
 
   useEffect(() => {
-    if (nonePending) {
+    if (isIdle) {
       animate(clickOpacity, 1, {
         duration: 0.25,
         ease: "easeOut",
       });
-    } else if (isPending) {
+    } else if (isTransitioning) {
       animate(clickOpacity, 1, {
         duration: 0.25,
         ease: "easeOut",
@@ -22,7 +22,7 @@ export function useOpacityAnimation({ progress, isPending, nonePending }) {
         ease: "easeOut",
       });
     }
-  }, [nonePending, isPending]);
+  }, [isIdle, isTransitioning]);
 
   const opacity = useTransform([scrollOpacity, clickOpacity], ([scroll, click]) => scroll * click);
 
