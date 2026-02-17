@@ -26,7 +26,12 @@ const CoverMedia = ({ medium }) => {
   }, [isMobile, viewportHeight, aspectRatio]);
 
   return (
-    <div className={styles.coverMedia} style={{ overflowX: isMobile ? "scroll" : undefined }} ref={containerRef}>
+    <div
+      className={styles.coverMedia}
+      style={{ overflowX: isMobile ? "scroll" : undefined }}
+      ref={containerRef}
+      data-lenis-prevent
+    >
       <div className={styles.coverMedia_inner} style={{ height: "100%", width: viewportHeight * aspectRatio }}>
         <Media medium={medium} />
       </div>
