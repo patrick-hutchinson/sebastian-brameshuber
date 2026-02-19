@@ -5,10 +5,23 @@ import Media from "@/components/Media/Media";
 import { useScaleAnimation } from "../hooks/useScaleAnimation";
 
 import { useOpacityAnimation } from "../hooks/useOpacityAnimation";
-import { useViewportHeight } from "../hooks/useViewportHeight";
+import { useStaticViewportHeight } from "../hooks/useStaticViewportHeight";
+import { useContext } from "react";
+import { DeviceContext } from "@/context/DeviceContext";
 
-const FilmSlide = ({ film, index, virtualScroll, itemHeight, scrollToSlide, animationPhase, slidePosition }) => {
-  const viewportHeight = useViewportHeight();
+const FilmSlide = ({
+  film,
+  index,
+  virtualScroll,
+  slideHeight,
+  slideWidth,
+  scrollToSlide,
+  animationPhase,
+  slidePosition,
+}) => {
+  console.log(slideWidth, "slide width");
+  const { isDesktop } = useContext(DeviceContext);
+  const { staticViewportHeight } = useStaticViewportHeight();
 
   const isTransitioning = animationPhase.phase === "transitioning" && animationPhase.index === index;
   const isFocused = animationPhase.phase === "focused" && animationPhase.index === index;
@@ -19,18 +32,36 @@ const FilmSlide = ({ film, index, virtualScroll, itemHeight, scrollToSlide, anim
 
     const relative = slidePosition - y; // position of this slide relative to viewport
 
-    const start = -itemHeight;
-    const end = viewportHeight;
+    const start = -slideHeight;
+    const end = staticViewportHeight;
 
     return Math.min(1, Math.max(0, (relative - start) / (end - start))); // normalize into [0..1] window
   });
 
   const scale = useScaleAnimation({ progress, isFocused, isIdle, film });
-  const opacity = useOpacityAnimation({ progress, isTransitioning, isIdle });
-  const top = useTransform(progress, [1, 0.5, 0], [0, 0, 250]);
+  const opacity = useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle });
+  const top = useTransform(progress, [1, 0.5, 0], [250, 0, 250]);
+
+  const mobileStyles = {
+    height: slideHeight,
+    width: slideWidth,
+    opacity,
+    scale,
+    x: "-50%",
+  };
+  const desktopStyles = {
+    height: slideHeight,
+    width: slideWidth,
+    opacity,
+    scale,
+    x: "-50%",
+    top,
+  };
+
+  const styling = isDesktop ? desktopStyles : mobileStyles;
 
   return (
-    <motion.div className={styles.filmSlide} style={{ scale, x: "-50%", opacity, top }} onClick={() => scrollToSlide(index)}>
+    <motion.div className={styles.filmSlide} style={styling} onClick={() => scrollToSlide(index)}>
       <Media medium={film.coverMedia?.medium} />
     </motion.div>
   );

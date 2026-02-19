@@ -7,6 +7,8 @@ export function useVirtualScroll({ lenis, loopHeight }) {
   useEffect(() => {
     if (!lenis) return;
 
+    // console.log(lenis, "lenis");
+
     const onScroll = ({ scroll }) => {
       const y = wrap(-loopHeight, 0, -scroll);
       virtualScroll.set(y);

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useTransform, useMotionValue, animate } from "framer-motion";
 
-export function useOpacityAnimation({ progress, isTransitioning, isIdle }) {
-  const scrollOpacity = useTransform(progress, [1, 0.45, 0], [1, 1, 0.2]);
+export function useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle }) {
+  const scrollOpacity = useTransform(progress, [1, 0.45, 0], [1, 1, 0]);
   const clickOpacity = useMotionValue(1);
 
   useEffect(() => {
@@ -16,6 +16,8 @@ export function useOpacityAnimation({ progress, isTransitioning, isIdle }) {
         duration: 0.25,
         ease: "easeOut",
       });
+    } else if (isFocused) {
+      animate(clickOpacity, 1);
     } else {
       animate(clickOpacity, 0, {
         duration: 0.2,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { animate } from "framer-motion";
 
-export function useAnimation({ lenis, itemHeight, virtualScroll, headerHeight, viewportHeight }) {
+export function useAnimation({ lenis, slideHeight, virtualScroll, headerHeight, staticViewportHeight }) {
   // Animation Phase, and all Keyframe Functions
   const [animationPhase, setAnimationPhase] = useState({
     phase: "idle", // "0️⃣ idle" | "1️⃣ transitioning" | "2️⃣ focused"
@@ -9,10 +9,10 @@ export function useAnimation({ lenis, itemHeight, virtualScroll, headerHeight, v
   });
 
   const scrollToSlide = (index) => {
-    const targetScroll = index * itemHeight - viewportHeight / 2 + itemHeight / 2 - headerHeight;
+    const targetScroll = index * slideHeight - staticViewportHeight / 2 + slideHeight / 2 - headerHeight;
 
-    lenis?.stop(); // stop Lenis while animating
-    virtualScroll.stop();
+    // lenis?.stop();
+    // virtualScroll.stop();
 
     // setPendingIndex(index); // 🔑 fade immediately
     setAnimationPhase({ phase: "transitioning", index });

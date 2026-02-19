@@ -2,7 +2,7 @@
 "use client";
 
 import { ReactLenis, useLenis } from "lenis/react";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 const LenisContext = createContext(null);

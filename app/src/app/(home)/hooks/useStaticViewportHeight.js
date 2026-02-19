@@ -1,23 +1,23 @@
 // hooks/useViewportHeight.ts
 import { useState, useLayoutEffect, useEffect } from "react";
 
-export function useViewportHeight() {
-  const [height, setHeight] = useState(null);
+export function useStaticViewportHeight() {
+  const [staticViewportHeight, setStaticViewportHeight] = useState(null);
 
   // Initial mount (layout viewport, not visual viewport)
   useLayoutEffect(() => {
-    setHeight(window.innerHeight);
+    setStaticViewportHeight(window.innerHeight);
   }, []);
 
   // Update only on orientation change
   useEffect(() => {
     const update = () => {
-      setHeight(window.innerHeight);
+      setStaticViewportHeight(window.innerHeight);
     };
 
     window.addEventListener("orientationchange", update);
     return () => window.removeEventListener("orientationchange", update);
   }, []);
 
-  return height;
+  return { staticViewportHeight };
 }

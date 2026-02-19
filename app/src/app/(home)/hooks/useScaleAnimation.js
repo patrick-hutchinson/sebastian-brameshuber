@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useTransform, useMotionValue, animate } from "framer-motion";
 import { useAnimatedNavigation } from "../../../components/Animation/hooks/useAnimatedNavigation";
+
+import { DeviceContext } from "@/context/DeviceContext";
 
 import { preloadImage } from "@/utils/imageCache";
 
 export function useScaleAnimation({ progress, isFocused, isIdle, film }) {
+  const { isMobile } = useContext(DeviceContext);
   const navigate = useAnimatedNavigation();
   // scroll-driven scale
-  const scrollScale = useTransform(progress, [1, 0], [1.3, 0.8]);
+  const scrollScale = useTransform(progress, [1, 0], [1.2, 0.8]);
 
   // click-driven scale
   const clickScale = useMotionValue(1);
@@ -28,7 +31,7 @@ export function useScaleAnimation({ progress, isFocused, isIdle, film }) {
         damping: 24,
       });
     } else if (isFocused) {
-      animate(clickScale, 1.265, {
+      animate(clickScale, isMobile ? 1 : 1.265, {
         type: "spring",
         stiffness: 120,
         damping: 24,

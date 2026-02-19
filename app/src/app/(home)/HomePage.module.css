@@ -1,8 +1,5 @@
 .filmSlide {
-  height: 75vh;
-  width: 75vw;
   position: relative;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,4 +32,25 @@
   left: 0;
   width: 100%;
   will-change: transform;
+}
+
+.subtitle {
+  display: none;
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  .subtitle {
+    position: fixed;
+    bottom: var(--margin-page);
+    left: var(--margin-page);
+    color: #fff;
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    z-index: -1;
+  }
 }

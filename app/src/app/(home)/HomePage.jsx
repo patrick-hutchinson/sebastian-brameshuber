@@ -1,15 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef, useLayoutEffect, useMemo } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { useLenisContext } from "@/context/LenisContext";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { useGeometry } from "./hooks/useGeometry";
 import { useHeaderHeight } from "./hooks/useHeaderHeight";
-import { useViewportHeight } from "./hooks/useViewportHeight";
+import { useStaticViewportHeight } from "./hooks/useStaticViewportHeight";
 import { useVirtualScroll } from "./hooks/useVirtualScroll";
 import { useAnimation } from "./hooks/useAnimation";
+import { useScrollDetection } from "./hooks/useScrollDetection";
 
 import FilmSlide from "./components/FilmSlide";
 
@@ -18,28 +19,31 @@ import styles from "./HomePage.module.css";
 const HomePage = ({ films }) => {
   const lenis = useLenisContext();
 
-  const loopedFilms = [...films, ...films];
+  const isScrolling = useScrollDetection();
 
-  const viewportHeight = useViewportHeight();
+  const { staticViewportHeight } = useStaticViewportHeight();
   const headerHeight = useHeaderHeight();
 
-  const { itemHeight, loopHeight } = useGeometry({
+  const { slideHeight, slideWidth, loopHeight, scrollContainerHeight } = useGeometry({
     filmsLength: films.length,
-    viewportHeight,
+    staticViewportHeight,
   });
 
   const virtualScroll = useVirtualScroll({ lenis, loopHeight });
+
   const { scrollToSlide, animationPhase } = useAnimation({
     lenis,
-    itemHeight,
+    slideHeight,
     virtualScroll,
     headerHeight: headerHeight.current,
-    viewportHeight,
+    staticViewportHeight,
   });
 
-  const slidePositions = useMemo(() => loopedFilms.map((_, i) => i * itemHeight), [loopedFilms, itemHeight]);
+  const loopedFilms = [...films, ...films];
 
-  if (!viewportHeight) return;
+  const slidePositions = useMemo(() => loopedFilms.map((_, i) => i * slideHeight), [loopedFilms, slideHeight]);
+
+  if (!staticViewportHeight) return;
 
   return (
     <>
@@ -53,18 +57,33 @@ const HomePage = ({ films }) => {
                 index={index}
                 slidePosition={slidePositions[index]}
                 virtualScroll={virtualScroll}
-                itemHeight={itemHeight}
+                slideHeight={slideHeight}
+                slideWidth={slideWidth}
                 animationPhase={animationPhase}
                 scrollToSlide={scrollToSlide}
-                viewportHeight={viewportHeight}
               />
             );
           })}
         </motion.div>
       </div>
 
+      <AnimatePresence>
+        {!isScrolling && (
+          <motion.div
+            key="subtitle"
+            className={styles.subtitle}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            typo="display"
+          >
+            Directed by Sebastian Brameshuber
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* SCROLL INPUT ONLY */}
-      <div style={{ height: loopHeight }} />
+      {<div style={{ height: scrollContainerHeight }} /> /* ❓ Where does 19.5 come from? */}
     </>
   );
 };

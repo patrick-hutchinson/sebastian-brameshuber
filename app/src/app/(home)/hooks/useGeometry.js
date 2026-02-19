@@ -1,13 +1,19 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 
-export function useGeometry({ filmsLength, viewportHeight }) {
-  const GAP = 0;
+import { DeviceContext } from "@/context/DeviceContext";
+import { useViewport } from "@/context/ViewportContext";
 
-  const slideHeight = useMemo(() => viewportHeight * 0.75, [viewportHeight]);
+export function useGeometry({ filmsLength, staticViewportHeight }) {
+  const { isMobile } = useContext(DeviceContext);
+  const { viewportWidth } = useViewport();
 
-  const itemHeight = useMemo(() => slideHeight + GAP, [slideHeight]);
+  const factor = isMobile ? 0.4 : 0.75;
+  const slideHeight = useMemo(() => staticViewportHeight * factor, [staticViewportHeight]);
+  const slideWidth = useMemo(() => (isMobile ? "100%" : viewportWidth * factor), [viewportWidth]);
 
-  const loopHeight = useMemo(() => itemHeight * filmsLength + viewportHeight, [itemHeight, filmsLength, viewportHeight]);
+  const loopHeight = useMemo(() => slideHeight * filmsLength, [slideHeight, filmsLength, staticViewportHeight]);
 
-  return { slideHeight, itemHeight, loopHeight };
+  const scrollContainerHeight = useMemo(() => loopHeight + staticViewportHeight - 19.5, [loopHeight]);
+
+  return { slideHeight, slideWidth, loopHeight, scrollContainerHeight };
 }
