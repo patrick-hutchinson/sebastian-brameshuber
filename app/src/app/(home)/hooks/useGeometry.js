@@ -7,9 +7,10 @@ export function useGeometry({ filmsLength, staticViewportHeight }) {
   const { isMobile } = useContext(DeviceContext);
   const { viewportWidth } = useViewport();
 
-  const factor = isMobile ? 0.4 : 0.75;
-  const slideHeight = useMemo(() => staticViewportHeight * factor, [staticViewportHeight]);
-  const slideWidth = useMemo(() => (isMobile ? "100%" : viewportWidth * factor), [viewportWidth]);
+  // Keep the slide responsive by width while enforcing a fixed 16:9 media frame.
+  const widthFactor = isMobile ? 1 : 0.75;
+  const slideWidth = useMemo(() => viewportWidth * widthFactor, [viewportWidth, widthFactor]);
+  const slideHeight = useMemo(() => (slideWidth * 9) / 16, [slideWidth]);
 
   const loopHeight = useMemo(() => slideHeight * filmsLength, [slideHeight, filmsLength, staticViewportHeight]);
 

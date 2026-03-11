@@ -31,7 +31,8 @@
 .filmCredit {
   margin-bottom: var(--margin-4);
 }
-.filmCredits .role {
+.filmCredits .filmCreditTitle,
+.filmFestivals .filmFestivalTitle {
   color: var(--accent);
 }
 
@@ -39,7 +40,7 @@
   margin-bottom: var(--margin-2);
 }
 
-.filmComment .text {
+.filmComment .title {
   color: var(--accent);
 }
 
@@ -93,6 +94,10 @@
 .filmSupportingMedia_inner {
   padding: var(--margin-page);
   background: #fff;
+}
+
+.filmCredits_Section {
+  margin-bottom: calc(var(--margin-1) / 2);
 }
 
 section:has(+ a .loadNext),
@@ -183,9 +188,20 @@ section:has(+ .loadNext) {
     width: calc(100% / (24 / 3)); /* 3/24 of container width per column */
   }
 
+  .filmCredits_Section {
+    margin-bottom: unset;
+  }
+
   /* Interview */
   .interviewHeading {
     margin-bottom: var(--margin-1);
+  }
+
+  .filmCredits {
+    grid-column: 1 / 20;
+  }
+  .filmFestivals {
+    grid-column: 20 / 25;
   }
 }
 

@@ -57,6 +57,7 @@ export const filmsQuery = `*[_type == "film"]{
   description,
   coverMedia[0] ${mediaAssetFragment},
   credits,
+  festivals,
   comments[]->{
     title,
     text,
@@ -113,6 +114,7 @@ export const filmsQuery = `*[_type == "film"]{
     publication,
     text,
   },
+  showOnHomePage,
   slug
 }`;
 

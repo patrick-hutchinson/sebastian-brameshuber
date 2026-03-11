@@ -18,14 +18,14 @@ const FilmCommentItem = ({ comment }) => {
 
   return (
     <div key={comment._id} className={styles.filmComment}>
-      <Text text={comment.title} />
+      <Text className={styles.title} text={comment.title} />
 
       <div
         ref={contentRef}
         className={styles.textWrapper}
         style={{
           overflow: "hidden",
-          maxHeight: expanded ? height : 305,
+          maxHeight: expanded ? height : 65,
           transition: "max-height 0.5s ease",
         }}
       >

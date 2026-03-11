@@ -7,7 +7,7 @@ const FilmCredits = ({ film }) => {
     <div className={styles.filmCredits} typo="fineprint">
       {film.credits.map((credit) => (
         <div key={credit._id} className={styles.filmCredit}>
-          <div className={styles.role}>{credit.role}</div>
+          <div className={styles.filmCreditTitle}>{credit.filmCreditTitle}</div>
           <div className={styles.people}>
             {credit.people?.map((person, index) => (
               <div key={index}>{person}</div>

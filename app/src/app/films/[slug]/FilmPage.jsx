@@ -16,6 +16,7 @@ import FilmReviews from "./components/FilmReviews";
 import LoadNextFilm from "./components/LoadNextFilm";
 
 import styles from "./FilmPage.module.css";
+import FilmFestivals from "./components/FilmFestivals";
 
 const FilmPage = ({ site, films, film }) => {
   const ContentWrapper = ({ children }) => {
@@ -34,9 +35,14 @@ const FilmPage = ({ site, films, film }) => {
           <Text className={styles.filmDescription} typo="display" text={film.description} />
         </Section>
 
-        <Section>
-          <FilmCredits film={film} />
-        </Section>
+        <div className={`${styles.sectionWrapper} ${styles.creditsAndFestivals}`}>
+          <Section className={styles.filmCredits_Section}>
+            <FilmCredits film={film} />
+          </Section>
+          <Section className={styles.filmFestivals_Section}>
+            <FilmFestivals film={film} />
+          </Section>
+        </div>
 
         <div className={`${styles.sectionWrapper} ${styles.commentsAndMedia}`}>
           <Section className={styles.filmComments_Section}>

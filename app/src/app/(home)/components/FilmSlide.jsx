@@ -18,8 +18,9 @@ const FilmSlide = ({
   scrollToSlide,
   animationPhase,
   slidePosition,
+  handleMouseEnter,
+  handleMouseLeave,
 }) => {
-  console.log(slideWidth, "slide width");
   const { isDesktop } = useContext(DeviceContext);
   const { staticViewportHeight } = useStaticViewportHeight();
 
@@ -65,7 +66,13 @@ const FilmSlide = ({
   const styling = isDesktop ? desktopStyles : mobileStyles;
 
   return (
-    <motion.div className={styles.filmSlide} style={styling} onClick={() => scrollToSlide(index)}>
+    <motion.div
+      className={styles.filmSlide}
+      style={styling}
+      onClick={() => scrollToSlide(index)}
+      onMouseEnter={() => handleMouseEnter(film)}
+      onMouseLeave={handleMouseLeave}
+    >
       <Media medium={film.coverMedia?.medium} />
     </motion.div>
   );

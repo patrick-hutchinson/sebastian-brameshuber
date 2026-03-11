@@ -44,11 +44,22 @@ export const film = defineType({
                 layout: 'tags',
               },
               description:
-                '⚠️ Namen hinzufügen und dann ENTER dücken, sodass die Eingabe als Tag auftaucht.',
+                '⚠️ Festival Namen hinzufügen und dann ENTER dücken, sodass die Eingabe als Tag auftaucht.',
             }),
           ],
         },
       ],
+    }),
+    defineField({
+      name: 'festivals',
+      title: 'Festivals',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags',
+      },
+      description:
+        '⚠️ Namen hinzufügen und dann ENTER dücken, sodass die Eingabe als Tag auftaucht.',
     }),
     defineField({
       name: 'comments',
@@ -87,6 +98,15 @@ export const film = defineType({
       title: 'Reviews',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'review'}]}],
+    }),
+    defineField({
+      name: 'showOnHomePage',
+      title: 'Auf Homepage anzeigen',
+      type: 'boolean',
+      initialValue: true,
+      // options: {layout: 'radio'},
+      description:
+        'Deaktiviere diese Box, wenn der Film nicht auf der Home Seite angezeigt werden soll.',
     }),
     defineField({
       name: 'slug',
