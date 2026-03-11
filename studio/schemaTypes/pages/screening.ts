@@ -92,10 +92,19 @@ export const screening = defineType({
               name: 'link',
               title: 'Link',
               type: 'link',
+              description:
+                'Hier kannst du einen Link für einen Showtime eintrag angeben. Wenn du einen Link bei dem Screening angegeben hast, wird dieser hier wird die Kachel ihn überschrieben.',
             }),
           ],
         }),
       ],
+    }),
+    defineField({
+      name: 'link',
+      title: 'Link',
+      type: 'link',
+      description:
+        "Dieser Link liegt über dem gesamten Screening Block. Wenn du einen separaten Link pro Untereintrag ('Showtime') brauchst, kannst du diesen direkt bei dem jeweiligen Showtime eintrag eingeben. Dann wird dieser Showtime Eintrag mit dem neuen Link überschrieben.",
     }),
   ],
 
@@ -106,28 +115,30 @@ export const screening = defineType({
     },
     prepare({filmTitle, showtimes}) {
       const firstShowtime = showtimes?.[0]
-      const location = firstShowtime?.location?.cinema
-      const screeningDate = firstShowtime?.screeningDate?.startDate
-        ? new Date(
-            `${firstShowtime.screeningDate.startDate}T${firstShowtime.screeningDate.startTime || '00:00'}`,
-          )
-        : null
+      const location = firstShowtime?.cinema
+      const startDate = firstShowtime?.screeningDate?.startDate
+      const startTime = firstShowtime?.screeningDate?.startTime
 
-      return {
-        title: filmTitle || 'Untitled film',
-        subtitle: [
-          screeningDate &&
-            screeningDate.toLocaleString('de-DE', {
+      const screeningDate = startDate ? new Date(`${startDate}T${startTime || '00:00'}`) : null
+      const formattedDate =
+        screeningDate &&
+        (startTime
+          ? screeningDate.toLocaleString('de-DE', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',
               hour: '2-digit',
               minute: '2-digit',
-            }),
-          location,
-        ]
-          .filter(Boolean)
-          .join(' · '),
+            })
+          : screeningDate.toLocaleDateString('de-DE', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            }))
+
+      return {
+        title: filmTitle || 'Untitled film',
+        subtitle: [formattedDate, location].filter(Boolean).join(' · '),
       }
     },
   },

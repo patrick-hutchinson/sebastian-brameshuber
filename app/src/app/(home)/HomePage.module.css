@@ -50,14 +50,4 @@
 
 /* iPads and other Tablets */
 @media screen and (min-width: 769px) {
-  /* .subtitle {
-    position: fixed;
-    bottom: var(--margin-page);
-    left: var(--margin-page);
-    color: #fff;
-    display: block;
-    height: fit-content;
-    width: fit-content;
-    z-index: -1;
-  } */
 }

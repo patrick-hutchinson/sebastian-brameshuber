@@ -19,12 +19,16 @@ const AnimationLink = ({ path, link, children, className, onMouseEnter, onMouseL
 
   if (!href) return <>{children}</>;
 
+  const isExternal = link?.type === "external";
+  const isEmail = link?.type === "email";
+
   const handleClick = (e) => {
+    // Preserve native behavior for external/email links and modified clicks.
+    if (isExternal || isEmail || e.button !== 0 || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+
     e.preventDefault();
     navigate(href);
   };
-
-  const isExternal = link?.type === "external";
 
   return (
     <a

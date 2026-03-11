@@ -8,5 +8,6 @@ export const publication = defineType({
     defineField({name: 'title', title: 'Title', type: 'string'}),
     defineField({name: 'text', title: 'Text', type: 'portableText'}),
     defineField({name: 'media', title: 'Image/Video', type: 'mediaAsset'}),
+    defineField({name: 'link', title: 'Link', type: 'link'}),
   ],
 })

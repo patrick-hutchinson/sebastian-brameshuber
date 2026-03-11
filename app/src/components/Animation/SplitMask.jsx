@@ -16,13 +16,13 @@ const SplitMask = ({ children }) => {
 
   return (
     <AnimatePresence mode="wait">
-      <motion.div key={pathname} style={{ height: "fit-content", width: "fit-content", overflow: "hidden" }}>
+      <motion.div key={pathname} style={{ height: "fit-content", width: "100%", overflow: "hidden" }}>
         <motion.div
           initial="initial"
           animate="animate"
           exit="exit"
           variants={variants}
-          style={{ position: "relative", height: "fit-content", width: "fit-content" }}
+          style={{ position: "relative", height: "fit-content", width: "100%" }}
         >
           {children}
         </motion.div>

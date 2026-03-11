@@ -7,19 +7,21 @@ export const news = defineType({
   fields: [
     defineField({name: 'date', title: 'Date', type: 'date', options: {dateFormat: 'DD.MM.YYYY'}}),
     defineField({name: 'text', title: 'Text', type: 'portableText'}),
-    defineField({name: 'author', title: 'Author', type: 'string'}),
-    defineField({name: 'publication', title: 'Publication', type: 'string'}),
     defineField({
       name: 'newsCategory',
       title: 'Category',
       type: 'reference',
       to: {type: 'newsCategory'},
     }),
+
+    defineField({name: 'author', title: 'Author', type: 'string'}),
+    defineField({name: 'publication', title: 'Publication', type: 'string'}),
     defineField({
       name: 'film',
       title: 'Film',
       type: 'reference',
       to: [{type: 'film'}],
+      description: 'Dieses Feld kann leer bleiben.',
     }),
     defineField({name: 'link', title: 'Link', type: 'link'}),
     defineField({name: 'previewMedia', title: 'Preview Image/Video', type: 'mediaAsset'}),

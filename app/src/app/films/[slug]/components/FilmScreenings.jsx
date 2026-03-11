@@ -1,4 +1,4 @@
-import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
+import ScreeningContainer from "@/components/Screenings/components/ScreeningConainer";
 import Screening from "@/components/Screenings/Screening";
 
 const FilmScreenings = ({ film }) => {

@@ -14,6 +14,7 @@ import FormatDate from "@/components/FormatDate/FormatDate";
 import SplitMask from "../../../../components/Animation/SplitMask";
 
 const NewsItem = ({ newsItem }) => {
+  console.log(newsItem.newsCategory, "category");
   const { isTouch } = useContext(DeviceContext);
 
   const [isHovering, setIsHovering] = useState(false);
@@ -38,6 +39,20 @@ const NewsItem = ({ newsItem }) => {
   const Wrapper = hasLink ? AnimationLink : "div";
   const wrapperProps = hasLink ? { link: newsItem.link, ...commonProps } : { ...commonProps };
 
+  const FinePrint = () => {
+    if (!newsItem.author || !newsItem.publication || !newsItem.film.title) return;
+
+    return (
+      <div typo="fineprint" className={styles.newsFooter}>
+        <div className={styles.category}>{newsItem.newsCategory.name}</div>
+
+        <span className={styles.source}>
+          {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
+        </span>
+      </div>
+    );
+  };
+
   return (
     <SplitMask>
       <Wrapper {...wrapperProps}>
@@ -46,13 +61,8 @@ const NewsItem = ({ newsItem }) => {
           <Text text={newsItem.text} className={styles.clamp} />
         </div>
         {isTouch && <Media medium={newsItem.previewMedia.medium} className={styles.previewMedia} />}
-        <div typo="fineprint" className={styles.newsFooter}>
-          <div className={styles.category}>{newsItem.category}</div>
 
-          <span className={styles.source}>
-            {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
-          </span>
-        </div>
+        <FinePrint />
 
         {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
       </Wrapper>

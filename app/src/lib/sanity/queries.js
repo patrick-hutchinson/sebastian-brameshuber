@@ -17,11 +17,20 @@ export const siteQuery = `*[_type=="site"][0]{
 export const aboutQuery = `*[_type=="about"][0]{
   aboutText,
   featuredScreenings[]{
+    _key,
+    _id,
+    _type,
     film->{
       title,
       fullTitle,
+      slug,
+      showOnHomePage,
     },
-    festivals
+    location,
+    screeningDate,
+    annotation,
+    festival,
+    showtimes,
   },
   awards[]->{
     award,
@@ -29,7 +38,8 @@ export const aboutQuery = `*[_type=="about"][0]{
     film->{
       title,
       fullTitle,
-      slug
+      slug,
+      showOnHomePage
     },
     link
   }
@@ -47,6 +57,7 @@ export const screeningsQuery = `*[_type == "screening"]{
   annotation,
   festival,
   showtimes,
+  link,
 }`;
 
 export const filmsQuery = `*[_type == "film"]{
@@ -99,7 +110,7 @@ export const filmsQuery = `*[_type == "film"]{
     }
   },
   "screenings": *[_type == "screening" && film._ref == ^._id]{
-    _id,
+       _id,
     _type,
     film->{
       title,
@@ -107,7 +118,9 @@ export const filmsQuery = `*[_type == "film"]{
     },
     location,
     screeningDate,
-    showtimes
+    annotation,
+    festival,
+    showtimes,
   },
   reviews[]->{
     author,
@@ -135,7 +148,9 @@ export const newsQuery = `*[_type == "news"]{
         }
       },
   date,
-  category,
+  newsCategory->{
+    name,
+  },
   author,
   publication,
   showtimes,

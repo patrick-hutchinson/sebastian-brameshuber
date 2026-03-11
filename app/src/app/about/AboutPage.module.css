@@ -16,6 +16,10 @@ section.featuredScreenings {
 .awards .filmTitle {
   color: var(--accent);
 }
+.awards::before {
+  content: "Awards";
+  display: block;
+}
 
 .awardYearContainer {
   display: grid;
@@ -61,6 +65,16 @@ section.featuredScreenings {
   }
   .awardFilmContainer {
     grid-column: 2 / 13;
+  }
+  .awards {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .awards::before {
+    grid-column: 2 / 13;
+  }
+  .awards > .awardYearContainer {
+    grid-column: 1 / 13;
   }
   section.featuredScreenings > ul {
     grid-column: 2 / 13;

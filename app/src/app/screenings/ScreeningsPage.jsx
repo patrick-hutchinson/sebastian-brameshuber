@@ -1,6 +1,6 @@
 import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 import Screening from "../../components/Screenings/Screening";
-import ScreeningContainer from "@/components/Screenings/ScreeningConainer";
+import ScreeningContainer from "@/components/Screenings/components/ScreeningConainer";
 
 const ScreeningsPage = ({ screenings }) => {
   console.log(screenings[1].showtimes[0].screeningDate, "screening");

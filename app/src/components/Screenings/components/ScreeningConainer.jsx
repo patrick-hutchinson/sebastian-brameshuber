@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import styles from "./Screening.module.css";
+import styles from "../Screening.module.css";
 
 const ScreeningContainer = ({ children }) => {
   return (

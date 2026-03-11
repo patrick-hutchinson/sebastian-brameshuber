@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 
+import AnimationLink from "@/components/Animation/AnimationLink";
 import Media from "@/components/Media/Media";
 import Text from "@/components/Text/Text";
 
@@ -10,16 +11,22 @@ import AdaptiveMediaContainer from "@/components/AdaptiveMediaContainer/Adaptive
 
 const PublicationDisplay = ({ publication }) => {
   const containerRef = useRef(null);
+
+  const hasLink = publication.link;
+  const Wrapper = hasLink ? AnimationLink : "div";
+  const wrapperProps = hasLink ? { link: publication.link } : {};
   return (
-    <div className={styles.publicationDisplay} typo="longcopy">
-      <div className={styles.publicationTitle}>{publication.title}</div>
-      <div className={styles.publicationMediaContainer} ref={containerRef}>
-        <AdaptiveMediaContainer container={containerRef} medium={publication.media.medium}>
-          <Media medium={publication.media.medium} className={styles.publicationMedia} />
-        </AdaptiveMediaContainer>
+    <Wrapper {...wrapperProps}>
+      <div className={styles.publicationDisplay} typo="longcopy">
+        <div className={styles.publicationTitle}>{publication.title}</div>
+        <div className={styles.publicationMediaContainer} ref={containerRef}>
+          <AdaptiveMediaContainer container={containerRef} medium={publication.media.medium}>
+            <Media medium={publication.media.medium} className={styles.publicationMedia} />
+          </AdaptiveMediaContainer>
+        </div>
+        <Text text={publication.text} />
       </div>
-      <Text text={publication.text} />
-    </div>
+    </Wrapper>
   );
 };
 
