@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTransform, useMotionValue, animate } from "framer-motion";
 
-export function useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle }) {
+export function useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle, top }) {
   const scrollOpacity = useTransform(progress, [1, 0.45, 0], [1, 1, 0]);
   const clickOpacity = useMotionValue(1);
 

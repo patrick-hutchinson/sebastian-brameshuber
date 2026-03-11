@@ -38,9 +38,12 @@ const FilmSlide = ({
     return Math.min(1, Math.max(0, (relative - start) / (end - start))); // normalize into [0..1] window
   });
 
-  const scale = useScaleAnimation({ progress, isFocused, isIdle, film });
-  const opacity = useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle });
-  const top = useTransform(progress, [1, 0.5, 0], [250, 0, 250]);
+  const top = {
+    mobile: useTransform(progress, [1, 0.5, 0], [150, 0, 150]),
+    desktop: useTransform(progress, [1, 0.5, 0], [250, 0, 250]),
+  };
+  const scale = useScaleAnimation({ progress, isFocused, isIdle, film, top });
+  const opacity = useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle, top });
 
   const mobileStyles = {
     height: slideHeight,
@@ -48,6 +51,7 @@ const FilmSlide = ({
     opacity,
     scale,
     x: "-50%",
+    top: top.mobile,
   };
   const desktopStyles = {
     height: slideHeight,
@@ -55,7 +59,7 @@ const FilmSlide = ({
     opacity,
     scale,
     x: "-50%",
-    top,
+    top: top.desktop,
   };
 
   const styling = isDesktop ? desktopStyles : mobileStyles;

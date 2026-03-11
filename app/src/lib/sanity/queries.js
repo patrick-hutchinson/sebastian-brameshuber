@@ -77,7 +77,6 @@ export const filmsQuery = `*[_type == "film"]{
       _type,
       _key,
 
-      // speech blocks
       speaker,
       initials,
       text[]{
@@ -94,10 +93,9 @@ export const filmsQuery = `*[_type == "film"]{
         }
       },
 
-      // heading blocks
       style,
       children[]
-}
+    }
   },
   "screenings": *[_type == "screening" && film._ref == ^._id]{
     _id,

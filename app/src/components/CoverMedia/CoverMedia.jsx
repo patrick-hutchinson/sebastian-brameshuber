@@ -38,9 +38,17 @@ const CoverMedia = ({ medium }) => {
   }, [viewportHeight, viewportWidth, aspectRatio]);
 
   // keep MotionValue in sync with slider
+  // useEffect(() => {
+  //   rawScroll.set(sliderValue);
+  // }, [sliderValue]);
+
   useEffect(() => {
-    rawScroll.set(sliderValue);
-  }, [sliderValue]);
+    const max = Math.max(0, viewportHeight * aspectRatio - viewportWidth);
+    setScrollMax(max);
+    const center = max / 2;
+    setSliderValue(center);
+    rawScroll.set(center); // initial set only
+  }, [viewportHeight, viewportWidth, aspectRatio]);
 
   return (
     <div className={styles.coverMedia}>
@@ -62,7 +70,15 @@ const CoverMedia = ({ medium }) => {
           max={scrollMax}
           step={0.01}
           value={sliderValue}
-          onChange={(e) => setSliderValue(parseFloat(e.target.value))}
+          // onChange={(e) => setSliderValue(parseFloat(e.target.value))}
+          onChange={(e) => {
+            const val = parseFloat(e.target.value);
+            setSliderValue(val);
+            rawScroll.set(val); // drive the spring
+          }}
+          onTouchStart={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+          onTouchEnd={(e) => e.stopPropagation()}
           className={styles.coverMedia_slider}
         />
       )}
