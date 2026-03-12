@@ -12,16 +12,16 @@ import ImagePreview from "@/components/ImagePreview/ImagePreview";
 import AnimationLink from "@/components/Animation/AnimationLink";
 import FormatDate from "@/components/FormatDate/FormatDate";
 import SplitMask from "../../../../components/Animation/SplitMask";
+import { motion } from "framer-motion";
 
 const NewsItem = ({ newsItem }) => {
-  console.log(newsItem.newsCategory, "category");
   const { isTouch } = useContext(DeviceContext);
 
   const [isHovering, setIsHovering] = useState(false);
+  const [isSplitArrived, setIsSplitArrived] = useState(false);
 
   const handleMouseEnter = () => {
     if (isTouch) return;
-    console.log("hovered");
     setIsHovering(true);
   };
   const handleMouseLeave = () => {
@@ -43,18 +43,24 @@ const NewsItem = ({ newsItem }) => {
     if (!newsItem.author || !newsItem.publication || !newsItem.film.title) return;
 
     return (
-      <div typo="fineprint" className={styles.newsFooter}>
-        <div className={styles.category}>{newsItem.newsCategory.name}</div>
+      <motion.div
+        typo="fineprint"
+        className={styles.newsFooter}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isSplitArrived ? 1 : 0 }}
+        transition={{ duration: 0.25 }}
+      >
+        <div className={styles.category}>{newsItem.newsCategory?.name}</div>
 
         <span className={styles.source}>
           {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
         </span>
-      </div>
+      </motion.div>
     );
   };
 
   return (
-    <SplitMask>
+    <SplitMask onArrive={() => setIsSplitArrived(true)}>
       <Wrapper {...wrapperProps}>
         <div className={styles.newsHeadline} typo="display">
           <FormatDate date={newsItem.date} />
