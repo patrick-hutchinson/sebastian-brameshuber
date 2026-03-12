@@ -80,7 +80,7 @@ export const filmsQuery = `*[_type == "film"]{
   purchaseLink,
   platform,
   gallery[] ${mediaAssetFragment},
-  interview->{
+  interviews[]->{
     title,
     subtitle,
     interviewer,

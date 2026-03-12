@@ -11,7 +11,7 @@ const hiddenTypes = [
   'mux.videoAsset',
   'award',
   'comment',
-  'interview',
+  // 'interview',
   'newsCategory',
   'review',
   'page',

@@ -9,14 +9,15 @@ import CoverMedia from "@/components/CoverMedia/CoverMedia";
 import FilmGallery from "./components/FilmGallery";
 import FilmComments from "./components/FilmComments/FilmComments";
 import FilmScreenings from "./components/FilmScreenings";
-import FilmInterview from "./components/FilmInterview";
+import FilmInterviews from "./components/FilmInterview";
 import FilmCredits from "./components/FilmCredits";
 import FilmSupportingMedia from "./components/FilmSupportingMedia";
 import FilmReviews from "./components/FilmReviews";
+import FilmFestivals from "./components/FilmFestivals";
+
 import LoadNextFilm from "./components/LoadNextFilm";
 
 import styles from "./FilmPage.module.css";
-import FilmFestivals from "./components/FilmFestivals";
 
 const FilmPage = ({ site, films, film }) => {
   const ContentWrapper = ({ children }) => {
@@ -58,8 +59,8 @@ const FilmPage = ({ site, films, film }) => {
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>
-          <Section className={styles.filmInterview_Section}>
-            <FilmInterview film={film} />
+          <Section className={styles.filmInterviews_Section}>
+            <FilmInterviews film={film} />
           </Section>
 
           <Section className={styles.filmReview_Section}>

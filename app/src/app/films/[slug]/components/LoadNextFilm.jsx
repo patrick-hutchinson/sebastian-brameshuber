@@ -5,10 +5,12 @@ import AnimationLink from "@/components/Animation/AnimationLink";
 import styles from "../FilmPage.module.css";
 
 const LoadNextFilm = ({ films, film }) => {
+  const sortedFilms = films.filter((film) => film.showOnHomePage);
+
   return (
-    <AnimationLink path={loadNextFilm(films, film)}>
+    <AnimationLink path={loadNextFilm(sortedFilms, film)}>
       <div className={styles.loadNext} typo="display">
-        <button>Load Next</button>
+        <button>Load Next Film</button>
       </div>
     </AnimationLink>
   );

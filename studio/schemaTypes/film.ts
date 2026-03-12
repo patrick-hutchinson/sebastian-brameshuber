@@ -88,10 +88,15 @@ export const film = defineType({
       description: 'Diese Bilder werden in voller Bildschirmhöhe unterhalb der Comments angezeigt,',
     }),
     defineField({
-      name: 'interview',
-      title: 'Interview',
-      type: 'reference',
-      to: {type: 'interview'},
+      name: 'interviews',
+      title: 'Interviews',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'interview'}],
+        },
+      ],
     }),
     defineField({
       name: 'reviews',

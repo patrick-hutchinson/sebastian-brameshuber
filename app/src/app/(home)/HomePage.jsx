@@ -11,7 +11,6 @@ import { useHeaderHeight } from "./hooks/useHeaderHeight";
 import { useStaticViewportHeight } from "./hooks/useStaticViewportHeight";
 import { useVirtualScroll } from "./hooks/useVirtualScroll";
 import { useAnimation } from "./hooks/useAnimation";
-import { useScrollDetection } from "./hooks/useScrollDetection";
 
 import FilmSlide from "./components/FilmSlide";
 
@@ -21,7 +20,6 @@ const HomePage = ({ films }) => {
   const lenis = useLenisContext();
   const { isMobile } = useContext(DeviceContext);
 
-  const isScrolling = useScrollDetection();
   const [hoveredFilm, setHoveredFilm] = useState(null);
   const [mobileInViewFilm, setMobileInViewFilm] = useState(null);
 
@@ -86,11 +84,7 @@ const HomePage = ({ films }) => {
     });
   });
 
-  const subtitleText = isMobile
-    ? (mobileInViewFilm?.title ?? null)
-    : isScrolling
-      ? "A film by Sebastian Brahmeshuber"
-      : (hoveredFilm?.title ?? "A film by...");
+  const subtitleText = isMobile ? (mobileInViewFilm?.title ?? null) : (hoveredFilm?.title ?? null);
 
   if (!staticViewportHeight) return;
 

@@ -25,7 +25,7 @@ const FilmCommentItem = ({ comment }) => {
         className={styles.textWrapper}
         style={{
           overflow: "hidden",
-          maxHeight: expanded ? height : 65,
+          maxHeight: expanded ? height : 305,
           transition: "max-height 0.5s ease",
         }}
       >

@@ -53,7 +53,8 @@
 .filmComment .commentSource {
   grid-column: 1 / 9;
 }
-.filmComment .readMore {
+.filmComment .readMore,
+.filmInterviews .readMore {
   grid-column: 10 / 13;
   display: flex;
   justify-content: flex-end;
@@ -69,7 +70,6 @@
 
 .filmReviews {
   column-count: 2;
-  /* column-gap: var(--gap-vertical); */
   column-gap: var(--margin-page);
 }
 .filmReview {
@@ -104,6 +104,10 @@ section:has(+ a .loadNext),
 section:has(+ .loadNext) {
   /* styles for a section immediately before .loadNext */
   margin-bottom: 0;
+}
+
+.filmInterviews_Section .filmInterview:not(:last-child) > :last-child {
+  margin-bottom: var(--margin-1);
 }
 
 /* Hover Events, Desktop Only */
@@ -147,29 +151,39 @@ section:has(+ .loadNext) {
 
   /* Interview + Reviews */
 
-  .filmInterview_Section .filmInterview {
+  .filmInterviews_Section .filmInterview,
+  .filmInterviews_Section .filmInterviews {
     display: contents;
   }
-  .filmInterview_Section .interviewHeading {
-    grid-column: 1 / 24;
+
+  .filmInterviews_Section .interviewHeading {
+    grid-column: 1 / 25;
   }
-  .filmInterview_Section .interviewText {
+
+  .filmInterviews_Section .filmInterview:not(:first-child) .interviewHeading {
+    grid-column: 1 / 19;
+  }
+
+  .filmInterviews_Section .interviewText,
+  .filmInterviews_Section .textWrapper {
     grid-column: 1 / 13;
     padding-right: var(--margin-page);
   }
 
   .sectionWrapper.interviewAndReviews .filmReviews {
-    grid-column: 22 / 25;
+    grid-column: 20 / 25;
     position: sticky;
     top: 50%;
     height: fit-content;
+    grid-row: 2;
   }
 
   .filmReviews {
     column-count: 1;
   }
 
-  .filmComment .readMore {
+  .filmComment .readMore,
+  .filmInterviews .readMore {
     grid-column: 10 / 12;
   }
 
@@ -207,7 +221,8 @@ section:has(+ .loadNext) {
 
 /* Desktop */
 @media screen and (min-width: 1280px) {
-  .interviewText {
+  .interviewText,
+  .filmInterviews_Section .textWrapper {
     grid-column: 1 / 12;
   }
 }
