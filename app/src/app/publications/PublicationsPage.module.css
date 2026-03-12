@@ -12,8 +12,10 @@
 /* iPads and other Tablets */
 @media screen and (min-width: 769px) {
   .publicationsContainer {
-    column-count: 2;
+    /* column-count: 2; */
     column-gap: var(--gap-vertical);
+    display: grid;
+    grid-template-columns: 50% 50%;
   }
 
   .publicationsContainer > * {

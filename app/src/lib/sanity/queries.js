@@ -26,11 +26,7 @@ export const aboutQuery = `*[_type=="about"][0]{
       slug,
       showOnHomePage,
     },
-    location,
-    screeningDate,
-    annotation,
-    festival,
-    showtimes,
+    festivals,
   },
   awards[]->{
     award,

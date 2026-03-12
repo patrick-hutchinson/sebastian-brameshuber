@@ -37,6 +37,10 @@ section.featuredScreenings {
   display: contents;
 }
 
+.featuredScreenings_Header {
+  grid-column: 1 / 12;
+}
+
 /* Hover Events, Desktop Only */
 @media (hover: hover) and (pointer: fine) {
 }
@@ -76,7 +80,8 @@ section.featuredScreenings {
   .awards > .awardYearContainer {
     grid-column: 1 / 13;
   }
-  section.featuredScreenings > ul {
+  section.featuredScreenings > ul,
+  .featuredScreenings_Header {
     grid-column: 2 / 13;
   }
 }

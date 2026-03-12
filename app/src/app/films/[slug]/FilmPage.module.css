@@ -110,6 +110,14 @@ section:has(+ .loadNext) {
   margin-bottom: var(--margin-1);
 }
 
+.sectionWrapper .filmReview_Section_mobile {
+  display: block;
+}
+
+.sectionWrapper .filmReview_Section_desktop {
+  display: none;
+}
+
 /* Hover Events, Desktop Only */
 @media (hover: hover) and (pointer: fine) {
 }
@@ -132,6 +140,14 @@ section:has(+ .loadNext) {
   .sectionWrapper section {
     display: contents;
     margin-bottom: 0;
+  }
+
+  .sectionWrapper section.filmReview_Section_mobile {
+    display: none;
+  }
+
+  .sectionWrapper section.filmReview_Section_desktop {
+    display: contents;
   }
 
   /* Comments + SupportingMedia */

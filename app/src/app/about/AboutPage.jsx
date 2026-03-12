@@ -17,6 +17,9 @@ const AboutPage = ({ about }) => {
       </Section>
       <div className={styles.sectionWrapper}>
         <Section className={styles.featuredScreenings}>
+          <div className={styles.featuredScreenings_Header} typo="longcopy">
+            Filmography
+          </div>
           <FeaturedScreenings featuredScreenings={about.featuredScreenings} />
         </Section>
         <Section>

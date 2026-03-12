@@ -49,6 +49,9 @@ const FilmPage = ({ site, films, film }) => {
           <Section className={styles.filmComments_Section}>
             <FilmComments film={film} />
           </Section>
+          <Section className={`${styles.filmReview_Section} ${styles.filmReview_Section_mobile}`}>
+            <FilmReviews film={film} />
+          </Section>
           <Section className={styles.filmSupportingMedia_Section}>
             <FilmSupportingMedia film={film} />
           </Section>
@@ -63,7 +66,7 @@ const FilmPage = ({ site, films, film }) => {
             <FilmInterviews film={film} />
           </Section>
 
-          <Section className={styles.filmReview_Section}>
+          <Section className={`${styles.filmReview_Section} ${styles.filmReview_Section_desktop}`}>
             <FilmReviews film={film} />
           </Section>
         </div>

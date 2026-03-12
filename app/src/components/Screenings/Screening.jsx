@@ -44,7 +44,7 @@ const Screening = ({ screening }) => {
         <AnimationLink link={screening.link}>
           <div className={styles.screening} typo="h4">
             <div className={styles.screeningHeader}>
-              {screening.film?.title}
+              <span className={styles.filmTitle}>{screening.film?.title}</span>
               <ScreeningFestival />
               <ScreeningAnnotation />
               <ScreeningLocation />

@@ -9,7 +9,6 @@ const FeaturedScreenings = ({ featuredScreenings }) => {
 
   return (
     <ul typo="longcopy">
-      <div>Filmography</div>
       {featuredScreenings.map((screening, index) => (
         <li key={screening._key ?? screening._id ?? `${screening.film?.slug?.current ?? "screening"}-${index}`}>
           {canLinkFilm(screening.film) ? (

@@ -18,6 +18,10 @@
   height: fit-content;
 }
 
+.screening .filmTitle {
+  text-transform: uppercase;
+}
+
 .screeningHeader {
   font-family: "MagdaClean";
   color: #000;
