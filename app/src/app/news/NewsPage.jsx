@@ -18,8 +18,8 @@ const NewsPage = ({ news }) => {
   return (
     <main>
       <Section>
-        {sortedNews.map((newsItem) => {
-          return <NewsItem key={newsItem._key} newsItem={newsItem} />;
+        {sortedNews.map((newsItem, index) => {
+          return <NewsItem key={newsItem._id ?? newsItem._key ?? index} newsItem={newsItem} staggerIndex={index} />;
         })}
       </Section>
       <ScrollToTop />

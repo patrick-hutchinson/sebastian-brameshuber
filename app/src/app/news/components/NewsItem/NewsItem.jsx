@@ -16,7 +16,7 @@ import SplitMask from "../../../../components/Animation/SplitMask";
 
 import styles from "./NewsItem.module.css";
 
-const NewsItem = ({ newsItem }) => {
+const NewsItem = ({ newsItem, staggerIndex = 0 }) => {
   const { isTouch } = useContext(DeviceContext);
 
   const [isHovering, setIsHovering] = useState(false);
@@ -66,7 +66,7 @@ const NewsItem = ({ newsItem }) => {
   };
 
   return (
-    <SplitMask onArrive={() => setIsSplitArrived(true)}>
+    <SplitMask onArrive={() => setIsSplitArrived(true)} staggerIndex={staggerIndex}>
       <Wrapper {...wrapperProps}>
         <div className={styles.newsHeadline} typo="display">
           <Text text={newsItem.text} className={styles.clamp} />

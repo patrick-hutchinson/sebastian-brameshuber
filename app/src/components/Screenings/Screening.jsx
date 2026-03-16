@@ -1,17 +1,18 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 import AnimationLink from "../Animation/AnimationLink";
-
-import SplitMask from "../Animation/SplitMask";
 
 import ScreeningDate from "@/components/Screenings/components/ScreeningDate";
 
 import styles from "./Screening.module.css";
 
 const Screening = ({ screening }) => {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+
   const firstScreening = screening.showtimes[0];
   const extraScreenings = screening.showtimes.slice(1);
 
@@ -39,8 +40,12 @@ const Screening = ({ screening }) => {
   };
 
   return (
-    <SplitMask>
-      <motion.div>
+    <motion.div ref={containerRef} style={{ height: "fit-content", width: "100%", overflow: "hidden" }}>
+      <motion.div
+        initial={{ y: "120%" }}
+        animate={isInView ? { y: 0 } : { y: "120%" }}
+        transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
+      >
         <AnimationLink link={screening.link}>
           <div className={styles.screening} typo="h4">
             <div className={styles.screeningHeader}>
@@ -74,7 +79,7 @@ const Screening = ({ screening }) => {
           );
         })}
       </motion.div>
-    </SplitMask>
+    </motion.div>
   );
 };
 
