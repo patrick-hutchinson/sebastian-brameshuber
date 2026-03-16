@@ -52,6 +52,44 @@ export const about = defineType({
       of: [{type: 'reference', to: [{type: 'award'}]}],
       validation: (Rule) => Rule.unique().error('You cannot select the same award multiple times.'),
     }),
+    defineField({
+      name: 'teaching',
+      title: 'Teaching',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'text',
+              title: 'Text',
+              type: 'portableText',
+            }),
+          ],
+          preview: {
+            select: {
+              text: 'text',
+            },
+            prepare({text}) {
+              const plainText =
+                text
+                  ?.filter((block) => block._type === 'block')
+                  .map((block) =>
+                    block.children
+                      ?.filter((child) => child._type === 'span')
+                      .map((child) => child.text)
+                      .join(''),
+                  )
+                  .join(' ') || ''
+
+              return {
+                title: plainText.slice(0, 80) || 'Untitled teaching entry',
+              }
+            },
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     prepare: () => ({title: 'Films'}),

@@ -2,15 +2,20 @@
   grid-column: 1 / 13;
 }
 
-section.featuredScreenings {
+section.featuredScreenings,
+section.teachingSection {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
-.featuredScreenings > ul {
+.featuredScreenings > ul,
+.teachingSection > ul {
   grid-column: 3 / 13;
 }
 
 .featuredScreenings .filmTitle {
+  color: var(--accent);
+}
+.teachingSection > ul {
   color: var(--accent);
 }
 .awards .filmTitle {
@@ -37,7 +42,8 @@ section.featuredScreenings {
   display: contents;
 }
 
-.featuredScreenings_Header {
+.featuredScreenings_Header,
+.teachingSection_Header {
   grid-column: 1 / 12;
 }
 
@@ -81,7 +87,9 @@ section.featuredScreenings {
     grid-column: 1 / 13;
   }
   section.featuredScreenings > ul,
-  .featuredScreenings_Header {
+  .featuredScreenings_Header,
+  section.teachingSection > ul,
+  .teachingSection_Header {
     grid-column: 2 / 13;
   }
 }

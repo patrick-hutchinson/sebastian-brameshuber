@@ -38,6 +38,9 @@ export const aboutQuery = `*[_type=="about"][0]{
       showOnHomePage
     },
     link
+  },
+  teaching[]{
+    text
   }
 }`;
 
