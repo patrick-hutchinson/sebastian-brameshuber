@@ -52,8 +52,25 @@ export const screeningsQuery = `*[_type == "screening"]{
   screeningDate,
   annotation,
   festival,
-  showtimes,
-  link,
+  showtimes[]{
+    ...,
+    link{
+      type,
+      url,
+      internalLink->{
+        _type,
+        slug
+      }
+    }
+  },
+  link{
+    type,
+    url,
+    internalLink->{
+      _type,
+      slug
+    }
+  },
 }`;
 
 export const filmsQuery = `*[_type == "film"]{
@@ -70,7 +87,14 @@ export const filmsQuery = `*[_type == "film"]{
     text,
     source,
     author,
-    link,
+    link{
+      type,
+      url,
+      internalLink->{
+        _type,
+        slug
+      }
+    },
   },
   supportingMedia[] ${mediaAssetFragment},
   purchaseLink,
@@ -95,6 +119,7 @@ export const filmsQuery = `*[_type == "film"]{
             type,
             url,
             internalLink->{
+              _type,
               slug
             }
           }
@@ -116,7 +141,25 @@ export const filmsQuery = `*[_type == "film"]{
     screeningDate,
     annotation,
     festival,
-    showtimes,
+    showtimes[]{
+      ...,
+      link{
+        type,
+        url,
+        internalLink->{
+          _type,
+          slug
+        }
+      }
+    },
+    link{
+      type,
+      url,
+      internalLink->{
+        _type,
+        slug
+      }
+    },
   },
   "awards": *[_type == "award" && film._ref == ^._id]{
     award,
@@ -142,6 +185,7 @@ export const newsQuery = `*[_type == "news"]{
             type,
             url,
             internalLink->{
+              _type,
               slug
             }
           }
@@ -158,7 +202,14 @@ export const newsQuery = `*[_type == "news"]{
     title,
     slug,
   },
-  link,
+  link{
+    type,
+    url,
+    internalLink->{
+      _type,
+      slug
+    }
+  },
   previewMedia[0] ${mediaAssetFragment}
 }`;
 
@@ -168,5 +219,12 @@ export const publicationsQuery = `*[_type == "publication"]{
   title,
   text,
   media[0] ${mediaAssetFragment},
-  link,
+  link{
+    type,
+    url,
+    internalLink->{
+      _type,
+      slug
+    }
+  },
 }`;

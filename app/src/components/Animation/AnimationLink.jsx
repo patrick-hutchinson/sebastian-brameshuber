@@ -3,11 +3,30 @@ import { useAnimatedNavigation } from "./hooks/useAnimatedNavigation";
 const AnimationLink = ({ path, link, children, className, onMouseEnter, onMouseLeave }) => {
   const navigate = useAnimatedNavigation();
 
+  const resolveInternalHref = (internalLink) => {
+    if (!internalLink) return null;
+
+    console.log("internal link!");
+
+    const rawSlug = internalLink?.slug?.current ?? internalLink?.slug;
+
+    console.log("internal link!", internalLink);
+    if (!rawSlug) return null;
+
+    console.log("raw slug:", rawSlug);
+
+    const slug = String(rawSlug).replace(/^\/+/, "");
+    if (!slug) return null;
+
+    if (internalLink?._type === "film") return `/films/${slug}`;
+    return `/${slug}`;
+  };
+
   let href;
   if (link) {
     href =
       link.type === "internal"
-        ? `/${link.internalLink.slug.current}`
+        ? resolveInternalHref(link.internalLink)
         : link.type === "external"
           ? link.url
           : link.type === "email"
@@ -17,7 +36,7 @@ const AnimationLink = ({ path, link, children, className, onMouseEnter, onMouseL
     href = path;
   }
 
-  if (!href) return <>{children}</>;
+  if (!href || href === "#") return <>{children}</>;
 
   const isExternal = link?.type === "external";
   const isEmail = link?.type === "email";

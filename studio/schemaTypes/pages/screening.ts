@@ -96,6 +96,24 @@ export const screening = defineType({
                 'Hier kannst du einen Link für einen Showtime eintrag angeben. Wenn du einen Link bei dem Screening angegeben hast, wird dieser hier wird die Kachel ihn überschrieben.',
             }),
           ],
+          preview: {
+            select: {
+              cinema: 'cinema',
+              startDate: 'screeningDate.startDate',
+              startTime: 'screeningDate.startTime',
+            },
+            prepare({cinema, startDate, startTime}) {
+              const title = cinema || 'Unknown location'
+              const subtitle = startDate
+                ? `${startDate}${startTime ? `, ${startTime}` : ''}`
+                : 'No date'
+
+              return {
+                title,
+                subtitle,
+              }
+            },
+          },
         }),
       ],
     }),

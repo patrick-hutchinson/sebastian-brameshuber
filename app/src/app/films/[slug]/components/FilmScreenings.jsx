@@ -4,10 +4,11 @@ import Screening from "@/components/Screenings/Screening";
 const FilmScreenings = ({ film }) => {
   if (!film.screenings) return undefined;
 
-  const sortedScreenings = film.screenings
-    .slice() // copy so we don't mutate
-    .sort((a, b) => new Date(a.showtimes[0]?.screeningDate) - new Date(b.showtimes[0]?.screeningDate))
-    .slice(0, 6); // limit to first 10
+  const sortedScreenings = film.screenings.slice().sort((a, b) => {
+    const aDate = a.showtimes?.[0]?.screeningDate?.startDate ? new Date(a.showtimes[0].screeningDate.startDate) : 0;
+    const bDate = b.showtimes?.[0]?.screeningDate?.startDate ? new Date(b.showtimes[0].screeningDate.startDate) : 0;
+    return bDate - aDate;
+  });
 
   return (
     <ScreeningContainer>
