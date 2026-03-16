@@ -42,7 +42,7 @@ const NewsItem = ({ newsItem }) => {
   const wrapperProps = hasLink ? { link: newsItem.link, ...commonProps } : { ...commonProps };
 
   const NewsFooter = () => {
-    if (!newsItem.author || !newsItem.publication || !newsItem.film.title) return;
+    // if (!newsItem.author || !newsItem.publication || !newsItem.film.title) return;
 
     return (
       <motion.div
@@ -56,9 +56,11 @@ const NewsItem = ({ newsItem }) => {
 
         <FormatDate date={newsItem.date} />
 
-        <span className={styles.source}>
-          {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
-        </span>
+        {newsItem.author && newsItem.publication && newsItem.film.title && (
+          <span className={styles.source}>
+            {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
+          </span>
+        )}
       </motion.div>
     );
   };
