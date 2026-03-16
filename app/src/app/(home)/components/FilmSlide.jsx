@@ -15,6 +15,7 @@ const FilmSlide = ({
   slideHeight,
   slideWidth,
   slideGap,
+  eagerImages,
   scrollToSlide,
   animationPhase,
   slidePosition,
@@ -74,7 +75,7 @@ const FilmSlide = ({
       onMouseEnter={() => handleMouseEnter(film)}
       onMouseLeave={handleMouseLeave}
     >
-      <Media medium={film.coverMedia?.medium} />
+      <Media medium={film.coverMedia?.medium} eager={eagerImages} />
     </motion.div>
   );
 };

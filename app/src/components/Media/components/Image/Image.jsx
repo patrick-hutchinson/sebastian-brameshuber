@@ -2,7 +2,7 @@ import { useImageResolution } from "@/components/Media/hooks/useImageResolution"
 import { markImageLoaded } from "@/utils/imageCache";
 import NextImage from "next/image";
 
-const Image = ({ medium, setIsLoaded }) => {
+const Image = ({ medium, setIsLoaded, eager = false }) => {
   const imageSource = medium.url;
 
   const resolutionWidth = medium.width;
@@ -23,7 +23,8 @@ const Image = ({ medium, setIsLoaded }) => {
         unoptimized
         width={resolutionWidth}
         height={resolutionHeight}
-        loading="lazy"
+        loading={eager ? "eager" : "lazy"}
+        fetchPriority={eager ? "high" : "auto"}
         decoding="sync"
         draggable={false}
         style={{

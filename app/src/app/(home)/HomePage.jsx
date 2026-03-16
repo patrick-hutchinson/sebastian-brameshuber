@@ -1,8 +1,9 @@
 "use client";
 
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useLenisContext } from "@/context/LenisContext";
 import { DeviceContext } from "@/context/DeviceContext";
+import { preloadImage } from "@/utils/imageCache";
 
 import { AnimatePresence, motion, useMotionValueEvent } from "framer-motion";
 
@@ -18,10 +19,11 @@ import styles from "./HomePage.module.css";
 
 const HomePage = ({ films }) => {
   const lenis = useLenisContext();
-  const { isMobile } = useContext(DeviceContext);
+  const { isMobile, isSafari } = useContext(DeviceContext);
 
   const [hoveredFilm, setHoveredFilm] = useState(null);
   const [mobileInViewFilm, setMobileInViewFilm] = useState(null);
+  const [isInitialLoading, setIsInitialLoading] = useState(false);
 
   const { staticViewportHeight } = useStaticViewportHeight();
   const headerHeight = useHeaderHeight();
@@ -54,6 +56,33 @@ const HomePage = ({ films }) => {
   const loopedFilms = [...sortedFilms, ...sortedFilms];
 
   const slidePositions = useMemo(() => loopedFilms.map((_, i) => i * slideStride), [loopedFilms, slideStride]);
+  const homeImageUrls = useMemo(
+    () => [...new Set(sortedFilms.map((film) => film.coverMedia?.medium?.url).filter(Boolean))],
+    [sortedFilms],
+  );
+
+  useEffect(() => {
+    if (!isSafari) return;
+    if (!homeImageUrls.length) return;
+
+    let isCancelled = false;
+    setIsInitialLoading(true);
+
+    const timeout = setTimeout(() => {
+      if (!isCancelled) setIsInitialLoading(false);
+    }, 3500);
+
+    Promise.allSettled(homeImageUrls.map((url) => preloadImage(url))).then(() => {
+      if (isCancelled) return;
+      clearTimeout(timeout);
+      setIsInitialLoading(false);
+    });
+
+    return () => {
+      isCancelled = true;
+      clearTimeout(timeout);
+    };
+  }, [isSafari, homeImageUrls]);
 
   useMotionValueEvent(virtualScroll, "change", (scrollValue) => {
     if (!isMobile || !slidePositions.length || !staticViewportHeight) return;
@@ -104,6 +133,7 @@ const HomePage = ({ films }) => {
                 slideHeight={slideHeight}
                 slideWidth={slideWidth}
                 slideGap={slideGap}
+                eagerImages={isSafari}
                 animationPhase={animationPhase}
                 scrollToSlide={scrollToSlide}
                 handleMouseLeave={handleMouseLeave}
@@ -113,6 +143,20 @@ const HomePage = ({ films }) => {
           })}
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {isInitialLoading && (
+          <motion.div
+            className={styles.loadingOverlay}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }}
+          >
+            <span typo="display">Loading Films...</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence mode="wait">
         {subtitleText && (
