@@ -1,6 +1,7 @@
 import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 import Screening from "../../components/Screenings/Screening";
 import ScreeningContainer from "@/components/Screenings/components/ScreeningConainer";
+import Section from "../../components/Structure/Section";
 
 const ScreeningsPage = ({ screenings }) => {
   console.log(screenings[1].showtimes[0].screeningDate, "screening");
@@ -12,11 +13,13 @@ const ScreeningsPage = ({ screenings }) => {
 
   return (
     <main>
-      <ScreeningContainer>
-        {sortedScreenings.map((screening) => {
-          return <Screening key={screening._id} screening={screening} />;
-        })}
-      </ScreeningContainer>
+      <Section>
+        <ScreeningContainer>
+          {sortedScreenings.map((screening) => {
+            return <Screening key={screening._id} screening={screening} />;
+          })}
+        </ScreeningContainer>
+      </Section>
       <ScrollToTop />
     </main>
   );

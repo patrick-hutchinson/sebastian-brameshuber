@@ -39,6 +39,7 @@ const ScrollToTop = () => {
 
   return (
     <div
+      className="scrollToTop"
       typo="display"
       onClick={() => handleClick()}
       style={{ textAlign: "center", width: "100%", margin: "var(--margin-2) 0" }}

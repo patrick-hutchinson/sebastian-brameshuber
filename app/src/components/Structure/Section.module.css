@@ -3,7 +3,6 @@
   height: fit-content;
 }
 
-/* .section:last-child {
-  padding-bottom: 200px;
+.section:has(+ :global(.scrollToTop)) {
   margin-bottom: 0;
-} */
+}

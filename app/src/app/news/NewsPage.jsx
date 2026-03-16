@@ -2,6 +2,7 @@ import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 import NewsItem from "./components/NewsItem/NewsItem";
 
 import styles from "./NewsPage.module.css";
+import Section from "../../components/Structure/Section";
 
 const NewsPage = ({ news }) => {
   const sortedNews = [...news].sort((a, b) => {
@@ -16,9 +17,11 @@ const NewsPage = ({ news }) => {
 
   return (
     <main>
-      {sortedNews.map((newsItem) => {
-        return <NewsItem key={newsItem._key} newsItem={newsItem} />;
-      })}
+      <Section>
+        {sortedNews.map((newsItem) => {
+          return <NewsItem key={newsItem._key} newsItem={newsItem} />;
+        })}
+      </Section>
       <ScrollToTop />
     </main>
   );

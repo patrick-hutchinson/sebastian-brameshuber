@@ -2,7 +2,6 @@ import { motion, useTransform } from "framer-motion";
 import styles from "../HomePage.module.css";
 
 import Media from "@/components/Media/Media";
-import { useScaleAnimation } from "../hooks/useScaleAnimation";
 
 import { useOpacityAnimation } from "../hooks/useOpacityAnimation";
 import { useStaticViewportHeight } from "../hooks/useStaticViewportHeight";
@@ -43,7 +42,7 @@ const FilmSlide = ({
     mobile: useTransform(progress, [1, 0.5, 0], [150, 0, 150]),
     desktop: useTransform(progress, [1, 0.5, 0], [250, 0, 250]),
   };
-  const scale = useScaleAnimation({ progress, isFocused, isIdle, film, top });
+  const scale = useTransform(progress, [1, 0], [1.2, 0.8]);
   const opacity = useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle, top });
 
   const mobileStyles = {
@@ -69,7 +68,7 @@ const FilmSlide = ({
     <motion.div
       className={styles.filmSlide}
       style={styling}
-      onClick={() => scrollToSlide(index)}
+      onClick={() => scrollToSlide(index, film)}
       onMouseEnter={() => handleMouseEnter(film)}
       onMouseLeave={handleMouseLeave}
     >

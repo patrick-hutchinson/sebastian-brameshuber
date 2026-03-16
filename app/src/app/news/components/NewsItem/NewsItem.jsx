@@ -2,17 +2,19 @@
 
 import { useContext, useState } from "react";
 
+import { motion } from "framer-motion";
+
 import { DeviceContext } from "@/context/DeviceContext";
 
 import Media from "@/components/Media/Media";
 import Text from "@/components/Text/Text";
 
-import styles from "./NewsItem.module.css";
 import ImagePreview from "@/components/ImagePreview/ImagePreview";
 import AnimationLink from "@/components/Animation/AnimationLink";
 import FormatDate from "@/components/FormatDate/FormatDate";
 import SplitMask from "../../../../components/Animation/SplitMask";
-import { motion } from "framer-motion";
+
+import styles from "./NewsItem.module.css";
 
 const NewsItem = ({ newsItem }) => {
   const { isTouch } = useContext(DeviceContext);
@@ -39,7 +41,7 @@ const NewsItem = ({ newsItem }) => {
   const Wrapper = hasLink ? AnimationLink : "div";
   const wrapperProps = hasLink ? { link: newsItem.link, ...commonProps } : { ...commonProps };
 
-  const FinePrint = () => {
+  const NewsFooter = () => {
     if (!newsItem.author || !newsItem.publication || !newsItem.film.title) return;
 
     return (
@@ -52,6 +54,8 @@ const NewsItem = ({ newsItem }) => {
       >
         <div className={styles.category}>{newsItem.newsCategory?.name}</div>
 
+        <FormatDate date={newsItem.date} />
+
         <span className={styles.source}>
           {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
         </span>
@@ -63,12 +67,11 @@ const NewsItem = ({ newsItem }) => {
     <SplitMask onArrive={() => setIsSplitArrived(true)}>
       <Wrapper {...wrapperProps}>
         <div className={styles.newsHeadline} typo="display">
-          <FormatDate date={newsItem.date} />
           <Text text={newsItem.text} className={styles.clamp} />
         </div>
         {isTouch && <Media medium={newsItem.previewMedia.medium} className={styles.previewMedia} />}
 
-        <FinePrint />
+        <NewsFooter />
 
         {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
       </Wrapper>

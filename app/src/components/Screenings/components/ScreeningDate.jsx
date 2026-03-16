@@ -64,7 +64,7 @@ const ScreeningDate = ({ date }) => {
       if (sameMonth) {
         return (
           <>
-            <time dateTime={startDate}>{formatMonthDay(start)}</time> –{" "}
+            <time dateTime={startDate}>{formatMonthDay(start)}</time>–
             <time dateTime={endDate}>
               {getDay(end)}, {getYear(end)}
             </time>
@@ -75,7 +75,7 @@ const ScreeningDate = ({ date }) => {
       if (sameYear) {
         return (
           <>
-            <time dateTime={startDate}>{formatMonthDay(start)}</time> – <time dateTime={endDate}>{formatDate(end)}</time>
+            <time dateTime={startDate}>{formatMonthDay(start)}</time>–<time dateTime={endDate}>{formatDate(end)}</time>
           </>
         );
       }
@@ -83,7 +83,7 @@ const ScreeningDate = ({ date }) => {
 
     return (
       <>
-        <time dateTime={hasStartTime ? `${startDate}T${startTime}` : startDate}>{format(start, hasStartTime)}</time> –{" "}
+        <time dateTime={hasStartTime ? `${startDate}T${startTime}` : startDate}>{format(start, hasStartTime)}</time>–
         <time dateTime={hasEndTime ? `${endDate}T${endTime}` : endDate}>{format(end, hasEndTime)}</time>
       </>
     );
