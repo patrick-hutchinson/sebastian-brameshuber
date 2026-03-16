@@ -14,6 +14,7 @@ const FilmSlide = ({
   virtualScroll,
   slideHeight,
   slideWidth,
+  slideGap,
   scrollToSlide,
   animationPhase,
   slidePosition,
@@ -39,7 +40,7 @@ const FilmSlide = ({
   });
 
   const top = {
-    mobile: useTransform(progress, [1, 0.5, 0], [150, 0, 150]),
+    mobile: useTransform(progress, [1, 0.5, 0], [180, 0, 180]),
     desktop: useTransform(progress, [1, 0.5, 0], [250, 0, 250]),
   };
   const scale = useTransform(progress, [1, 0], [1.2, 0.8]);
@@ -52,6 +53,7 @@ const FilmSlide = ({
     scale,
     x: "-50%",
     top: top.mobile,
+    marginBottom: slideGap,
   };
   const desktopStyles = {
     height: slideHeight,

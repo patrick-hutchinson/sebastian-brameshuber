@@ -2,7 +2,7 @@ import { useState } from "react";
 import { animate } from "framer-motion";
 import { useAnimatedNavigation } from "@/components/Animation/hooks/useAnimatedNavigation";
 
-export function useAnimation({ lenis, slideHeight, virtualScroll, headerHeight, staticViewportHeight }) {
+export function useAnimation({ lenis, slideHeight, slideStride, virtualScroll, headerHeight, staticViewportHeight }) {
   const navigate = useAnimatedNavigation();
 
   // Animation Phase, and all Keyframe Functions
@@ -14,7 +14,7 @@ export function useAnimation({ lenis, slideHeight, virtualScroll, headerHeight, 
   const scrollToSlide = (index, film) => {
     if (animationPhase.phase === "transitioning") return;
 
-    const targetScroll = index * slideHeight - staticViewportHeight / 2 + slideHeight / 2 - headerHeight;
+    const targetScroll = index * slideStride - staticViewportHeight / 2 + slideHeight / 2 - headerHeight;
 
     // lenis?.stop();
     // virtualScroll.stop();

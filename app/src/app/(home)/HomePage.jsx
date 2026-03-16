@@ -28,7 +28,7 @@ const HomePage = ({ films }) => {
 
   const sortedFilms = films.filter((film) => film.showOnHomePage);
 
-  const { slideHeight, slideWidth, loopHeight, scrollContainerHeight } = useGeometry({
+  const { slideHeight, slideWidth, slideGap, slideStride, loopHeight, scrollContainerHeight } = useGeometry({
     filmsLength: sortedFilms.length,
     staticViewportHeight,
   });
@@ -38,6 +38,7 @@ const HomePage = ({ films }) => {
   const { scrollToSlide, animationPhase } = useAnimation({
     lenis,
     slideHeight,
+    slideStride,
     virtualScroll,
     headerHeight: headerHeight.current,
     staticViewportHeight,
@@ -52,7 +53,7 @@ const HomePage = ({ films }) => {
 
   const loopedFilms = [...sortedFilms, ...sortedFilms];
 
-  const slidePositions = useMemo(() => loopedFilms.map((_, i) => i * slideHeight), [loopedFilms, slideHeight]);
+  const slidePositions = useMemo(() => loopedFilms.map((_, i) => i * slideStride), [loopedFilms, slideStride]);
 
   useMotionValueEvent(virtualScroll, "change", (scrollValue) => {
     if (!isMobile || !slidePositions.length || !staticViewportHeight) return;
@@ -102,6 +103,7 @@ const HomePage = ({ films }) => {
                 virtualScroll={virtualScroll}
                 slideHeight={slideHeight}
                 slideWidth={slideWidth}
+                slideGap={slideGap}
                 animationPhase={animationPhase}
                 scrollToSlide={scrollToSlide}
                 handleMouseLeave={handleMouseLeave}

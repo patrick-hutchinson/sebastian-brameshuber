@@ -11,10 +11,12 @@ export function useGeometry({ filmsLength, staticViewportHeight }) {
   const widthFactor = isMobile ? 1 : 0.75;
   const slideWidth = useMemo(() => viewportWidth * widthFactor, [viewportWidth, widthFactor]);
   const slideHeight = useMemo(() => (slideWidth * 9) / 16, [slideWidth]);
+  const slideGap = useMemo(() => (isMobile ? (staticViewportHeight || 0) * 0.2 : 0), [isMobile, staticViewportHeight]);
+  const slideStride = useMemo(() => slideHeight + slideGap, [slideHeight, slideGap]);
 
-  const loopHeight = useMemo(() => slideHeight * filmsLength, [slideHeight, filmsLength, staticViewportHeight]);
+  const loopHeight = useMemo(() => slideStride * filmsLength, [slideStride, filmsLength]);
 
   const scrollContainerHeight = useMemo(() => loopHeight + staticViewportHeight - 19.5, [loopHeight]);
 
-  return { slideHeight, slideWidth, loopHeight, scrollContainerHeight };
+  return { slideHeight, slideWidth, slideGap, slideStride, loopHeight, scrollContainerHeight };
 }

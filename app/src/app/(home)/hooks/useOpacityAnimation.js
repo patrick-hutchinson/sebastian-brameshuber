@@ -1,8 +1,13 @@
 import { useEffect } from "react";
 import { useTransform, useMotionValue, animate } from "framer-motion";
+import { useContext } from "react";
+import { DeviceContext } from "@/context/DeviceContext";
 
 export function useOpacityAnimation({ progress, isTransitioning, isFocused, isIdle, top }) {
-  const scrollOpacity = useTransform(progress, [1, 0.45, 0], [1, 1, 0]);
+  const { isMobile } = useContext(DeviceContext);
+  const scrollOpacity = isMobile
+    ? useTransform(progress, [1, 0.78, 0.5, 0.22, 0], [0, 0.35, 1, 0.35, 0])
+    : useTransform(progress, [1, 0.45, 0], [1, 1, 0]);
   const clickOpacity = useMotionValue(1);
 
   useEffect(() => {
