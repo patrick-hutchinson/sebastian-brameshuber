@@ -14,6 +14,7 @@ import FilmCredits from "./components/FilmCredits";
 import FilmSupportingMedia from "./components/FilmSupportingMedia";
 import FilmReviews from "./components/FilmReviews";
 import FilmFestivals from "./components/FilmFestivals";
+import FilmAwards from "./components/FilmAwards";
 
 import LoadNextFilm from "./components/LoadNextFilm";
 
@@ -42,6 +43,7 @@ const FilmPage = ({ site, films, film }) => {
           </Section>
           <Section className={styles.filmFestivals_Section}>
             <FilmFestivals film={film} />
+            <FilmAwards film={film} />
           </Section>
         </div>
 

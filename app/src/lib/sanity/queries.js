@@ -118,6 +118,10 @@ export const filmsQuery = `*[_type == "film"]{
     festival,
     showtimes,
   },
+  "awards": *[_type == "award" && film._ref == ^._id]{
+    award,
+    year,
+  },
   reviews[]->{
     author,
     publication,

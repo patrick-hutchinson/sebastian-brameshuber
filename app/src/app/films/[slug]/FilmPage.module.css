@@ -32,7 +32,8 @@
   margin-bottom: var(--margin-4);
 }
 .filmCredits .filmCreditTitle,
-.filmFestivals .filmFestivalTitle {
+.filmFestivals .filmFestivalTitle,
+.filmAwards .filmAwardTitle {
   color: var(--accent);
 }
 
@@ -230,7 +231,8 @@ section:has(+ .loadNext) {
   .filmCredits {
     grid-column: 1 / 20;
   }
-  .filmFestivals {
+  .filmFestivals,
+  .filmAwards {
     grid-column: 20 / 25;
   }
 }
