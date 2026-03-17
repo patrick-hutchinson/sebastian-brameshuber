@@ -25,7 +25,7 @@ const FilmCommentItem = ({ comment }) => {
         className={styles.textWrapper}
         style={{
           overflow: "hidden",
-          maxHeight: expanded ? height : 305,
+          maxHeight: expanded ? height : 370,
           transition: "max-height 0.5s ease",
         }}
       >
@@ -36,7 +36,7 @@ const FilmCommentItem = ({ comment }) => {
           <Text text={comment.source} />
           <Text text={comment.author} />
         </div>
-        {height > 305 && (
+        {height > 370 && (
           <button className={styles.readMore} onClick={() => setExpanded((prev) => !prev)}>
             {expanded ? "Read Less" : "Read More"}
           </button>

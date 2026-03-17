@@ -15,6 +15,7 @@ export function useAnimation({ lenis, slideHeight, slideStride, virtualScroll, h
     if (animationPhase.phase === "transitioning") return;
 
     const targetScroll = index * slideStride - staticViewportHeight / 2 + slideHeight / 2 - headerHeight;
+    const targetVirtualScroll = -targetScroll;
 
     // lenis?.stop();
     // virtualScroll.stop();
@@ -22,16 +23,13 @@ export function useAnimation({ lenis, slideHeight, slideStride, virtualScroll, h
     // setPendingIndex(index); // 🔑 fade immediately
     setAnimationPhase({ phase: "transitioning", index });
 
-    animate(virtualScroll, -targetScroll, {
-      type: "spring",
-      stiffness: 120,
-      damping: 30,
-      mass: 1.2,
+    animate(virtualScroll, targetVirtualScroll, {
+      type: "tween",
+      duration: 0.52,
+      ease: [0.22, 1, 0.36, 1],
       onComplete: () => {
         setAnimationPhase({ phase: "focused", index });
-        if (film?.slug?.current) {
-          navigate(`films/${film.slug.current}`);
-        }
+        if (film?.slug?.current) navigate(`films/${film.slug.current}`);
       },
     });
   };

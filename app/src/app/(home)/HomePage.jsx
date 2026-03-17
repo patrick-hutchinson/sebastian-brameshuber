@@ -4,6 +4,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { useLenisContext } from "@/context/LenisContext";
 import { DeviceContext } from "@/context/DeviceContext";
 import { preloadImage } from "@/utils/imageCache";
+import { useRouter } from "next/navigation";
 
 import { AnimatePresence, motion, useMotionValueEvent } from "framer-motion";
 
@@ -20,6 +21,7 @@ import styles from "./HomePage.module.css";
 const HomePage = ({ films }) => {
   const lenis = useLenisContext();
   const { isMobile, isSafari } = useContext(DeviceContext);
+  const router = useRouter();
 
   const [hoveredFilm, setHoveredFilm] = useState(null);
   const [mobileInViewFilm, setMobileInViewFilm] = useState(null);
@@ -115,6 +117,14 @@ const HomePage = ({ films }) => {
   });
 
   const subtitleText = isMobile ? (mobileInViewFilm?.title ?? null) : (hoveredFilm?.title ?? null);
+
+  useEffect(() => {
+    const uniqueFilmPaths = [...new Set(sortedFilms.map((film) => film?.slug?.current).filter(Boolean))].map(
+      (slug) => `/films/${slug}`,
+    );
+
+    uniqueFilmPaths.forEach((path) => router.prefetch(path));
+  }, [router, sortedFilms]);
 
   if (!staticViewportHeight) return;
 
