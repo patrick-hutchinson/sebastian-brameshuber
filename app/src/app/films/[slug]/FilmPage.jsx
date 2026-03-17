@@ -38,14 +38,13 @@ const FilmPage = ({ site, films, film }) => {
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.creditsAndFestivals}`}>
-          {film.credits && (
-            <Section className={styles.filmCredits_Section}>
-              <FilmCredits film={film} />
-            </Section>
-          )}
-          <Section className={styles.filmFestivals_Section}>
-            <FilmFestivals film={film} />
-            <FilmAwards film={film} />
+          <Section>
+            <FilmCredits film={film} />
+
+            <div className={styles.festivalsAndAwards}>
+              <FilmFestivals film={film} />
+              <FilmAwards film={film} />
+            </div>
           </Section>
         </div>
 

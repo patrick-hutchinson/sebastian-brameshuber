@@ -102,10 +102,6 @@
   background: #fff;
 }
 
-.filmCredits_Section {
-  margin-bottom: calc(var(--margin-1) / 2);
-}
-
 section:has(+ a .loadNext),
 section:has(+ .loadNext) {
   /* styles for a section immediately before .loadNext */
@@ -122,6 +118,9 @@ section:has(+ .loadNext) {
 
 .sectionWrapper .filmReview_Section_desktop {
   display: none;
+}
+.festivalsAndAwards > div {
+  margin-bottom: var(--margin-3);
 }
 
 /* Hover Events, Desktop Only */
@@ -217,8 +216,7 @@ section:has(+ .loadNext) {
   .filmCredits {
     grid-column: 1 / 20;
   }
-  .filmFestivals,
-  .filmAwards {
+  .festivalsAndAwards {
     grid-column: 20 / 25;
   }
 }
@@ -243,10 +241,6 @@ section:has(+ .loadNext) {
   .filmCredit {
     flex: 0 0 auto; /* don't shrink or grow, keep natural height */
     width: calc(100% / (24 / 3)); /* 3/24 of container width per column */
-  }
-
-  .filmCredits_Section {
-    margin-bottom: unset;
   }
 }
 
