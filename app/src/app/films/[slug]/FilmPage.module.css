@@ -56,6 +56,11 @@
   grid-template-columns: repeat(12, 1fr);
   padding-top: var(--margin-3);
 }
+
+.filmInterviews .commentInformation {
+  padding-top: 0 !important;
+}
+
 .filmComment .commentSource {
   grid-column: 1 / 9;
 }
@@ -63,7 +68,7 @@
 .filmInterviews .readMore {
   grid-column: 10 / 13;
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 
 .interviewHeading {
@@ -108,7 +113,7 @@ section:has(+ .loadNext) {
   margin-bottom: 0;
 }
 
-.filmInterviews_Section .filmInterview:not(:last-child) > :last-child {
+.filmInterviews_Section .filmInterview:not(:last-child) .readMore {
   margin-bottom: var(--margin-1);
 }
 
@@ -218,6 +223,10 @@ section:has(+ .loadNext) {
   }
   .festivalsAndAwards {
     grid-column: 20 / 25;
+  }
+
+  .filmInterviews .commentInformation {
+    display: contents;
   }
 }
 

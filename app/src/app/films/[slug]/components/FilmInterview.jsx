@@ -37,16 +37,18 @@ const FilmInterviews = ({ film }) => {
             <Interview className={styles.interviewText} text={interview.interviewText} />
           </div>
 
-          {height > 305 && (
-            <button
-              typo="fineprint"
-              style={{ paddingTop: "var(--margin-3)" }}
-              className={styles.readMore}
-              onClick={() => setExpanded((prev) => !prev)}
-            >
-              {expanded ? "Read Less" : "Read More"}
-            </button>
-          )}
+          <div className={styles.commentInformation} typo="fineprint">
+            {height > 915 && (
+              <button
+                typo="fineprint"
+                style={{ paddingTop: "var(--margin-3)" }}
+                className={styles.readMore}
+                onClick={() => setExpanded((prev) => !prev)}
+              >
+                {expanded ? "Read Less" : "Read More"}
+              </button>
+            )}
+          </div>
         </div>
       ))}
     </div>
