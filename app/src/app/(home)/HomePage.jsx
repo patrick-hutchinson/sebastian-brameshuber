@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLenisContext } from "@/context/LenisContext";
 import { DeviceContext } from "@/context/DeviceContext";
 import { preloadImage } from "@/utils/imageCache";
@@ -22,6 +22,7 @@ const HomePage = ({ films }) => {
   const lenis = useLenisContext();
   const { isMobile, isSafari } = useContext(DeviceContext);
   const router = useRouter();
+  const hasRunInitialPreload = useRef(false);
 
   const [hoveredFilm, setHoveredFilm] = useState(null);
   const [mobileInViewFilm, setMobileInViewFilm] = useState(null);
@@ -30,7 +31,7 @@ const HomePage = ({ films }) => {
   const { staticViewportHeight } = useStaticViewportHeight();
   const headerHeight = useHeaderHeight();
 
-  const sortedFilms = films.filter((film) => film.showOnHomePage);
+  const sortedFilms = useMemo(() => films.filter((film) => film.showOnHomePage), [films]);
 
   const { slideHeight, slideWidth, slideGap, slideStride, loopHeight, scrollContainerHeight } = useGeometry({
     filmsLength: sortedFilms.length,
@@ -66,7 +67,9 @@ const HomePage = ({ films }) => {
   useEffect(() => {
     if (!isSafari) return;
     if (!homeImageUrls.length) return;
+    if (hasRunInitialPreload.current) return;
 
+    hasRunInitialPreload.current = true;
     let isCancelled = false;
     setIsInitialLoading(true);
 
