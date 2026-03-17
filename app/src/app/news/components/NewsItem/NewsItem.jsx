@@ -67,7 +67,9 @@ const NewsItem = ({ newsItem, staggerIndex = 0 }) => {
         <div className={styles.newsHeadline} typo="display">
           <Text text={newsItem.text} className={styles.clamp} />
         </div>
-        {isTouch && <Media medium={newsItem.previewMedia.medium} className={styles.previewMedia} />}
+        {isTouch && newsItem.previewMedia?.medium && (
+          <Media medium={newsItem.previewMedia?.medium} className={styles.previewMedia} />
+        )}
 
         {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
       </Wrapper>
