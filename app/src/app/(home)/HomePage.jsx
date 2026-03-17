@@ -3,7 +3,7 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLenisContext } from "@/context/LenisContext";
 import { DeviceContext } from "@/context/DeviceContext";
-import { preloadImage } from "@/utils/imageCache";
+import { isImageLoaded, preloadImage } from "@/utils/imageCache";
 import { useRouter } from "next/navigation";
 
 import { AnimatePresence, motion, useMotionValueEvent } from "framer-motion";
@@ -22,7 +22,6 @@ const HomePage = ({ films }) => {
   const lenis = useLenisContext();
   const { isMobile, isSafari } = useContext(DeviceContext);
   const router = useRouter();
-  const hasRunInitialPreload = useRef(false);
 
   const [hoveredFilm, setHoveredFilm] = useState(null);
   const [mobileInViewFilm, setMobileInViewFilm] = useState(null);
@@ -65,11 +64,21 @@ const HomePage = ({ films }) => {
   );
 
   useEffect(() => {
-    if (!isSafari) return;
-    if (!homeImageUrls.length) return;
-    if (hasRunInitialPreload.current) return;
+    if (!isSafari) {
+      setIsInitialLoading(false);
+      return;
+    }
+    if (!homeImageUrls.length) {
+      setIsInitialLoading(false);
+      return;
+    }
 
-    hasRunInitialPreload.current = true;
+    const urlsToPreload = homeImageUrls.filter((url) => !isImageLoaded(url));
+    if (!urlsToPreload.length) {
+      setIsInitialLoading(false);
+      return;
+    }
+
     let isCancelled = false;
     setIsInitialLoading(true);
 
@@ -77,7 +86,7 @@ const HomePage = ({ films }) => {
       if (!isCancelled) setIsInitialLoading(false);
     }, 3500);
 
-    Promise.allSettled(homeImageUrls.map((url) => preloadImage(url))).then(() => {
+    Promise.allSettled(urlsToPreload.map((url) => preloadImage(url))).then(() => {
       if (isCancelled) return;
       clearTimeout(timeout);
       setIsInitialLoading(false);

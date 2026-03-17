@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useViewport } from "@/context/ViewportContext";
 import { useContext } from "react";
 import { DeviceContext } from "@/context/DeviceContext";
+import { useLenisContext } from "@/context/LenisContext";
 
 import styles from "./CoverMedia.module.css";
 
@@ -13,6 +14,7 @@ const CoverMedia = ({ medium }) => {
 
   const { viewportHeight, viewportWidth } = useViewport();
   const { isMobile } = useContext(DeviceContext);
+  const lenis = useLenisContext();
 
   const aspectRatio = medium.width / medium.height;
 
@@ -28,6 +30,9 @@ const CoverMedia = ({ medium }) => {
   });
 
   const x = useTransform(scrollProgress, (v) => -v);
+  const pageScroll = useMotionValue(0);
+  const fadeOutDistance = Math.max(1, viewportHeight * 0.5);
+  const opacity = useTransform(pageScroll, [0, fadeOutDistance], [1, 0]);
 
   // calculate bounds
   useEffect(() => {
@@ -50,8 +55,25 @@ const CoverMedia = ({ medium }) => {
     rawScroll.set(center); // initial set only
   }, [viewportHeight, viewportWidth, aspectRatio]);
 
+  useEffect(() => {
+    if (lenis) {
+      const onScroll = ({ scroll }) => {
+        pageScroll.set(scroll);
+      };
+
+      pageScroll.set(lenis.scroll ?? 0);
+      lenis.on("scroll", onScroll);
+      return () => lenis.off("scroll", onScroll);
+    }
+
+    const onWindowScroll = () => pageScroll.set(window.scrollY || 0);
+    onWindowScroll();
+    window.addEventListener("scroll", onWindowScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onWindowScroll);
+  }, [lenis, pageScroll]);
+
   return (
-    <div className={styles.coverMedia}>
+    <motion.div className={styles.coverMedia} style={{ opacity }}>
       <motion.div
         className={styles.coverMedia_inner}
         style={{
@@ -82,7 +104,7 @@ const CoverMedia = ({ medium }) => {
           className={styles.coverMedia_slider}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 
