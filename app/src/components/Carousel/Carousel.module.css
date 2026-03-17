@@ -4,6 +4,8 @@
   user-select: none;
   cursor: grab;
   overflow: hidden;
+  touch-action: pan-x pinch-zoom;
+  overscroll-behavior: contain;
 }
 
 .carousel_outer {
@@ -17,7 +19,7 @@
 
 .carousel_inner {
   display: flex;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pinch-zoom;
 }
 .slide {
   height: calc(100vw - (4 * var(--margin-page)));

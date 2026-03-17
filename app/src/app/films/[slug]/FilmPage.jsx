@@ -38,9 +38,11 @@ const FilmPage = ({ site, films, film }) => {
         </Section>
 
         <div className={`${styles.sectionWrapper} ${styles.creditsAndFestivals}`}>
-          <Section className={styles.filmCredits_Section}>
-            <FilmCredits film={film} />
-          </Section>
+          {film.credits && (
+            <Section className={styles.filmCredits_Section}>
+              <FilmCredits film={film} />
+            </Section>
+          )}
           <Section className={styles.filmFestivals_Section}>
             <FilmFestivals film={film} />
             <FilmAwards film={film} />
@@ -48,34 +50,48 @@ const FilmPage = ({ site, films, film }) => {
         </div>
 
         <div className={`${styles.sectionWrapper} ${styles.commentsAndMedia}`}>
-          <Section className={styles.filmComments_Section}>
-            <FilmComments film={film} />
-          </Section>
-          <Section className={`${styles.filmReview_Section} ${styles.filmReview_Section_mobile}`}>
-            <FilmReviews film={film} />
-          </Section>
-          <Section className={styles.filmSupportingMedia_Section}>
-            <FilmSupportingMedia film={film} />
-          </Section>
+          {film.comments && (
+            <Section className={styles.filmComments_Section}>
+              <FilmComments film={film} />
+            </Section>
+          )}
+          {film.reviews && (
+            <Section className={`${styles.filmReview_Section} ${styles.filmReview_Section_mobile}`}>
+              <FilmReviews film={film} />
+            </Section>
+          )}
+          {film.supportingMedia && (
+            <Section className={styles.filmSupportingMedia_Section}>
+              <FilmSupportingMedia film={film} />
+            </Section>
+          )}
         </div>
 
-        <Section>
-          <FilmGallery film={film} />
-        </Section>
+        {film.gallery && (
+          <Section>
+            <FilmGallery film={film} />
+          </Section>
+        )}
 
         <div className={`${styles.sectionWrapper} ${styles.interviewAndReviews}`}>
-          <Section className={styles.filmInterviews_Section}>
-            <FilmInterviews film={film} />
-          </Section>
+          {film.interviews && film.interviews.length > 0 && (
+            <Section className={styles.filmInterviews_Section}>
+              <FilmInterviews film={film} />
+            </Section>
+          )}
 
-          <Section className={`${styles.filmReview_Section} ${styles.filmReview_Section_desktop}`}>
-            <FilmReviews film={film} />
-          </Section>
+          {film.reviews && (
+            <Section className={`${styles.filmReview_Section} ${styles.filmReview_Section_desktop}`}>
+              <FilmReviews film={film} />
+            </Section>
+          )}
         </div>
 
-        <Section>
-          <FilmScreenings film={film} />
-        </Section>
+        {film.screenings && (
+          <Section>
+            <FilmScreenings film={film} />
+          </Section>
+        )}
 
         <LoadNextFilm films={films} film={film} />
 
