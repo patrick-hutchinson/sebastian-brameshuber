@@ -1,0 +1,15 @@
+.newsContainer {
+}
+
+/* iPads and other Tablets */
+@media screen and (min-width: 769px) {
+  .newsContainer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: var(--gap-vertical);
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+}

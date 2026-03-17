@@ -18,9 +18,11 @@ const NewsPage = ({ news }) => {
   return (
     <main>
       <Section>
-        {sortedNews.map((newsItem, index) => {
-          return <NewsItem key={newsItem._id ?? newsItem._key ?? index} newsItem={newsItem} staggerIndex={index} />;
-        })}
+        <div className={styles.newsContainer}>
+          {sortedNews.map((newsItem, index) => {
+            return <NewsItem key={newsItem._id ?? newsItem._key ?? index} newsItem={newsItem} staggerIndex={index} />;
+          })}
+        </div>
       </Section>
       <ScrollToTop />
     </main>

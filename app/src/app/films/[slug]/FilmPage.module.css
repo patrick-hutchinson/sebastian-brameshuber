@@ -29,7 +29,7 @@
   column-gap: var(--margin-page);
 }
 .filmCredit {
-  margin-bottom: var(--margin-4);
+  margin-bottom: var(--margin-3);
 }
 .filmCredits .filmCreditTitle,
 .filmFestivals .filmFestivalTitle,
@@ -49,7 +49,7 @@
   display: grid;
 
   grid-template-columns: repeat(12, 1fr);
-  padding-top: var(--margin-4);
+  padding-top: var(--margin-3);
 }
 .filmComment .commentSource {
   grid-column: 1 / 9;
@@ -76,7 +76,7 @@
 .filmReview {
   break-inside: avoid;
   flex-direction: column;
-  margin-bottom: var(--margin-4);
+  margin-bottom: var(--margin-3);
 }
 .filmReview:last-child {
   margin-bottom: 0;

@@ -10,8 +10,8 @@
 
 .coverMedia_slider {
   position: fixed;
-  bottom: var(--margin-4);
-  left: var(--margin-4);
+  bottom: var(--margin-3);
+  left: var(--margin-3);
   width: 50%;
   z-index: 10;
   -webkit-appearance: none;

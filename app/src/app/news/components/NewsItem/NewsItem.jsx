@@ -45,13 +45,7 @@ const NewsItem = ({ newsItem, staggerIndex = 0 }) => {
     // if (!newsItem.author || !newsItem.publication || !newsItem.film.title) return;
 
     return (
-      <motion.div
-        typo="fineprint"
-        className={styles.newsFooter}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isSplitArrived ? 1 : 0 }}
-        transition={{ duration: 0.25 }}
-      >
+      <motion.div typo="fineprint" className={styles.newsFooter}>
         <div className={styles.category}>{newsItem.newsCategory?.name}</div>
 
         <FormatDate date={newsItem.date} />
@@ -68,12 +62,12 @@ const NewsItem = ({ newsItem, staggerIndex = 0 }) => {
   return (
     <SplitMask onArrive={() => setIsSplitArrived(true)} staggerIndex={staggerIndex}>
       <Wrapper {...wrapperProps}>
+        <NewsFooter />
+
         <div className={styles.newsHeadline} typo="display">
           <Text text={newsItem.text} className={styles.clamp} />
         </div>
         {isTouch && <Media medium={newsItem.previewMedia.medium} className={styles.previewMedia} />}
-
-        <NewsFooter />
 
         {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
       </Wrapper>

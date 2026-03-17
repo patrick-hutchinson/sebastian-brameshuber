@@ -40,7 +40,7 @@ const FilmInterviews = ({ film }) => {
           {height > 305 && (
             <button
               typo="fineprint"
-              style={{ paddingTop: "var(--margin-4)" }}
+              style={{ paddingTop: "var(--margin-3)" }}
               className={styles.readMore}
               onClick={() => setExpanded((prev) => !prev)}
             >
