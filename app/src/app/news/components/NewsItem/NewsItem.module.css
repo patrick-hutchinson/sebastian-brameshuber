@@ -1,8 +1,8 @@
 .newsItem {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  border: 1px solid #454545;
-  margin-bottom: var(--margin-4);
+  background: #8d8a8a;
+  margin-bottom: var(--gap-horizontal);
   padding: 1px;
 }
 
@@ -20,7 +20,7 @@ a.newsItem:hover .newsHeadline {
 
   grid-column: 1 / 13;
 
-  color: #fff !important;
+  color: #000 !important;
 }
 
 .newsFooter .category {
@@ -39,7 +39,7 @@ a.newsItem:hover .newsHeadline {
 }
 .newsHeadline {
   grid-column: 1 / 13;
-  color: var(--accent);
+  color: #fff;
 }
 
 .clamp {
@@ -80,7 +80,7 @@ a.newsItem:hover .newsHeadline {
   }
   .newsHeadline {
     grid-column: 1 / 13;
-    color: var(--accent);
+    color: #fff;
   }
 }
 
