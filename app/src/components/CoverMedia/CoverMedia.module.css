@@ -6,6 +6,7 @@
   position: fixed;
   top: var(--header-height);
   z-index: 1;
+  touch-action: pan-x pinch-zoom;
 }
 
 .coverMedia_slider {

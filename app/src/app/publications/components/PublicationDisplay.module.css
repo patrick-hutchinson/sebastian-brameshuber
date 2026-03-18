@@ -9,6 +9,10 @@
   padding: var(--margin-page);
 }
 
+.publicationDisplayExpandable {
+  cursor: pointer;
+}
+
 .publicationMediaContainer {
   background: var(--background);
   display: flex;
@@ -16,6 +20,10 @@
   justify-content: center;
   height: 100%;
   overflow: hidden;
+}
+
+.publicationExcerpts {
+  padding-top: var(--margin-2);
 }
 
 /* Hover Events, Desktop Only */

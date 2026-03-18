@@ -221,6 +221,33 @@ export const publicationsQuery = `*[_type == "publication"]{
   _type,
   title,
   text,
+  excerpts[]{
+    title,
+    text[]{
+      _type,
+      _key,
+
+      speaker,
+      initials,
+      text[]{
+        ...,
+        markDefs[]{
+          ...,
+          _type == "link" => {
+            type,
+            url,
+            internalLink->{
+              _type,
+              slug
+            }
+          }
+        }
+      },
+
+      style,
+      children[]
+    }
+  },
   media[0] ${mediaAssetFragment},
   link{
     type,

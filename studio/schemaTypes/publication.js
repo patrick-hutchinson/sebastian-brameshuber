@@ -9,5 +9,19 @@ export const publication = defineType({
     defineField({name: 'text', title: 'Text', type: 'portableText'}),
     defineField({name: 'media', title: 'Image/Video', type: 'mediaAsset'}),
     defineField({name: 'link', title: 'Link', type: 'link'}),
+    defineField({
+      name: 'excerpts',
+      title: 'Auszug/Interview/Freitext',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'title', type: 'string'},
+            {name: 'text', type: 'interviewText'},
+          ],
+        },
+      ],
+    }),
   ],
 })

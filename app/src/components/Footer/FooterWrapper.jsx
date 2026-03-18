@@ -6,7 +6,7 @@ import Footer from "@/components/Footer/Footer";
 const FooterWrapper = ({ site }) => {
   const pathname = usePathname();
 
-  if (pathname === "/") return null;
+  if (pathname === "/" || pathname.includes("films")) return null;
   return <Footer site={site} />;
 };
 
