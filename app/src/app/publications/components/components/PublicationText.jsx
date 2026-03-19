@@ -13,7 +13,7 @@ const PublicationText = ({ publication, expanded = false }) => {
 
   return (
     <div className={styles.publicationText}>
-      <Text text={publication.text} />
+      <Text className={styles.introduction} text={publication.text} />
 
       {excerpts && excerpts.length > 0 && (
         <motion.div
@@ -30,8 +30,8 @@ const PublicationText = ({ publication, expanded = false }) => {
             transition={{ duration: 0.25, ease: "easeOut", delay: expanded ? 0.5 : 0 }}
           >
             {excerpts.map((excerpt, index) => (
-              <div key={excerpt?._id ?? excerpt?._key ?? index}>
-                <div className={styles.interviewTitle}>{excerpt.title}</div>
+              <div className={styles.excerptWrapper} key={excerpt?._id ?? excerpt?._key ?? index}>
+                <div className={styles.excerptTitle}>{excerpt.title}</div>
                 <Interview text={excerpt.text} />
               </div>
             ))}

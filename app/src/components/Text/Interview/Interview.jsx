@@ -4,10 +4,14 @@ import styles from "./Interview.module.css";
 const Interview = ({ text, className }) => {
   if (!text || text.length === 0) return;
   return (
-    <div className={`${styles.interview} ${className}`} typo="longcopy">
+    <div className={`interview ${styles.interview} ${className}`} typo="longcopy">
       {text.map((block) => {
         if (block._type === "block") {
-          return <h2 key={block._key}>{block.children.map((c) => c.text).join("")}</h2>;
+          return (
+            <p className={styles.runningText} key={block._key}>
+              {block.children.map((c) => c.text).join("")}
+            </p>
+          );
         }
 
         if (block._type === "speech") {

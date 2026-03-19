@@ -22,8 +22,17 @@
   overflow: hidden;
 }
 
-.publicationExcerpts {
-  padding-top: var(--margin-2);
+.introduction::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: black;
+  width: calc(100vw - (4 * var(--margin-page)));
+  margin: var(--margin-4) 0;
+}
+
+.excerptWrapper:not(:last-child) {
+  margin-bottom: var(--margin-2);
 }
 
 /* Hover Events, Desktop Only */
@@ -42,6 +51,10 @@
   .publicationDisplay {
     grid-template-rows: auto 500px auto;
   }
+
+  /* .excerptWrapper:not(:last-child) :global(.interview)::after {
+    width: calc(50vw - (3 * var(--margin-page)));
+  } */
 }
 
 /* Desktop */
