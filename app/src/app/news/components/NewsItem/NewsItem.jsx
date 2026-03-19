@@ -16,7 +16,7 @@ import FormatDate from "@/components/FormatDate/FormatDate";
 import styles from "./NewsItem.module.css";
 
 const NewsItem = ({ newsItem, staggerIndex = 0 }) => {
-  const { isTouch } = useContext(DeviceContext);
+  const { isTouch, isMobile } = useContext(DeviceContext);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const staggerDelay = Math.min(staggerIndex * 0.06, 0.6);
@@ -47,13 +47,23 @@ const NewsItem = ({ newsItem, staggerIndex = 0 }) => {
 
     return (
       <motion.div typo="fineprint" className={styles.newsFooter}>
-        <div className={styles.category}>{newsItem.newsCategory?.name}</div>
+        {!isMobile && (
+          <div className={styles.category}>
+            {newsItem.newsCategory?.name}, <FormatDate date={newsItem.date} />
+          </div>
+        )}
 
-        <FormatDate date={newsItem.date} />
+        {isMobile && (
+          <>
+            <div className={styles.category}>{newsItem.newsCategory?.name}</div>
+            <FormatDate date={newsItem.date} />
+          </>
+        )}
 
         {newsItem.author && newsItem.publication && newsItem.film.title && (
           <span className={styles.source}>
-            {newsItem.author}, {newsItem.publication} on {newsItem.film.title}
+            {newsItem.author}, {newsItem.publication} on{" "}
+            <span style={{ textTransform: "uppercase" }}>{newsItem.film.title}</span>
           </span>
         )}
       </motion.div>
@@ -77,9 +87,7 @@ const NewsItem = ({ newsItem, staggerIndex = 0 }) => {
             <Media medium={newsItem.previewMedia?.medium} className={styles.previewMedia} />
           )}
 
-          {newsItem.previewMedia?.medium && (
-            <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />
-          )}
+          {newsItem.previewMedia?.medium && <ImagePreview medium={newsItem.previewMedia.medium} isHovering={isHovering} />}
         </Wrapper>
       </motion.div>
     </motion.div>

@@ -29,6 +29,10 @@ a.newsItem:hover .newsHeadline {
   text-transform: capitalize;
 }
 
+.newsFooter .categoryContainer {
+  display: contents;
+}
+
 .newsFooter time {
   grid-row: 1;
   grid-column: 7 / 13;
@@ -70,10 +74,12 @@ a.newsItem:hover .newsHeadline {
 
 /* iPads and other Tablets */
 @media screen and (min-width: 769px) {
-  .newsFooter time {
+  .newsFooter .category {
     grid-row: 1;
-    grid-column: 3 / 6;
+    grid-column: 1 / 5;
+    text-transform: capitalize;
   }
+
   .newsFooter .source {
     grid-row: 1;
     grid-column: 5 / 13;
