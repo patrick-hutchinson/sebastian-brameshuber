@@ -22,7 +22,7 @@
   overflow: hidden;
 }
 
-.introduction::after {
+.publicationExcerptsWrapper::before {
   content: "";
   display: block;
   height: 1px;
@@ -52,9 +52,9 @@
     grid-template-rows: auto 500px auto;
   }
 
-  /* .excerptWrapper:not(:last-child) :global(.interview)::after {
+  .publicationExcerptsWrapper::before {
     width: calc(50vw - (3 * var(--margin-page)));
-  } */
+  }
 }
 
 /* Desktop */
