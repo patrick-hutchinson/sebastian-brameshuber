@@ -74,6 +74,10 @@ a.newsItem:hover .newsHeadline {
 
 /* iPads and other Tablets */
 @media screen and (min-width: 769px) {
+  .newsFooter {
+    column-gap: 2px;
+  }
+
   .newsFooter .category {
     grid-row: 1;
     grid-column: 1 / 5;
