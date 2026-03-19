@@ -6,6 +6,12 @@ export const publication = defineType({
   type: 'document',
   fields: [
     defineField({name: 'title', title: 'Title', type: 'string'}),
+    defineField({
+      name: 'releaseDate',
+      title: 'Erscheinungsdatum',
+      type: 'date',
+      options: {dateFormat: 'DD.MM.YYYY'},
+    }),
     defineField({name: 'text', title: 'Text', type: 'portableText'}),
     defineField({name: 'media', title: 'Image/Video', type: 'mediaAsset'}),
     defineField({name: 'link', title: 'Link', type: 'link'}),

@@ -221,6 +221,7 @@ export const publicationsQuery = `*[_type == "publication"]{
   _type,
   title,
   text,
+  releaseDate,
   excerpts[]{
     title,
     text[]{
