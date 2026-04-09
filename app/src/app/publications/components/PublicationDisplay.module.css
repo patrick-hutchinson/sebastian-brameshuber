@@ -35,6 +35,10 @@
   margin-bottom: var(--margin-2);
 }
 
+.excerptTitle {
+  color: var(--accent);
+}
+
 /* Hover Events, Desktop Only */
 @media (hover: hover) and (pointer: fine) {
 }

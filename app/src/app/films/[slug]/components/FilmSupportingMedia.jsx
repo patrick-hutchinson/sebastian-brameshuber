@@ -19,7 +19,7 @@ const FilmSupportingMedia = ({ film }) => {
       {film.platform && film.purchaseLink && (
         <div typo="fineprint" style={{ marginTop: "var(--margin-page)" }}>
           <a href={film.purchaseLink} target="_blank">
-            Buy on {film.platform}
+            Watch on {film.platform}
           </a>
         </div>
       )}

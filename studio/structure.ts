@@ -1,6 +1,7 @@
 import type {StructureResolver} from 'sanity/structure'
 import {MasterDetailIcon} from '@sanity/icons'
 import {DashboardIcon} from '@sanity/icons'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 // Define singleton document IDs here
 const singletons = ['site', 'about']
@@ -15,6 +16,7 @@ const hiddenTypes = [
   'newsCategory',
   'review',
   'page',
+  'film',
 ]
 
 export const structure: StructureResolver = (S, context) =>
@@ -40,6 +42,12 @@ export const structure: StructureResolver = (S, context) =>
                 .child(S.document().schemaType('about').documentId('about')),
             ]),
         ),
+      orderableDocumentListDeskItem({
+        type: 'film',
+        title: 'Films',
+        S,
+        context,
+      }),
 
       // Everything else (exclude hidden types and the ones we added above)
       ...S.documentTypeListItems().filter(

@@ -76,7 +76,7 @@ export const screeningsQuery = `*[_type == "screening"]{
   },
 }`;
 
-export const filmsQuery = `*[_type == "film"]{
+export const filmsQuery = `*[_type == "film"]|order(orderRank asc, _createdAt asc){
   _id,
   _type,
   title,
@@ -108,6 +108,7 @@ export const filmsQuery = `*[_type == "film"]{
     subtitle,
     interviewer,
     interviewee,
+    source,
     interviewText[]{
       _type,
       _key,
@@ -164,10 +165,7 @@ export const filmsQuery = `*[_type == "film"]{
       }
     },
   },
-  "awards": *[_type == "award" && film._ref == ^._id]{
-    award,
-    year,
-  },
+  awards,
   reviews[]->{
     author,
     publication,

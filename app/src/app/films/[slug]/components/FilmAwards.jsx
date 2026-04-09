@@ -8,8 +8,9 @@ const FilmAwards = ({ film }) => {
   return (
     <div className={styles.filmAwards} typo="fineprint">
       <div className={styles.filmAwardTitle}>Awards</div>
-      {awards?.map((award, index) => (
-        <div key={index}>{award.award}</div>
+
+      {awards.map((award, index) => (
+        <div key={`${index}`}>{award}</div>
       ))}
     </div>
   );

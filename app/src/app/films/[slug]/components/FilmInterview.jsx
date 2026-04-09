@@ -1,6 +1,7 @@
 import { useLayoutEffect, useState, useRef } from "react";
 
 import Interview from "@/components/Text/Interview/Interview";
+import Text from "@/components/Text/Text";
 
 import styles from "../FilmPage.module.css";
 
@@ -33,18 +34,17 @@ const FilmInterviewItem = ({ interview }) => {
         <Interview className={styles.interviewText} text={interview.interviewText} />
       </div>
 
-      {height > 915 && (
-        <div className={styles.commentInformation} typo="fineprint">
-          <button
-            typo="fineprint"
-            style={{ paddingTop: "var(--margin-3)" }}
-            className={styles.readMore}
-            onClick={() => setExpanded((prev) => !prev)}
-          >
+      <div className={styles.interviewInformation} typo="fineprint">
+        <div className={styles.interviewSource}>
+          <Text text={interview.source} />
+        </div>
+
+        {height > 915 && (
+          <button typo="fineprint" className={styles.readMore} onClick={() => setExpanded((prev) => !prev)}>
             {expanded ? "Read Less" : "Read More"}
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

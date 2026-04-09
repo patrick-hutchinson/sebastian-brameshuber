@@ -9,6 +9,7 @@ export const interview = defineType({
     defineField({name: 'subtitle', title: 'Subtitle', type: 'string'}),
     defineField({name: 'interviewer', title: 'Interviewer', type: 'string'}),
     defineField({name: 'interviewee', title: 'Der Geinterviewte', type: 'string'}),
+    defineField({name: 'source', title: 'Source', type: 'portableText'}),
     defineField({name: 'interviewText', title: 'Interview Text', type: 'interviewText'}),
   ],
 })

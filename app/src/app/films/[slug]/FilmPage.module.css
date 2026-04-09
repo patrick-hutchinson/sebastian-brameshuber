@@ -50,18 +50,24 @@
   color: var(--accent);
 }
 
-.commentInformation {
+.interviewInformation {
+  grid-column: 1 / 12;
+}
+.commentInformation,
+.interviewInformation {
   display: grid;
 
   grid-template-columns: repeat(12, 1fr);
   padding-top: var(--margin-3);
 }
 
-.filmInterviews .commentInformation {
+.commentInformation,
+.interviewInformation {
   padding-top: 0 !important;
 }
 
-.filmComment .commentSource {
+.filmComment .commentSource,
+.filmInterview .interviewSource {
   grid-column: 1 / 9;
 }
 .filmComment .readMore,

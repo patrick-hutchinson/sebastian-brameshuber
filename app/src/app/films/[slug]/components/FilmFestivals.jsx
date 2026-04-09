@@ -5,7 +5,7 @@ const FilmFestivals = ({ film }) => {
 
   return (
     <div className={styles.filmFestivals} typo="fineprint">
-      <div className={styles.filmFestivalTitle}>Festivals</div>
+      <div className={styles.filmFestivalTitle}>Festivals (selection)</div>
       {film.festivals?.map((festival, index) => (
         <div key={index}>{festival}</div>
       ))}

@@ -1,10 +1,12 @@
 import {defineField, defineType} from 'sanity'
+import {orderRankField, orderRankOrdering} from '@sanity/orderable-document-list'
 
 export const film = defineType({
   name: 'film',
   title: 'Film',
 
   type: 'document',
+  orderings: [orderRankOrdering],
   fields: [
     defineField({
       name: 'title',
@@ -24,7 +26,7 @@ export const film = defineType({
     defineField({
       name: 'coverMedia',
       title: 'Cover Media',
-      type: 'mediaAsset', // ⚠️ needs to be defined!
+      type: 'mediaAsset',
     }),
     defineField({
       name: 'credits',
@@ -52,7 +54,11 @@ export const film = defineType({
     }),
     defineField({
       name: 'festivals',
-      title: 'Festivals',
+      type: 'array',
+      of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'awards',
       type: 'array',
       of: [{type: 'string'}],
     }),
@@ -116,6 +122,10 @@ export const film = defineType({
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
+    }),
+    orderRankField({
+      type: 'film',
+      newItemPosition: 'after',
     }),
   ],
   preview: {
