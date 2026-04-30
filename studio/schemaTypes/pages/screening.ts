@@ -4,6 +4,18 @@ export const screening = defineType({
   name: 'screening',
   title: 'Screening',
   type: 'document',
+  orderings: [
+    {
+      title: 'Erste Showtime (frueh -> spaet)',
+      name: 'firstShowtimeStartAsc',
+      by: [{field: 'firstShowtimeStart', direction: 'asc'}],
+    },
+    {
+      title: 'Erste Showtime (spaet -> frueh)',
+      name: 'firstShowtimeStartDesc',
+      by: [{field: 'firstShowtimeStart', direction: 'desc'}],
+    },
+  ],
   fields: [
     defineField({
       name: 'film',
@@ -30,6 +42,15 @@ export const screening = defineType({
       title: 'Anmerkung',
       type: 'string',
       description: 'Wie z.B hosted by...',
+    }),
+    defineField({
+      name: 'firstShowtimeStart',
+      title: 'Erste Showtime (Sortierung)',
+      type: 'datetime',
+      description:
+        'Wird automatisch beim Publizieren aus der ersten Showtime (Startdatum/-zeit) gesetzt.',
+      readOnly: true,
+      hidden: true,
     }),
 
     // Array of showtimes

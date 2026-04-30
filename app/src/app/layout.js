@@ -14,12 +14,24 @@ import { getSite } from "@/lib/sanity/fetch";
 import ScrollRestorationController from "@/controllers/ScrollRestorationController";
 import { ViewportProvider } from "../context/ViewportContext";
 
+const portableTextToMetaDescription = (blocks) => {
+  if (!Array.isArray(blocks)) return "";
+
+  return blocks
+    .filter((block) => block?._type === "block" && Array.isArray(block.children))
+    .map((block) => block.children.map((child) => child?.text || "").join(""))
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
 export async function generateMetadata() {
   const site = await getSite();
+  const metaDescription = portableTextToMetaDescription(site?.description);
 
   return {
     title: site.title,
-    description: site.google_description,
+    description: metaDescription,
     icons: {
       icon: [
         { url: "/icons/favicon/favicon.ico" },
@@ -33,7 +45,7 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: site.title,
-      description: site.google_description,
+      description: metaDescription,
       images: [
         {
           url: "/icons/share.png", // <- your share image path
@@ -47,7 +59,7 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: site.title,
-      description: site.google_description,
+      description: metaDescription,
       images: ["/icons/share.png"],
     },
   };

@@ -4,6 +4,7 @@ import {visionTool} from '@sanity/vision'
 
 import {structure} from './structure'
 import {schema} from './schemaTypes'
+import {createScreeningPublishAction} from './documentActions/screeningPublishAction'
 
 import {muxInput} from 'sanity-plugin-mux-input'
 
@@ -15,6 +16,18 @@ export default defineConfig({
   dataset: 'production',
 
   schema,
+  document: {
+    actions: (previousActions, context) => {
+      if (context.schemaType !== 'screening') return previousActions
+
+      return previousActions.map((action) => {
+        if (action.action === 'publish') {
+          return createScreeningPublishAction(action)
+        }
+        return action
+      })
+    },
+  },
 
   plugins: [structureTool({structure}), visionTool(), muxInput()],
 })

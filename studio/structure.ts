@@ -1,6 +1,7 @@
 import type {StructureResolver} from 'sanity/structure'
 import {MasterDetailIcon} from '@sanity/icons'
 import {DashboardIcon} from '@sanity/icons'
+import {CalendarIcon} from '@sanity/icons'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 // Define singleton document IDs here
@@ -17,6 +18,7 @@ const hiddenTypes = [
   'review',
   'page',
   'film',
+  'screening',
 ]
 
 export const structure: StructureResolver = (S, context) =>
@@ -48,6 +50,14 @@ export const structure: StructureResolver = (S, context) =>
         S,
         context,
       }),
+      S.listItem()
+        .title('Screenings')
+        .icon(CalendarIcon)
+        .child(
+          S.documentTypeList('screening')
+            .title('Screenings')
+            .defaultOrdering([{field: 'firstShowtimeStart', direction: 'asc'}]),
+        ),
 
       // Everything else (exclude hidden types and the ones we added above)
       ...S.documentTypeListItems().filter(
