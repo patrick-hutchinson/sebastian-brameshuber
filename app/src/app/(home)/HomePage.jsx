@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useLenisContext } from "@/context/LenisContext";
 import { DeviceContext } from "@/context/DeviceContext";
 import { isImageLoaded, preloadImage } from "@/utils/imageCache";
@@ -37,7 +37,9 @@ const HomePage = ({ films }) => {
     staticViewportHeight,
   });
 
-  const virtualScroll = useVirtualScroll({ lenis, loopHeight });
+  // Wrapped range is [-loopHeight, 0], so +200 offset maps to (-loopHeight + 200) at scroll=0.
+  const mobileInitialOffset = useMemo(() => (isMobile ? 200 : 0), [isMobile]);
+  const virtualScroll = useVirtualScroll({ lenis, loopHeight, initialOffset: mobileInitialOffset });
 
   const { scrollToSlide, animationPhase } = useAnimation({
     lenis,

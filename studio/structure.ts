@@ -3,6 +3,7 @@ import {MasterDetailIcon} from '@sanity/icons'
 import {DashboardIcon} from '@sanity/icons'
 import {CalendarIcon} from '@sanity/icons'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
+import {screeningDateAscending} from './schemaTypes/pages/screening'
 
 // Define singleton document IDs here
 const singletons = ['site', 'about']
@@ -56,7 +57,7 @@ export const structure: StructureResolver = (S, context) =>
         .child(
           S.documentTypeList('screening')
             .title('Screenings')
-            .defaultOrdering([{field: 'firstShowtimeStart', direction: 'asc'}]),
+            .defaultOrdering(screeningDateAscending),
         ),
 
       // Everything else (exclude hidden types and the ones we added above)

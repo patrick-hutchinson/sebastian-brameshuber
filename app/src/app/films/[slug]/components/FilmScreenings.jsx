@@ -1,27 +1,20 @@
 import ScreeningContainer from "@/components/Screenings/components/ScreeningConainer";
 import Screening from "@/components/Screenings/Screening";
+import { getScreeningStartTimestamp } from "@/components/Screenings/utils/screeningSort";
 
 const FilmScreenings = ({ film }) => {
   if (!film.screenings) return undefined;
-
-  const getStartDate = (screening) => {
-    const startDate = screening.showtimes?.[0]?.screeningDate?.startDate;
-    if (!startDate) return null;
-
-    const parsedDate = new Date(startDate);
-    if (Number.isNaN(parsedDate.getTime())) return null;
-    return parsedDate;
-  };
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   const closestScreenings = film.screenings
     .map((screening) => {
-      const date = getStartDate(screening);
+      const timestamp = getScreeningStartTimestamp(screening);
       return {
         screening,
-        distance: date ? Math.abs(date.getTime() - today.getTime()) : Number.POSITIVE_INFINITY,
+        distance:
+          timestamp === Number.NEGATIVE_INFINITY ? Number.POSITIVE_INFINITY : Math.abs(timestamp - today.getTime()),
       };
     })
     .sort((a, b) => a.distance - b.distance)

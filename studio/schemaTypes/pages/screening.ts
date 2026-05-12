@@ -1,4 +1,13 @@
 import {defineField, defineType} from 'sanity'
+import {getFirstShowtimeStartDate} from '../../utils/screeningDate'
+
+export const screeningDateAscending = [
+  {field: 'firstShowtimeStart', direction: 'asc' as const},
+]
+
+const screeningDateDescending = [
+  {field: 'firstShowtimeStart', direction: 'desc' as const},
+]
 
 export const screening = defineType({
   name: 'screening',
@@ -6,14 +15,14 @@ export const screening = defineType({
   type: 'document',
   orderings: [
     {
-      title: 'Erste Showtime (frueh -> spaet)',
+      title: 'Screening date (past -> present)',
       name: 'firstShowtimeStartAsc',
-      by: [{field: 'firstShowtimeStart', direction: 'asc'}],
+      by: screeningDateAscending,
     },
     {
-      title: 'Erste Showtime (spaet -> frueh)',
+      title: 'Screening date (present -> past)',
       name: 'firstShowtimeStartDesc',
-      by: [{field: 'firstShowtimeStart', direction: 'desc'}],
+      by: screeningDateDescending,
     },
   ],
   fields: [
@@ -48,7 +57,7 @@ export const screening = defineType({
       title: 'Erste Showtime (Sortierung)',
       type: 'datetime',
       description:
-        'Wird automatisch beim Publizieren aus der ersten Showtime (Startdatum/-zeit) gesetzt.',
+        'Wird automatisch aus der ersten Showtime (Startdatum/-zeit) gesetzt und fuer die Studio-Sortierung verwendet.',
       readOnly: true,
       hidden: true,
     }),
@@ -155,10 +164,9 @@ export const screening = defineType({
     prepare({filmTitle, showtimes}) {
       const firstShowtime = showtimes?.[0]
       const location = firstShowtime?.cinema
-      const startDate = firstShowtime?.screeningDate?.startDate
       const startTime = firstShowtime?.screeningDate?.startTime
 
-      const screeningDate = startDate ? new Date(`${startDate}T${startTime || '00:00'}`) : null
+      const screeningDate = getFirstShowtimeStartDate({showtimes})
       const formattedDate =
         screeningDate &&
         (startTime

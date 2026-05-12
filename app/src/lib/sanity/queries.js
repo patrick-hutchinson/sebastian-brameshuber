@@ -44,9 +44,13 @@ export const aboutQuery = `*[_type=="about"][0]{
   }
 }`;
 
-export const screeningsQuery = `*[_type == "screening"]{
+export const screeningsQuery = `*[_type == "screening"]|order(
+  coalesce(firstShowtimeStart, showtimes[0].screeningDate.startDate) desc,
+  showtimes[0].screeningDate.startTime desc
+){
   _id,
   _type,
+  firstShowtimeStart,
   film->{
     title,
     slug,
@@ -134,9 +138,13 @@ export const filmsQuery = `*[_type == "film"]|order(orderRank asc, _createdAt as
       children[]
     }
   },
-  "screenings": *[_type == "screening" && film._ref == ^._id]{
-       _id,
+  "screenings": *[_type == "screening" && film._ref == ^._id]|order(
+    coalesce(firstShowtimeStart, showtimes[0].screeningDate.startDate) desc,
+    showtimes[0].screeningDate.startTime desc
+  ){
+    _id,
     _type,
+    firstShowtimeStart,
     film->{
       title,
       slug,

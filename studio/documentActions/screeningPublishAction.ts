@@ -1,31 +1,11 @@
 import type {DocumentActionComponent, DocumentActionProps, SanityDocumentLike} from 'sanity'
-
-function getFirstShowtimeIso(doc: SanityDocumentLike | null | undefined): string | null {
-  const showtimes = (doc as any)?.showtimes
-  if (!Array.isArray(showtimes) || showtimes.length === 0) return null
-
-  const first = showtimes[0]
-  const startDate = first?.screeningDate?.startDate as string | undefined
-  const startTime = first?.screeningDate?.startTime as string | undefined
-
-  if (!startDate) return null
-
-  const normalizedTime =
-    typeof startTime === 'string' && /^([01]\d|2[0-3]):([0-5]\d)$/.test(startTime)
-      ? startTime
-      : '00:00'
-
-  const parsed = new Date(`${startDate}T${normalizedTime}:00`)
-  if (Number.isNaN(parsed.getTime())) return null
-
-  return parsed.toISOString()
-}
+import {getFirstShowtimeStartIso} from '../utils/screeningDate'
 
 async function syncFirstShowtimeStart(props: DocumentActionProps) {
   const document = props.draft ?? props.published
   if (!document?._id) return
 
-  const derivedIso = getFirstShowtimeIso(document)
+  const derivedIso = getFirstShowtimeStartIso(document as SanityDocumentLike)
   const client = props.getClient({apiVersion: '2025-06-27'})
 
   const patch = client.patch(document._id)
@@ -49,7 +29,7 @@ export function createScreeningPublishAction(
       ...originalResult,
       onHandle: async () => {
         await syncFirstShowtimeStart(props)
-        originalResult.onHandle?.()
+        await originalResult.onHandle?.()
       },
     }
   }
